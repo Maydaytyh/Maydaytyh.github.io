@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpeg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/M-32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/M-16x16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="我的故事我的高中OI生涯 凌晨1点的钟声敲过，向来浮躁喧嚣的世界早已陷入了沉寂，唯有我的敲击键盘的“嗒嗒”声在不迭地响起。然而评测机并不理会我一次次的修改代码，“Wrong answer”      再次映入了我的眼帘。我站起伸了个懒腰，望着窗外路灯的点点光亮，暗想：幸好，还有你们，于是又坐下调试自己的代码。我又一次刷新了“status”，终于，he鲜红的“Accepted”清楚地映现在屏幕上。内">
+<meta name="keywords" content="经历">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高考之外">
+<meta property="og:url" content="http://yoursite.com/2018/08/19/hello-world/index.html">
+<meta property="og:site_name" content="GuguMelon&#39;s Blog">
+<meta property="og:description" content="我的故事我的高中OI生涯 凌晨1点的钟声敲过，向来浮躁喧嚣的世界早已陷入了沉寂，唯有我的敲击键盘的“嗒嗒”声在不迭地响起。然而评测机并不理会我一次次的修改代码，“Wrong answer”      再次映入了我的眼帘。我站起伸了个懒腰，望着窗外路灯的点点光亮，暗想：幸好，还有你们，于是又坐下调试自己的代码。我又一次刷新了“status”，终于，he鲜红的“Accepted”清楚地映现在屏幕上。内">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-02-04T09:02:34.127Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高考之外">
+<meta name="twitter:description" content="我的故事我的高中OI生涯 凌晨1点的钟声敲过，向来浮躁喧嚣的世界早已陷入了沉寂，唯有我的敲击键盘的“嗒嗒”声在不迭地响起。然而评测机并不理会我一次次的修改代码，“Wrong answer”      再次映入了我的眼帘。我站起伸了个懒腰，望着窗外路灯的点点光亮，暗想：幸好，还有你们，于是又坐下调试自己的代码。我又一次刷新了“status”，终于，he鲜红的“Accepted”清楚地映现在屏幕上。内">
+
+<link rel="canonical" href="http://yoursite.com/2018/08/19/hello-world/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>高考之外 | GuguMelon's Blog</title><meta name="robots" content="noindex">
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="GuguMelon's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">GuguMelon's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">今天所做之事勿候明天，自己所做之事勿候他人。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/About/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">32</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">31</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/Maydaytyh" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/19/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="GuGuMelon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="GuguMelon's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          高考之外
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-19 10:26:29" itemprop="dateCreated datePublished" datetime="2018-08-19T10:26:29+08:00">2018-08-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-04 17:02:34" itemprop="dateModified" datetime="2021-02-04T17:02:34+08:00">2021-02-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="我的故事"><a href="#我的故事" class="headerlink" title="我的故事"></a>我的故事</h1><h2 id="我的高中OI生涯"><a href="#我的高中OI生涯" class="headerlink" title="我的高中OI生涯"></a>我的高中OI生涯</h2><p> 凌晨1点的钟声敲过，向来浮躁喧嚣的世界早已陷入了沉寂，唯有我的敲击键盘的“嗒嗒”声在不迭地响起。然而评测机并不理会我一次次的修改代码，“Wrong answer”      再次映入了我的眼帘。我站起伸了个懒腰，望着窗外路灯的点点光亮，暗想：幸好，还有你们，于是又坐下调试自己的代码。我又一次刷新了“status”，终于，he鲜红的“Accepted”清楚地映现在屏幕上。内心，唯有狂喜。纵然与OI（信息学奥林匹克竞赛）为伴的日子很累，但我却爱上了这样的生活。</p>
+<p>我，曾是一名Oier(信息学奥林匹克竞赛选手)，在一个特殊的集体里，有一段坎坷，特殊而又难忘的回忆。</p>
+<p>曾记否？高一的中秋节前夕，在学校的安排下我们组建了信息学奥赛小组。在第一次集训时，辅导老师的一段话让我刻骨铭心：“最难的时候往往也是要进步的时候。无论何时都不要轻易放弃，因为放弃是最容易的，撂担子不干便是了。只有你亲自走过那些坎儿，往后漫漫时光再回首才会发现它们是多么的微不足道。”</p>
+<p>有着相同志趣和方向的我们有缘相聚，这段高考与奥赛兼修的时光我们携手走过。我们有过欢笑，也有过泪水；有过温暖，也有过苦涩；有过幸福的日子，也有过一起伤痛的时光。那时高一的我们，每周日下午的培训便是对一周学习生活的最好调剂。对一个算法由不知所云到渐入佳境，由模仿别人的代码到自己打出代码，由最初的逢题必看题解到自己亲手“AC”Accepted）一道道题目，我不知道这是不是所谓进步，只是一个劲儿地钻研着，直到NOIP2014(全国青少年信息学奥林匹克联赛)击醒了我。诚然，我本来便是抱着试一试的态度参加了人生中一次NOIP，但它告诉了我距离目标究竟有多远，又一轮备战开始了。被各式各样的算法轮番轰炸过后，我打开一个又一个题库，找到一道又一道“水题”，总有在做完一道题目而彻底吸收一个算法的时候。高一平淡而充实的生活如一杯香茗，细品才能领略到其沁人心脾的清新与芬香。</p>
+<p>曾记否？高一的暑假，一次培训如北极星般为我指明了方向。正如有人所说，“有目标可循是一件很幸福的事”，之后的整个暑假，电脑——餐桌——床构成了我三点一线的生活，代码充斥了我的整个暑假，而我没有丝毫的厌倦。一份代码改了又改，终会改成评测机所期待的模样；一件事做了又做，终会达到梦想的目标。</p>
+<p>曾记否？眨眼间我已经高二了，文化课课程难度大幅提升，但NOIP在即，我压力倍增。在这个本该攻坚克难的阶段，我却出现了漂浮不定的情绪。高考与OI，究竟孰轻孰重？时常，我结束了一天繁重的学习，一个人静静地坐在操场上，疲惫不堪地望着满天的繁星发呆，究竟哪颗才是属于我自己的明星？我的未来是那颗黯淡的还是璀璨的……由于这样漂浮不定的情绪，我在OI上，止步不前；在文化课上，一落千丈。NOIP近了，我也渐渐释然：这是一个坚持梦想把握未来的时段，是愿意呵护梦想还是任梦想枯萎，选择权在自己手中。既然选择了，就不要后悔；既然深爱过，就不要放弃。为了使自己的OI之路不留遗憾，就像哈利波特选择折断老魔杖般决绝，我选择了放手一搏，每天除了上课便是耗在机房做最后的冲刺。那也是我迄今为止最累最充实的一段时光，在时光的裹挟下,快马加鞭,匆忙地活着。终于，NOIP2015到了。</p>
+<p>或许是命运开了一个玩笑，也或许是我自己的实力真差了一些，拼尽一切的我，最终还是榜上无名。获奖名单揭晓那天，我独自在小操场哭了很久，我不明白为什么自己付出了那么多，却收获寥寥。但时光依旧飞逝，学习还得继续，我勉强调节自己的状态，投入到文化课的学习中去。由于之前侧重OI，我在文化课上落后很多。那段最黑暗的时日里，向来优秀的我却被消颓，堕落，焦虑，悔恨，不甘，怨恨充斥。幸好，好朋友的话如同黎明的曙光，照亮了我前行的路，他在明信片中写道：“斤斤计较去耕耘，淡泊寡欲去收获。曾经的梦结束了，该醒了，你还有未来！”我匆匆跑出教室，独自想了很久，也许过程比收获更具含金量，努力过便不觉空虚。那段紧张而美丽的生活如伴着牛奶的咖啡，苦涩中伴着浓郁的醇香，萦绕心头，难以忘怀。</p>
+<p>唯有刺痛过的玫瑰才拥有最艳丽的红亮，唯有流过血的手指才能弹出最动人的曲调。正值韶华，年少轻狂，高考于我，是本职；而OI于我，是开拓。高考之外还有一番OI铸就的风景，唯有用心才能体会到它的芬芳，尽管我没能充分领略OI的风光，却在成长。或许OI送给我最好的礼物便是成长吧，我将一路珍藏！</p>
+<h2 id="开启的ACM的篇章"><a href="#开启的ACM的篇章" class="headerlink" title="开启的ACM的篇章"></a>开启的ACM的篇章</h2><p>转眼间大学已经过去了一年，我只想对自己说，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(!successful()) try.</span><br></pre></td></tr></table></figure>
+
+<h1 id="我的展望"><a href="#我的展望" class="headerlink" title="我的展望"></a>我的展望</h1><p>我知道前路还很漫长，自己不属于天赋选手，就更应该多多努力，努力提升自己。bin巨，Claris,app，这些大神，都是一步一步成长起来的。人一我十，人百我万！Claris当初顶着各方压力坚持独自搞OI，就是这样永不服输的精神，才是灵魂所在！<br>我希望自己能够好好地拼搏一次！</p>
+<p>这两天一直在搞这个博客，没怎么写题，用这个博客来记录自己的成长历程吧。发现在这里写一些话，其实挺好的。</p>
+<!-- flag of hidden posts -->
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/经历/" rel="tag"># 经历</a>
+          </div>
+
+        
+
+
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#我的故事"><span class="nav-number">1.</span> <span class="nav-text">我的故事</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#我的高中OI生涯"><span class="nav-number">1.1.</span> <span class="nav-text">我的高中OI生涯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启的ACM的篇章"><span class="nav-number">1.2.</span> <span class="nav-text">开启的ACM的篇章</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我的展望"><span class="nav-number">2.</span> <span class="nav-text">我的展望</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GuGuMelon"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">GuGuMelon</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/maydaytyh" title="GitHub → https://github.com/maydaytyh" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maydaytyh@gmail.com" title="E-Mail → mailto:maydaytyh@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ugorange.com" title="https://ugorange.com" rel="noopener" target="_blank">orange</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuGuMelon</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

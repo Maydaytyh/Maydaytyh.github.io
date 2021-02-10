@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>GuguMelon&#39;s Blog</title>
+  
+  <subtitle>今天所做之事勿候明天，自己所做之事勿候他人。</subtitle>
+  <link href="http://yoursite.com/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2021-02-09T10:59:21.583Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>GuGuMelon</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MACOS更新后提示xcrun: error</title>
+    <link href="http://yoursite.com/2021/02/09/MACOS%E6%9B%B4%E6%96%B0%E5%90%8E%E6%8F%90%E7%A4%BAxcrun-error/"/>
+    <id>http://yoursite.com/2021/02/09/MACOS%E6%9B%B4%E6%96%B0%E5%90%8E%E6%8F%90%E7%A4%BAxcrun-error/</id>
+    <published>2021-02-09T10:37:31.000Z</published>
+    <updated>2021-02-09T10:59:21.583Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a><p>第一次更新BigSur，在命令行运行gcc出现了xcrun: error: invalid active developer path, missing xcrun的报错。</p><p>经搜索，需要重新安装命令行工具Command Line Tools，是因为更新系统时原来的 <strong>Command Line Tools</strong> 被自动卸载了，所以重新安装即可。</p><p>在终端中执行如下指令即可</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure><p>Command Line Tools包含的工具很多，如下所示</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">ar</span><br><span class="line">as</span><br><span class="line">asa</span><br><span class="line">bison</span><br><span class="line">BuildStrings</span><br><span class="line">c++</span><br><span class="line">c89</span><br><span class="line">c99</span><br><span class="line">cc</span><br><span class="line">clang</span><br><span class="line">clang++</span><br><span class="line">cmpdylib</span><br><span class="line">codesign_allocate</span><br><span class="line">CpMac</span><br><span class="line">cpp</span><br><span class="line">ctags</span><br><span class="line">ctf_insert</span><br><span class="line">DeRez</span><br><span class="line">dsymutil</span><br><span class="line">dwarfdump</span><br><span class="line">dyldinfo</span><br><span class="line">flex</span><br><span class="line">flex++</span><br><span class="line">g++</span><br><span class="line">gatherheaderdoc</span><br><span class="line">gcc</span><br><span class="line">gcov</span><br><span class="line">GetFileInfo</span><br><span class="line">git</span><br><span class="line">git-cvsserver</span><br><span class="line">git-receive-pack</span><br><span class="line">git-shell</span><br><span class="line">git-upload-archive</span><br><span class="line">git-upload-pack</span><br><span class="line">gm4</span><br><span class="line">gnumake</span><br><span class="line">gperf</span><br><span class="line">hdxml2manxml</span><br><span class="line">headerdoc2html</span><br><span class="line">indent</span><br><span class="line">install_name_tool</span><br><span class="line">ld</span><br><span class="line">lex</span><br><span class="line">libtool</span><br><span class="line">lipo</span><br><span class="line">lldb</span><br><span class="line">lorder</span><br><span class="line">m4</span><br><span class="line">make</span><br><span class="line">MergePef</span><br><span class="line">mig</span><br><span class="line">mkdep</span><br><span class="line">MvMac</span><br><span class="line">nasm</span><br><span class="line">ndisasm</span><br><span class="line">nm</span><br><span class="line">nmedit</span><br><span class="line">otool</span><br><span class="line">pagestuff</span><br><span class="line">projectInfo</span><br><span class="line">ranlib</span><br><span class="line">rebase</span><br><span class="line">redo_prebinding</span><br><span class="line">ResMerger</span><br><span class="line">resolveLinks</span><br><span class="line">Rez</span><br><span class="line">RezDet</span><br><span class="line">RezWack</span><br><span class="line">rpcgen</span><br><span class="line">segedit</span><br><span class="line">SetFile</span><br><span class="line">size</span><br><span class="line">SplitForks</span><br><span class="line">strings</span><br><span class="line">strip</span><br><span class="line">svn</span><br><span class="line">svnadmin</span><br><span class="line">svndumpfilter</span><br><span class="line">svnlook</span><br><span class="line">svnrdump</span><br><span class="line">svnserve</span><br><span class="line">svnsync</span><br><span class="line">svnversion</span><br><span class="line">unifdef</span><br><span class="line">unifdefall</span><br><span class="line">UnRezWack</span><br><span class="line">unwinddump</span><br><span class="line">what</span><br><span class="line">xml2man</span><br><span class="line">yacc</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;p&gt;第一次更新BigSur，在命令行运行gcc出现了xcrun: error: invalid active developer path, missing xcrun的报错。&lt;/p&gt;
+&lt;p&gt;经搜索，需要重新安装命令行工具Command L</summary>
+      
+    
+    
+    
+    <category term="MACOS" scheme="http://yoursite.com/categories/MACOS/"/>
+    
+    
+    <category term="Bug" scheme="http://yoursite.com/tags/Bug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>个人书单</title>
+    <link href="http://yoursite.com/2021/02/06/%E4%B8%AA%E4%BA%BA%E4%B9%A6%E5%8D%95/"/>
+    <id>http://yoursite.com/2021/02/06/%E4%B8%AA%E4%BA%BA%E4%B9%A6%E5%8D%95/</id>
+    <published>2021-02-06T04:13:13.000Z</published>
+    <updated>2021-02-06T04:14:47.684Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+</summary>
+      
+    
+    
+    
+    <category term="读书" scheme="http://yoursite.com/categories/读书/"/>
+    
+    
+    <category term="读书" scheme="http://yoursite.com/tags/读书/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数学结论</title>
+    <link href="http://yoursite.com/2021/02/04/%E6%95%B0%E5%AD%A6%E7%BB%93%E8%AE%BA/"/>
+    <id>http://yoursite.com/2021/02/04/%E6%95%B0%E5%AD%A6%E7%BB%93%E8%AE%BA/</id>
+    <published>2021-02-04T13:44:07.000Z</published>
+    <updated>2021-02-06T03:47:19.123Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a><h2 id="均值不等式"><a href="#均值不等式" class="headerlink" title="均值不等式"></a>均值不等式</h2><p><a href="https://zhuanlan.zhihu.com/p/58362884" target="_blank" rel="noopener">均值不等式证明</a></p><h3 id="整数拆分问题"><a href="#整数拆分问题" class="headerlink" title="整数拆分问题"></a>整数拆分问题</h3><p>即将一个数$ $拆分为$k$个数，使得$k$个数乘积最大。</p><p>由均值不等式易得$k$个数相等时 乘积是最大的，那么这$k$个数应该等于多少呢？</p><p>即求$f(x)=x^{\left(\frac{n}{x}\right)}$的最大值</p><p>$f(x)=x^{\left(\frac{n}{x}\right)}=e^{\frac{n}{x} \ln x}$</p><p>易得$h(x)=\frac{1}{x} \ln x$ 与$f(x)$有相同的单调性</p><p>$h^{\prime}(x)=\frac{1-\ln x}{x^{2}}$</p><p>可知，x=e时，$f(x)$取得最大值，由于2不是整数，所以可以是2或3.</p><p>则将$n$拆分为尽量多的3以及少量2即可。</p><p>总结可得</p><p><img src="https://i.loli.net/2021/02/06/K5jFsLWkHzJ7tgx.png" alt="image.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h2 id=&quot;均值不等式&quot;&gt;&lt;a href=&quot;#均值不等式&quot; class=&quot;headerlink&quot; title=&quot;均值不等式&quot;&gt;&lt;/a&gt;均值不等式&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/5</summary>
+      
+    
+    
+    
+    <category term="数学" scheme="http://yoursite.com/categories/数学/"/>
+    
+    
+    <category term="数学" scheme="http://yoursite.com/tags/数学/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>引用参数与形参区别</title>
+    <link href="http://yoursite.com/2021/02/04/%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0%E4%B8%8E%E5%BD%A2%E5%8F%82%E5%8C%BA%E5%88%AB/"/>
+    <id>http://yoursite.com/2021/02/04/%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0%E4%B8%8E%E5%BD%A2%E5%8F%82%E5%8C%BA%E5%88%AB/</id>
+    <published>2021-02-04T03:38:15.000Z</published>
+    <updated>2021-02-04T07:18:50.998Z</updated>
+    
+    <content type="html"><![CDATA[<p>发现引用传值真的要快很多。</p><a id="more"></a><p>在函数进行参数传递时，如果采用形式参数传递，则需要进行拷贝，将会有额外的时间和空间的开销，而使用引用类型传递，因为自始自终使用的都是一个东西，只是起了几个名字而已，所以就没有额外的开销，时间和空间上都有不小的提升。</p><p>引用传递本质是指针，对于基本数据类型 ，引用传递和非引用基本没有区别（基本类型复制较快）， 而对于<strong>容器</strong>或者<strong>自定义类型</strong> 复制成本非常高（因为这里会调用 拷贝构造函数，具体是深拷贝还是浅拷贝，需要取决于你是否重写拷贝构造函数）</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;发现引用传值真的要快很多。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="语言" scheme="http://yoursite.com/categories/语言/"/>
+    
+    <category term="C++" scheme="http://yoursite.com/categories/语言/C/"/>
+    
+    
+    <category term="坑点" scheme="http://yoursite.com/tags/坑点/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo博客的一点经验</title>
+    <link href="http://yoursite.com/2021/01/30/%E8%BF%81%E7%A7%BBhexo%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E7%82%B9%E7%BB%8F%E9%AA%8C/"/>
+    <id>http://yoursite.com/2021/01/30/%E8%BF%81%E7%A7%BBhexo%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E7%82%B9%E7%BB%8F%E9%AA%8C/</id>
+    <published>2021-01-30T02:32:39.000Z</published>
+    <updated>2021-01-30T03:29:28.347Z</updated>
+    
+    <content type="html"><![CDATA[<p>多次折腾hexo博客的一点心得</p><a id="more"></a><h2 id="迁移hexo博客相关"><a href="#迁移hexo博客相关" class="headerlink" title="迁移hexo博客相关"></a>迁移hexo博客相关</h2><p>要做的事情无非就是下面几步</p><ul><li>在新环境中安装git</li><li>在新环境中安装node</li><li>在新环境中安装hexo</li><li>复制Blog文件夹的全部内容到新环境</li><li>配置ssh，添加密钥到github</li><li>测试即可完成</li></ul><h2 id="hexo博客如何给一篇文章设立多个分类"><a href="#hexo博客如何给一篇文章设立多个分类" class="headerlink" title="hexo博客如何给一篇文章设立多个分类"></a>hexo博客如何给一篇文章设立多个分类</h2><p>从前以为下面的方式就是给一篇文章设置多个分类，最近才发现这样设置的是多级目录</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">categories: </span><br><span class="line">            - 技术</span><br><span class="line">            - Blog</span><br></pre></td></tr></table></figure><p>要想设置多个目录，只需要给分类加上[]即可，如下所示</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">categories: </span><br><span class="line">            - [技术]</span><br><span class="line">            - [Blog]</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;多次折腾hexo博客的一点心得&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="技术" scheme="http://yoursite.com/categories/技术/"/>
+    
+    <category term="Blog" scheme="http://yoursite.com/categories/Blog/"/>
+    
+    
+    <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>田宇航定理</title>
+    <link href="http://yoursite.com/2021/01/29/%E7%94%B0%E5%AE%87%E8%88%AA%E5%AE%9A%E7%90%86/"/>
+    <id>http://yoursite.com/2021/01/29/%E7%94%B0%E5%AE%87%E8%88%AA%E5%AE%9A%E7%90%86/</id>
+    <published>2021-01-29T10:11:49.000Z</published>
+    <updated>2021-02-04T09:02:24.458Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="电脑使用定理"><a href="#电脑使用定理" class="headerlink" title="电脑使用定理"></a>电脑使用定理</h3><ul><li><p>不要花时间折腾一些对于使用没什么大影响的东西，要看重内容</p></li><li><p>不影响使用的bug，如今天遇到的“体系结构 arm64 不受支持”这一C/C++扩展的bug，而且网上也找不到解决方案，不必折腾，让子弹飞一会儿</p></li><li><p>面对问题，要克制自己的冲动，选择bug最少的解决方案</p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;电脑使用定理&quot;&gt;&lt;a href=&quot;#电脑使用定理&quot; class=&quot;headerlink&quot; title=&quot;电脑使用定理&quot;&gt;&lt;/a&gt;电脑使用定理&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;不要花时间折腾一些对于使用没什么大影响的东西，要看重内容&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p</summary>
+      
+    
+    
+    
+    <category term="随笔" scheme="http://yoursite.com/categories/随笔/"/>
+    
+    
+    <category term="个人思考" scheme="http://yoursite.com/tags/个人思考/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Pyquery 403 Frobidden</title>
+    <link href="http://yoursite.com/2021/01/22/Pyquery-403-Frobidden/"/>
+    <id>http://yoursite.com/2021/01/22/Pyquery-403-Frobidden/</id>
+    <published>2021-01-22T02:52:39.000Z</published>
+    <updated>2021-01-29T15:40:12.403Z</updated>
+    
+    <content type="html"><![CDATA[<p>自己电脑没事，别人电脑403Forbidden？来，解决这个问题</p><a id="more"></a><p>使用Pyquery爬虫时，在自己的Windwos下运行没有问题，但是别人那里爬不到任何信息，而且爬两次就会报错403 Forbidden。</p><p>我很是迷惑，因为报错信息是urllib库的内容，而我没有使用urllib库，检查发现，Pyquery库在解析网页时会调用Requests库</p><p>这时，学长让我加个Header，感觉是被反爬虫机制干了，我提议先装一个Reuqests库试试，果然，是换了个编译器忘了装Requests库了，而我也加上了Header，问题得到了解决。</p><p>附：Agent代码</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'</span></span><br><span class="line">&#125;</span><br><span class="line">webBase += str(year) + <span class="string">"-"</span> + str(month) + <span class="string">"-"</span> + str(day) + <span class="string">"/"</span></span><br><span class="line">doc=pq(webBase, encoding=<span class="string">"utf-8"</span>, headers=headers)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;自己电脑没事，别人电脑403Forbidden？来，解决这个问题&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="语言" scheme="http://yoursite.com/categories/语言/"/>
+    
+    <category term="Python" scheme="http://yoursite.com/categories/语言/Python/"/>
+    
+    
+    <category term="爬虫" scheme="http://yoursite.com/tags/爬虫/"/>
+    
+    <category term="坑点" scheme="http://yoursite.com/tags/坑点/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>回首2020</title>
+    <link href="http://yoursite.com/2021/01/07/%E5%9B%9E%E9%A6%962020/"/>
+    <id>http://yoursite.com/2021/01/07/%E5%9B%9E%E9%A6%962020/</id>
+    <published>2021-01-07T13:23:21.000Z</published>
+    <updated>2021-01-29T15:40:13.633Z</updated>
+    
+    <content type="html"><![CDATA[<p>荒诞却又值得纪念的2020。</p><a id="more"></a><p>2020年初，我还在欢乐地带着玉米接待sjy和wsy，那几天真的好快乐喔，尽管sjy这个闷骚的家伙在玉米在的时候就能憋着不说话，晚上回去又属他话多，但还是真的好快乐，记得和他们在大学城北站告别的时候，我在回学校的路上一直在想，为什么无比欢乐的时光总是这么短暂呢？不由想起来，两年前清明节他们俩来找我，结果wsy因为要上军理先溜了，sjy因为要回去数学建模培训也先溜了，那个时候就在想，无忧无虑的时光早已一去不复返了，我们身上都已经背上了一份份责任，对自己，对别人。</p><p>快乐有在变少吗？其实也未必，只是我们获得快乐越来越难了。生活中也许还有百般简单的快乐，但是真正的大快乐在于我们一直担心的事情有了好结果那一瞬间，那一个如释重负的瞬间，或许是在阳光微醺的午后，或许是在星空寂语的深夜，一天中的时时刻刻，都可能会带给我们惊喜。每个接到惊喜的人，怎么能抑制住心中的兴奋呢？所以，其实我们快乐的能力并没有丧失，只是我们获得快乐越来越难了。</p><p>这怎么就扯远了呢。</p><p>软测考试是元旦之前还是之后我都记不清了，只是依稀记得有一个1.4的考试，那应该就是了吧。那这里不得不提前说一下之后的软测大作业，真的离谱，让我们自己爬代码，写自动化测试程序，测试java7和java8的输入、形式都相同，但是结果不同的API。。虽然这门课最后得分还挺好的，但是写大作业的那几天想做点东西却不知道做什么的无力感是真的难受。</p><p>时间来到了每年年前期末的生病阶段，肠胃型感冒，一晚上起来七八次，校医院医生只是直说赶紧转诊急救去，别来找我。生病并不可怕，可怕的是几天之后考试。那几天也几乎没怎么复习，在床上躺尸。不过那几天每天喝粥，吃自己和玉米整的一大堆药，还是挺印象深刻的。考完试搞了几天软测的大作业就回家了，回家当天是生日，回家前一天和玉米在图书馆提前过了一个生日，吃了一个可可爱爱的小蛋糕，火车上了度过了一天，晚上回去又吃了一个大大的大蛋糕，吃了两个蛋糕还是蛮开心的。</p><p>生活总是这么有趣。</p><p>而之后的日子却一天天灰暗了起来。</p><p>某天清晨惊醒看到的科比去世的消息消息，一天天增长的疫情人数，惶惶终日。其实也猜到了开不了学，但是没想到这开不了学的日子一直持续到了9月。在家的日子谈不上索然无味，就是总少了点东西，这里折腾两天，那里折腾两天，不是很如意。而生活也好像喜欢和我开玩笑，上半年光快递就丢了4次，买本旧书还折腾了好多天，电脑还三天两头出问题，课程的作业一天天的堆积着，本来说着复习考研，可是在家的低效率，计网的一堆堆作业，编译原理每周让我焦头烂额的实验，以及家里的一些事情，生活突然就变得不那么有期待了……不过也好在我还是熬过来了，并且完成的还不错。整个暑假其实还是比较扯的，虽然还是完成了些东西，但现在看来我对这个暑假是极其不满意的，但是已经过去了，大概是7月还处于焦虑不安的时期，进了8月就开始每天想着开学了吧，安不下心来。</p><p>8.29抵达北京，阔别良久的良乡，却要在31号就搬离，玉米30号到，晚上见了从1.15以来的第一面，真是难忘的一年啊，这么难都熬过来了，还有什么害怕的呢？未来可期～收拾宿舍发现自己真是一个怀旧的人啊，太多太多的东西都舍不得扔，导致最后我的行李是比别人多一些。当断则断，还是扔了不少东西的，以及好像不小心把自己的录取通知书等等资料给弄丢了……记得当时告诉自己，这是要给你发一个新的录取通知书呢，好兆头。可能确实人在最无助的时候就会turn to 老天爷吧，总把一些东西当成老天爷的馈赠。搬到村里后，地方是真的小啊，慢慢倒是也习惯了，刚开学那会儿每天就想着往良乡跑，确实学不进去，就这我还以为来了学校生活的旋律就慢慢到学习上来了。小学期开始后，生活确实转移到学习上来了，但是我却发现自己没有时间学习考研的东西……每天忙于造CPU，大家都说大四了水一水水一水，可是一个个的还是牟足了劲的做，可能是习惯了把作业完成的很好吧，虽然确实划水了，但是还是用了很大的力气去完成这个作业，以为大四的小学期不用熬夜了，可是还是每天熬夜到一两点；顺便顺便，以为小学期结束就不用熬夜了，可是考研期间其实也是一两点才睡，小学期终于结束了，也就10月了，以为生活的重心终于要转移到考研上来了，不过也确实，中间因为入党材料的事情耽搁了加起来几天的时间吧，不过这件事情好在最后有了好结果。</p><p>十一期间也没怎么学习，十一之后好像才慢慢有了学习的状态吧，那个时候学习还不是很苦，每天7点多点起来，吃个饭就去图书馆学习，晚上学到10.30回来，每天看上去游刃有余，其实看到别人的进度，自己心里还是很慌的，自己确实进度慢慢，也不知道怎么就进入了资料收集的大误区，每天沉迷于收集资料，把自己的百度网盘塞的满满的，各种pdf层出不穷，却没有细看其中哪怕就一份。</p><p>10.31玉米21岁生日生日，本来想着去故宫，吃海底捞完美规划，谁知道地铁上手机被狗东西给偷了，于是去派出所做了一上午笔录笔录，虽然也根本找不回来，可是对于丢手机这个流程，是很熟悉了，该冻结什么，改什么密码，也进一步提醒了自己备份的重要性，还好之前大部分照片都备份了，就是损失了手机，用了两年1个月，结果换了个新手机，是该高兴高兴，还是该哭泣呢？不知道……:( 反正，我自己的资金–了</p><p>11月就这样悄无声息的来临了，还是按部就班的学习，每天给自己打打气，到了到了11月中旬吧，发现大家都开始找导师找毕设了，惊觉与导师的重要性，我觉得找个好导师比较重要，四处打听，其实也没打听到什么，大家好像都不怎么了解，想着要不找那个很push的老师算了，想起来pyq还有一个老师，但是感觉这个老师好厉害，估计保研的都招满了吧，不管了，先试一下，抱着试一试的态度我问了老师招不招考研的学生，没想到老师回复了我招。然后在玉米的教导下，我给老师发了我的基本信息，并表明了我想跟着老师做毕设，以后也想读老师的研究生，老师秒回，欢迎欢迎。然后老师让我去找她聊聊，这一聊，就从不到一点聊到了两点，虽然外卖凉了，但是心里好踏实，我告诉自己我告诉自己，又多了一条上岸的理由。之后老师的种种言行举止都让我觉得自己好幸运，当然我要是考上的话，那我真的好幸运。</p><p>进入进入12月后，开始变得焦虑起来，时间越来越短，而感觉自己的复习毫无进展，简单来说，就是感觉自己啥都不会，唉，现在我还是忘不了那二十多天的煎熬，疲惫的身体已经不支持7点多起来了，而身体问题频出，晚上焦虑的睡不着觉，头疼，不过我还是坚持了下来，坚持学习。12月初其实还好，每天都在做数学卷子赶进度，大概是六级之后，十五天左右，我的眼睛开始废了，每天眼睛肿胀睁不开，而压力也真的好大，自己一个人坐在一楼的沙发那里，看着书，看着看着头就炸掉了，眼泪止不住的往下流，但是我告诉自己千万不能放弃，都坚持到这里了，走下去，一定要走下去，现在想起来，我都忘不了那最后15天昏暗的日子。理了个发，去了趟校医院，医生很温柔，让我注意用眼，坚持下去，眼睛满满的好了，后脑勺又出了一个大疙瘩，根本不能抬头，觉得自己真是倒霉啊那会儿，不过现在都过去了就看起来觉得没什么了。</p><p>最后一周，王晗喊我调整作息，于是每天中午回去午睡，结果没有一天是考试时间起来的。。。不过也保证了身体不会再出现什么问题了，休息好比什么都强强。</p><p>考试前，心情却异常的平静，也不是有多平静，就是这两天一直在积极调整自己的心态，所以从发挥上来看，是没有太大的问题的，数学也算是尽力了吧，粗心的分数不会太多，能拿多少分全看老师大题怎么给分，好了好了，不说这些，总之这一年就这样以考试结束了，果然，结束的时候并不会有什么仪式感，平淡的像什么都没发生什么都没发生。一切都挺好都挺好。</p><p>感谢一直陪伴着我的人儿，自己一个人真的顶不住的，有一群和你每天哈哈哈哈的人不容易，有一个永远陪着你听你诉说的人不容易，这样看来，我还真是幸运的！</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;荒诞却又值得纪念的2020。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="随笔" scheme="http://yoursite.com/categories/随笔/"/>
+    
+    
+    <category term="个人思考" scheme="http://yoursite.com/tags/个人思考/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>7.18随笔.md</title>
+    <link href="http://yoursite.com/2020/07/18/7-18%E9%9A%8F%E7%AC%94/"/>
+    <id>http://yoursite.com/2020/07/18/7-18%E9%9A%8F%E7%AC%94/</id>
+    <published>2020-07-18T01:31:42.000Z</published>
+    <updated>2021-01-29T15:40:12.627Z</updated>
+    
+    <content type="html"><![CDATA[<p>要是自己有本事的话就不会这么难过了。</p><a id="more"></a><p>一直处于浑浑噩噩的状态，可能就是觉得考本校太容易了吧，可是你也不想想，你为什么没有保研的资格？不就是浑浑噩噩？不知道自己究竟想要什么！没有目标作为驱动力！</p><p>我不想再因为自己没有努力而导致的自己的没本事而难过，如果我可以选择的话。</p><p>趁现在还有选择的机会，冲吧。</p><p>关于择校，反正都是数一、英一、政治，唯一有区别的可能就是专业课，而今年大势所趋，可能BIT也会把专业课改成408，这种情况下，有可能我会直接选择国科大。。毕竟还是要冲一把的，专业课差别都不大，当然，是在自己复习的不错的情况下，当下还是要好好复习，尤其是数学，得数学者得天下！</p><p>冲呀！！</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;要是自己有本事的话就不会这么难过了。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="随笔" scheme="http://yoursite.com/categories/随笔/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>对过去以及未来学习的一些思考</title>
+    <link href="http://yoursite.com/2020/07/07/%E5%AF%B9%E8%BF%87%E5%8E%BB%E4%BB%A5%E5%8F%8A%E6%9C%AA%E6%9D%A5%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83-md/"/>
+    <id>http://yoursite.com/2020/07/07/%E5%AF%B9%E8%BF%87%E5%8E%BB%E4%BB%A5%E5%8F%8A%E6%9C%AA%E6%9D%A5%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83-md/</id>
+    <published>2020-07-07T14:33:17.000Z</published>
+    <updated>2021-01-30T02:20:44.931Z</updated>
+    
+    <content type="html"><![CDATA[<p>近来突然意识到自己快要步入社会了，学习确实是一件终身的事情啊。</p><a id="more"></a><p>大学三年的时光一眨眼就过去了，要说遗憾，感觉还是有的……但是毕竟都过去了，嘛，所以就总结一下，继续向前吧。</p><h2 id="关于学习"><a href="#关于学习" class="headerlink" title="关于学习"></a>关于学习</h2><p>过去的这么多年，似乎学习一直是为了考试，大学以前不必说，小城市没有太多的娱乐活动，也没有老师会教你某一门课背后蕴含的无穷奥妙，有的只是小考、中考、高考。喜欢某一门课？不排除有的朋友真的是从枯燥的应试教育背后发现某门学科的真正含义，比如有些同学对于英语、语文的热爱是真的可以上升到语言、文学层次的，这样的热爱足以支撑枯燥的应试时光。那么其他科目呢，其实刷题把这门课刷高是没有灵魂的，比如我现在慢慢意识到自己对于历史、地理都是很喜欢的，也就对政治一门不是太感兴趣，因为感觉要背的东西太多了，但是就本人而言，还是对政治方面的东西很感兴趣的（确信！）。那为什么当初不选择文科冲一冲某校呢，可能一方面是自己内心不太愿意去做这个决定，另一方面是自己当时对计算机比较感兴趣吧。好吧，上面有些扯远了，我想说的其实就是应试教育似乎也吞噬了我的大学三年，这真的是一件很可怕的事情啊。似乎对很多课失去了兴趣，而是单纯的等考试前看一看，这也造成了一次滑铁卢啊。但是也正是从那时候开始，似乎对学习更加上心了，虽然不如大佬们对待学习的热情，但是在作业层次还是尽心尽力的。但是啊，还是以分数为导向，我觉得不算好好学习。</p><p>这几天看dl的博客，发现了一句个人认为很有价值的话。</p><blockquote><p>大学课程同之前的课程一样，具备课程的基本属性：给你继续自由探索的勇气和能力。也就是说，课程的结束只是起点而已。</p></blockquote><p>所以，大学的课程，并不是这学期学完就结束了，并不是老师教你的东西就是全部，更广阔的世界是需要自己去探索的，这一个过程会耗费大量的时间，会让你娱乐的时间变少，但是确实是值得的啊。可惜我明白的太迟了。浪费了大量的时间。</p><p>所以，从现在开始，学习对我来说意义发生了变化，学习不是你获取高分的工具，学习是自己不断探索的过程，不断成长，学习不能停啊！！</p><h2 id="关于知识管理"><a href="#关于知识管理" class="headerlink" title="关于知识管理"></a>关于知识管理</h2><p>还是学习方面，自己从前的学习其实是没有层次的，学了就忘，mark的东西都是积灰，小孩子这样子可以，但是一个成年人是不是需要拥有一个属于自己的知识体系呢？其实也可以说是自己的生活轨迹。</p><p>斟酌再三，我选用了notion这款软件，page可以任意嵌套，block可以任意排列，这确实是一个理想的人生轨迹软件。</p><p>不出意外的话，日后的学习记录，精彩mark我会保存在notion中。</p><p>说起来就想多说点，考研复习真的是一个体力活，用了一天刷了定积分17个视频，把我恶心到接下来一天半都没怎么复习，持续摸鱼，当然也可能是我给自己的懒找借口吧……保持状态真的特别重要啊！！一定要坐一会起来站站走走！！每天出去走路也是必备的！冲！</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;近来突然意识到自己快要步入社会了，学习确实是一件终身的事情啊。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="随笔" scheme="http://yoursite.com/categories/随笔/"/>
+    
+    
+    <category term="个人思考" scheme="http://yoursite.com/tags/个人思考/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>操作系统实验二进程控制</title>
+    <link href="http://yoursite.com/2019/11/15/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E4%BA%8C%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/"/>
+    <id>http://yoursite.com/2019/11/15/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E4%BA%8C%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/</id>
+    <published>2019-11-15T14:32:55.000Z</published>
+    <updated>2021-01-29T15:40:13.466Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="操作系统课程设计实验二-进程控制"><a href="#操作系统课程设计实验二-进程控制" class="headerlink" title="操作系统课程设计实验二 进程控制"></a>操作系统课程设计实验二 进程控制</h2><h3 id="一些基本的东西"><a href="#一些基本的东西" class="headerlink" title="一些基本的东西"></a>一些基本的东西</h3><h5 id="C语言获取系统时间的函数"><a href="#C语言获取系统时间的函数" class="headerlink" title="C语言获取系统时间的函数"></a>C语言获取系统时间的函数</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gettimeofday</span><span class="params">(struct  timeval*tv,struct  timezone *tz )</span></span></span><br><span class="line"><span class="function"><span class="comment">//其中，时间会返回到结构体tv中，tv的结构如下</span></span></span><br><span class="line"><span class="function">    struct  timeval</span>&#123;</span><br><span class="line">       <span class="keyword">long</span>  tv_sec;<span class="comment">/*秒*/</span></span><br><span class="line">       <span class="keyword">long</span>  tv_usec;<span class="comment">/*微妙*/</span></span><br><span class="line">&#125;；</span><br><span class="line"><span class="comment">//同时，timezone为当前时区的信息，一般第二个参数置为NULL，结构体如下。</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timezone</span>&#123;</span></span><br><span class="line">        <span class="keyword">int</span> tz_minuteswest;<span class="comment">//和greenwich时间差的分钟数</span></span><br><span class="line">        <span class="keyword">int</span> tz_dsttime;<span class="comment">//夏令时校正</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h5 id="Linux系统编程wait-函数"><a href="#Linux系统编程wait-函数" class="headerlink" title="Linux系统编程wait()函数"></a>Linux系统编程wait()函数</h5><p> wait()函数用于使父进程（也就是调用wait()的进程）阻塞，直到一个子进程结束或者该进程接收到了一个指定的信号为止。如果该父进程没有子进程或者它的子进程已经结束，则wait()函数就会立即返回。 </p><h5 id="Windows进程相关结构体-STARTUPINFO"><a href="#Windows进程相关结构体-STARTUPINFO" class="headerlink" title="Windows进程相关结构体 STARTUPINFO"></a>Windows进程相关结构体 STARTUPINFO</h5><p> 用于指定新进程的主窗口特性的一个结构。 </p><p>没有太明白。。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;操作系统课程设计实验二-进程控制&quot;&gt;&lt;a href=&quot;#操作系统课程设计实验二-进程控制&quot; class=&quot;headerlink&quot; title=&quot;操作系统课程设计实验二 进程控制&quot;&gt;&lt;/a&gt;操作系统课程设计实验二 进程控制&lt;/h2&gt;&lt;h3 id=&quot;一些基本的东西&quot;&gt;</summary>
+      
+    
+    
+    
+    <category term="课程" scheme="http://yoursite.com/categories/课程/"/>
+    
+    <category term="操作系统" scheme="http://yoursite.com/categories/课程/操作系统/"/>
+    
+    
+    <category term="进程控制" scheme="http://yoursite.com/tags/进程控制/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gdb使用小结</title>
+    <link href="http://yoursite.com/2019/08/28/gdb%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/"/>
+    <id>http://yoursite.com/2019/08/28/gdb%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</id>
+    <published>2019-08-28T11:59:15.000Z</published>
+    <updated>2021-02-04T08:48:40.147Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>妈妈再也不用担心我离开$IDE$就不会敲代码啦！</p><p>对于$gdb$功能的基础介绍</p><ul><li>设置断点</li><li>逐行执行代码</li><li>查看变量的值</li></ul><h3 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h3><p>首先我们在$gcc$程序的时候需要添加$-g$选项</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//本文仍以test.c为例</span></span><br><span class="line">gcc -g test.c -o test</span><br></pre></td></tr></table></figure><p>此时生成的$test$便可通过$gdb$调试辣！</p><p>我们执行</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb test</span><br></pre></td></tr></table></figure><p>会发现出现了多行信息，只需要添加$-q$，世界会瞬间变得清净起来。</p><p>踏入了$gdb$的世界，下面让我们来具体学习一下操作吧！</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">file 文件名 //装载文件，如果是直接gdb进入而没有附加文件，则调试前需要装载文件</span><br><span class="line">list begin,end  //展示从begin行到end行的代码，若没加行数限制则默认每次展示10行，回车继续展示</span><br><span class="line">b(reak) num //在num行设置断点</span><br><span class="line">b(reak) 文件名:函数名</span><br><span class="line">r(un)  //运行</span><br><span class="line">p(rint) var //输出变量的值</span><br><span class="line">c(ontinue) //继续执行</span><br><span class="line">n(ext) //下一行</span><br><span class="line">s(tep) //下一行，与next区别为会进入函数内部</span><br><span class="line">set var=   //修改变量值</span><br><span class="line">breakpoints //查看断点</span><br><span class="line">disable num//使第num行的断点失效</span><br><span class="line">enable num //使第num行的断点生效</span><br><span class="line">delete num//删除num行的断点</span><br><span class="line">delete //删除所有断点</span><br><span class="line">kill //停止当前进程</span><br><span class="line">q(uit) //退出gdb</span><br></pre></td></tr></table></figure><p>上面便是我们常用的$gdb$的基本操作辣！</p><p>你是不是还有一个疑问呢？如果发生段错误（内存错误）我们怎么知道是哪里出了问题呢？</p><p>这就涉及到一个新的知识点。</p><h3 id="利用-gdb-和-core-dump-快速定位段错误"><a href="#利用-gdb-和-core-dump-快速定位段错误" class="headerlink" title="利用$gdb$和$core dump$快速定位段错误"></a>利用$gdb$和$core dump$快速定位段错误</h3><p>内存错误的程序通常会崩溃掉，即$coredum$（核心转储），这时候会有一个镜像文件留存下来，即$core$，我们可以从其中找到内存错误的代码片段。</p><p>比如这段错误的代码。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">char</span> *s;</span><br><span class="line">gets(s);</span><br><span class="line"><span class="built_in">puts</span>(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>运行后，结果为</p><p>去同目录下找$core$文件，可能会找不到，因为默认空间设置为0，我们给空间设置为1000。</p><p>即执行</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ulimit -c <span class="number">1000</span></span><br></pre></td></tr></table></figure><p>然后执行</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb -q err core</span><br></pre></td></tr></table></figure><p>会得到</p><p>我们通过$bt$命令便可以查看错误的点的信息（具体行数）</p><p>如图所示</p><p>以上。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h3&gt;&lt;p&gt;妈妈再也不用担心我离开$IDE$就不会敲代码啦！&lt;/p&gt;
+&lt;p&gt;对于$gdb$功能的基础介绍&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置</summary>
+      
+    
+    
+    
+    <category term="语言" scheme="http://yoursite.com/categories/语言/"/>
+    
+    <category term="C++" scheme="http://yoursite.com/categories/语言/C/"/>
+    
+    
+    <category term="学一学" scheme="http://yoursite.com/tags/学一学/"/>
+    
+    <category term="小学期" scheme="http://yoursite.com/tags/小学期/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gcc编译命令与makefile总结</title>
+    <link href="http://yoursite.com/2019/08/28/gcc%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2019/08/28/gcc%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</id>
+    <published>2019-08-28T10:51:13.000Z</published>
+    <updated>2021-02-04T08:50:53.293Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>今天学习了$gcc$的基本指令，之前总是望而却步，今天一口气。</p><h3 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h3><p>我们知道，$gcc$在编译$C$语言或者$C++$时，分为四个步骤。</p><ul><li>预处理 替换头文件和宏，移除注释（.i文件）</li><li>编译，生成汇编代码 (.s文件)</li><li>汇编 生成目标文件（机器码 .o文件）</li><li>链接 生成可执行文件<h3 id="编译命令"><a href="#编译命令" class="headerlink" title="编译命令"></a>编译命令</h3></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//以下均以test.c为例</span><br><span class="line">gcc test.c //此行代码会直接生成可执行文件，并默认保存为a.out</span><br><span class="line">gcc test.c -o  test.o //-0指令表示生成文件命名为-o后的名字，若无其他指令则与后缀无关，都是可执行文件</span><br><span class="line">//关于-o，以下几种需要-o重定向输出文件</span><br><span class="line">gcc -S test.c//只处理预处理和编译 生成汇编代码</span><br><span class="line">gcc -E test.c //只预处理</span><br><span class="line">gcc -c test.c //只有预处理、编译、汇编三步，生成obj(.o)文件</span><br><span class="line">gcc -I 路径 test.c //所调用的头文件所涉及的路径</span><br><span class="line">gcc -Dmarco test.c //宏定义</span><br><span class="line">gcc -Dmarc=def test.c//宏定义</span><br><span class="line">gcc -g test.c//编译时，生成调试信息，常常与gdb配合使用</span><br><span class="line">gcc -std=c9//指定语言标准</span><br><span class="line">gcc -On(0-3) //开启编译优化选项，一般使用-O2</span><br></pre></td></tr></table></figure><h3 id="大明星：-makelist"><a href="#大明星：-makelist" class="headerlink" title="大明星：$makelist$"></a>大明星：$makelist$</h3><p>怎么样？看了上面的编译命令，是不是觉得原来也不过如此？</p><p>但是想一下，如果我们需要编译链接许多文件呢？有没有什么简便的方式呢？</p><p>这个时候，$makefile$就要闪耀登场了！</p><p>什么是$makefile$？之前用$windows$我从来没见过，因为强大的/一般的$IDE$已经为我们做好了一切事情。</p><p>$makefile$其实可以简单理解为指令的集合，是对指定的一些文件进行编译的指令，如果我们一个个写出来会很耗费时间，但是$makelist$可以让我们通过简单的$make$，实现相同的功能。</p><h4 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">目标文件：[依赖文件集合]</span><br><span class="line">指令                    <span class="comment">//注意：此处开头必须打tab！</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//实例</span></span><br><span class="line">main:test.o <span class="keyword">delete</span>.o add.o</span><br><span class="line">gcc $^ -o $@</span><br><span class="line">test.o:test.c</span><br><span class="line">gcc -c test.c -o test.o</span><br><span class="line">add.o:add.c</span><br><span class="line">gcc -c add.c -o add.o</span><br><span class="line"><span class="keyword">delete</span>.o:<span class="keyword">delete</span>.c</span><br><span class="line">gcc -c <span class="keyword">delete</span>.c -o <span class="keyword">delete</span>.o</span><br></pre></td></tr></table></figure><p>上面只是3个文件，需要一行一行写出来，如果有1000个需要处理的文件呢？还要一行一行写出来未免效率也太低了。这个时候，$makefile$的扩展用法就要登场了。</p><h4 id="变量定义"><a href="#变量定义" class="headerlink" title="变量定义"></a>变量定义</h4><h5 id="预定义变量"><a href="#预定义变量" class="headerlink" title="预定义变量"></a>预定义变量</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$&lt; 代表第一个依赖文件的名称</span><br><span class="line"></span><br><span class="line">$@ 代表目标文件的名称</span><br><span class="line"></span><br><span class="line">$^  代表所有依赖文件的名称</span><br></pre></td></tr></table></figure><p>此外还可以自己定义一些变量。</p><h5 id="自定义变量"><a href="#自定义变量" class="headerlink" title="自定义变量"></a>自定义变量</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CC = gcc</span><br><span class="line">CFLAGS = -I ../include </span><br><span class="line"><span class="comment">//注意等号左右两边都需要有空格</span></span><br></pre></td></tr></table></figure><p>举个例子，上面代码可改为</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CC = gcc</span><br><span class="line">main:test.o <span class="keyword">delete</span>.o add.o</span><br><span class="line">$(CC) $^ -o $@</span><br></pre></td></tr></table></figure><h4 id="隐含规则"><a href="#隐含规则" class="headerlink" title="隐含规则"></a>隐含规则</h4><h5 id="模式规则"><a href="#模式规则" class="headerlink" title="模式规则"></a>模式规则</h5><p>将一个带有某种后缀的文件转换为另一种后缀的文件</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.c.o:</span><br><span class="line">$(CC) $(CCFLAGS) -c -o $@ $&lt;</span><br></pre></td></tr></table></figure><h5 id="后缀规则"><a href="#后缀规则" class="headerlink" title="后缀规则"></a>后缀规则</h5><p>冒号后为依赖文件，冒号前为目标文件</p><h3 id="个人感受"><a href="#个人感受" class="headerlink" title="个人感受"></a>个人感受</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%.o:%.c(若有多个依赖文件则多写几个%)</span><br><span class="line">$(CC) $(CCFLAGS) -c -o $@ $&lt;</span><br></pre></td></tr></table></figure><p>综合以上规则，$makefile$文件可写为</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CC = gcc</span><br><span class="line">main:test.o <span class="keyword">delete</span>.o add.o</span><br><span class="line">$(CC) $^ -o $@</span><br><span class="line">.c.o:</span><br><span class="line">$(CC) -c $&lt; -o $@</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h3&gt;&lt;p&gt;今天学习了$gcc$的基本指令，之前总是望而却步，今天一口气。&lt;/p&gt;
+&lt;h3 id=&quot;前置知识&quot;&gt;&lt;a href=&quot;#前置</summary>
+      
+    
+    
+    
+    <category term="语言" scheme="http://yoursite.com/categories/语言/"/>
+    
+    <category term="C++" scheme="http://yoursite.com/categories/语言/C/"/>
+    
+    
+    <category term="学一学" scheme="http://yoursite.com/tags/学一学/"/>
+    
+    <category term="小学期" scheme="http://yoursite.com/tags/小学期/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2019牛客多校第十场G</title>
+    <link href="http://yoursite.com/2019/08/28/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E5%8D%81%E5%9C%BAG/"/>
+    <id>http://yoursite.com/2019/08/28/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E5%8D%81%E5%9C%BAG/</id>
+    <published>2019-08-28T06:16:39.000Z</published>
+    <updated>2021-02-04T08:49:55.131Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://ac.nowcoder.com/acm/contest/890/G" target="_blank">Road Construction</a></p><h1 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h1><p>题意很简单，给出$n$个点的坐标，寻找一条直线，使得直线两边的点的数量相同，并且所有点到直线的距离最大，要求求出直线的斜率。</p><a id="more"></a><h1 id="思路重现"><a href="#思路重现" class="headerlink" title="思路重现"></a>思路重现</h1><p>这个题还是需要一点思路的。</p><p>一个优美的结论，这条直线一定是和某两点之间连线平行或垂直。</p><h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://ac.nowcoder.com/acm/contest/890/G&quot; target=&quot;_blank&quot;&gt;Road Construction&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;题意简述&quot;&gt;&lt;a href=&quot;#题意简述&quot; class=&quot;headerlink&quot; title=&quot;题意简述&quot;&gt;&lt;/a&gt;题意简述&lt;/h1&gt;&lt;p&gt;题意很简单，给出$n$个点的坐标，寻找一条直线，使得直线两边的点的数量相同，并且所有点到直线的距离最大，要求求出直线的斜率。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="http://yoursite.com/categories/算法/"/>
+    
+    <category term="牛客" scheme="http://yoursite.com/categories/算法/牛客/"/>
+    
+    
+    <category term="计算几何" scheme="http://yoursite.com/tags/计算几何/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于字符串处理的整理</title>
+    <link href="http://yoursite.com/2019/08/22/%E5%85%B3%E4%BA%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E7%9A%84%E6%95%B4%E7%90%86/"/>
+    <id>http://yoursite.com/2019/08/22/%E5%85%B3%E4%BA%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E7%9A%84%E6%95%B4%E7%90%86/</id>
+    <published>2019-08-22T02:47:22.000Z</published>
+    <updated>2021-02-04T08:50:24.437Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>字符串是我们经常要处理的东西，今天在处理方面比如读入处理等方面做一个小小的总结。</p><h3 id="读字符串之前"><a href="#读字符串之前" class="headerlink" title="读字符串之前"></a>读字符串之前</h3><p>如果读字符串之前有读入数的操作，那么需要把其后的换行符给读入消去，$getchar()$即可。</p><h3 id="整行读入字符串的方式"><a href="#整行读入字符串的方式" class="headerlink" title="整行读入字符串的方式"></a>整行读入字符串的方式</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++标准string</span></span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line">getline(<span class="built_in">cin</span>,s);</span><br><span class="line"><span class="comment">//char字符数组</span></span><br><span class="line"><span class="keyword">char</span> s[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%[^\n]%*c"</span>,s);</span><br><span class="line">gets(s);</span><br><span class="line"><span class="built_in">cin</span>.get(s,<span class="number">100</span>);</span><br><span class="line"><span class="built_in">cin</span>.getline(s,<span class="number">100</span>);</span><br></pre></td></tr></table></figure><h4 id="整行读入原理解释"><a href="#整行读入原理解释" class="headerlink" title="整行读入原理解释"></a>整行读入原理解释</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%[^\n]%*c"</span>,s);</span><br></pre></td></tr></table></figure><p>​    $%[\qquad ]$是很有趣的参数，意义是读入一个字符集合，一旦遇到不在集合中的就停止，同时遇到^后面的字符也会停止，所以^\n就是遇到换行符停止，后面的%*c是为了把换行符读入，防止影响接下来的读入。</p><h3 id="cin-get-和cin-getline-之区别"><a href="#cin-get-和cin-getline-之区别" class="headerlink" title="cin.get()和cin.getline()之区别"></a>cin.get()和cin.getline()之区别</h3><p>两者都是只支持$char*$字符数组。</p><p>我们知道读入时存在缓冲区这一说法，比如$cin$，在键盘输入结束后，将数据存入缓冲区m$cin$函数直接从缓冲区读取数据，所以如果缓冲区有残留数据，$cin$会直接读取。</p><p>问题的关键在于，$cin.get$()在一次输入结束后不会删除缓冲区的结束符，而$cin.getline$()会自动丢弃缓冲区字符。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cin</span>.get(数组名，长度，结束符);</span><br><span class="line"><span class="built_in">cin</span>.getline(数组名，长度，结束符);</span><br><span class="line"><span class="comment">//其中，结束符默认为换行符</span></span><br></pre></td></tr></table></figure><p>如果要用$cin.get()$读入多组数据，需要写成 $cin.get(数组名，长度).get()$。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h3&gt;&lt;p&gt;字符串是我们经常要处理的东西，今天在处理方面比如读入处理等方面做一个小小的总结。&lt;/p&gt;
+&lt;h3 id=&quot;读字符串之前&quot;&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="语言" scheme="http://yoursite.com/categories/语言/"/>
+    
+    <category term="C++" scheme="http://yoursite.com/categories/语言/C/"/>
+    
+    
+    <category term="字符串" scheme="http://yoursite.com/tags/字符串/"/>
+    
+    <category term="整理" scheme="http://yoursite.com/tags/整理/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2019牛客多校第七场B 多项式分解</title>
+    <link href="http://yoursite.com/2019/08/09/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC7%E5%9C%BAB/"/>
+    <id>http://yoursite.com/2019/08/09/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC7%E5%9C%BAB/</id>
+    <published>2019-08-09T10:54:10.000Z</published>
+    <updated>2021-02-04T08:49:43.506Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://ac.nowcoder.com/acm/contest/887/B" target="_blank">Irreducible Polynomial</a></p><h1 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h1><p>给一个最多$20$次的多项式，问是否能够对该多项式分解因式。能则输出$No$，不能则输出$Yes$。</p><a id="more"></a><h1 id="思路重现"><a href="#思路重现" class="headerlink" title="思路重现"></a>思路重现</h1><p>刚开始和$yls$还想着找零点，求导等骚操作，然后$yls$说他找到了规律。</p><p>根据代数基本定理：任何一个非零的一元n次复系数多项式，都正好有n个复数根（重根视为多个根。</p><p>所以，$&lt;2$次的必然不可分解，$&gt;2$次的必然可以至少因式分解出一个式子，$=2$的判断一元二次方程是否有跟即可。</p><h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, LL&gt;P;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">2e3</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> LL mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> LL lINF = <span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ls (rt&lt;&lt;1)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rs (rt&lt;&lt;1|1)</span></span><br><span class="line"><span class="function">LL <span class="title">gcd</span><span class="params">(LL a, LL b)</span> </span>&#123; <span class="keyword">return</span> b ? gcd(b, a%b) : a; &#125;</span><br><span class="line"><span class="keyword">int</span> _;</span><br><span class="line">LL n;</span><br><span class="line">LL a[M];</span><br><span class="line">LL de;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;_);</span><br><span class="line">    <span class="keyword">while</span>(_--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n + <span class="number">1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (n &gt; <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"No\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            de = a[<span class="number">1</span>] * a[<span class="number">1</span>] - <span class="number">4</span> * a[<span class="number">0</span>] * a[<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">if</span> (de &gt;= <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"No\n"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://ac.nowcoder.com/acm/contest/887/B&quot; target=&quot;_blank&quot;&gt;Irreducible Polynomial&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;题意简述&quot;&gt;&lt;a href=&quot;#题意简述&quot; class=&quot;headerlink&quot; title=&quot;题意简述&quot;&gt;&lt;/a&gt;题意简述&lt;/h1&gt;&lt;p&gt;给一个最多$20$次的多项式，问是否能够对该多项式分解因式。能则输出$No$，不能则输出$Yes$。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="http://yoursite.com/categories/算法/"/>
+    
+    <category term="牛客" scheme="http://yoursite.com/categories/算法/牛客/"/>
+    
+    
+    <category term="数学" scheme="http://yoursite.com/tags/数学/"/>
+    
+    <category term="结论" scheme="http://yoursite.com/tags/结论/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Atcoder ABC 136C</title>
+    <link href="http://yoursite.com/2019/08/06/136C/"/>
+    <id>http://yoursite.com/2019/08/06/136C/</id>
+    <published>2019-08-06T08:04:10.000Z</published>
+    <updated>2021-02-04T08:49:20.556Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href target="_blank"></a></p><h1 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h1><p>给$n$个数，对每个数可以执行减一操作，也可以不执行，能否把这$n$个数变成非减的数列。</p><a id="more"></a><h1 id="思路重现"><a href="#思路重现" class="headerlink" title="思路重现"></a>思路重现</h1><p>我一开始的想法：循环判断。对于相差大于$1$的相邻数，直接退出，返回$false$，对于连续的递减，比如$3、2、1$也退出，返回$false$，但是死$WA$，没找到原因。</p><p>后来发现如果有连续的数，比如$5、5、4$就会错误。</p><p>那么就需要正解了。</p><p>从后往前，如果前一个数比这个数大，就把前面的数减$1$，然后再循环一遍，如果有递减存在，就返回$false$。为什么从后往前呢，想一下$5、5、4$的情况。</p><p>同样的，如果要打造一个非递增数列，允许减一，就需要从前往后了。</p><p>再想一下，如果非递减允许加一，就是从前往后了</p><p>总结一下，就是要保证被操作的数要先被访问到，不然可能会错过。</p><h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100000+50</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXM 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,n,m) for(int i=n;i&lt;=m;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000 + 7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a, b) memset(a, b, sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">"="</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> ch = getchar();</span><br><span class="line">    <span class="keyword">while</span> (ch &lt; <span class="string">'0'</span> || ch &gt; <span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (ch == <span class="string">'-'</span>)</span><br><span class="line">            f = <span class="number">-1</span>;</span><br><span class="line">        ch = getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x = <span class="number">10</span> * x + ch - <span class="string">'0'</span>;</span><br><span class="line">        ch = getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> a[MAXN];</span><br><span class="line"><span class="comment">//1 1 1 1 1   RL R L R    L   RL R R  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//while(1)&#123;</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">int</span> n=read();</span><br><span class="line">    rep(i,<span class="number">1</span>,n) a[i]=read();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&gt;<span class="number">1</span>;--i)</span><br><span class="line">    <span class="keyword">if</span>(a[i]-a[i<span class="number">-1</span>]&lt;<span class="number">0</span>) a[i<span class="number">-1</span>]--;</span><br><span class="line">    <span class="keyword">bool</span> flag=<span class="number">0</span>;</span><br><span class="line">    rep(i,<span class="number">1</span>,n<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i]-a[i+<span class="number">1</span>]&gt;<span class="number">0</span>) &#123;flag=<span class="number">1</span>;<span class="keyword">break</span>;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(flag) <span class="built_in">puts</span>(<span class="string">"No"</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">"Yes"</span>);</span><br><span class="line">   <span class="comment">// &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>​        </p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href target=&quot;_blank&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;题意简述&quot;&gt;&lt;a href=&quot;#题意简述&quot; class=&quot;headerlink&quot; title=&quot;题意简述&quot;&gt;&lt;/a&gt;题意简述&lt;/h1&gt;&lt;p&gt;给$n$个数，对每个数可以执行减一操作，也可以不执行，能否把这$n$个数变成非减的数列。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="http://yoursite.com/categories/算法/"/>
+    
+    <category term="Atcoder" scheme="http://yoursite.com/categories/算法/Atcoder/"/>
+    
+    
+    <category term="水" scheme="http://yoursite.com/tags/水/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++全排列函数</title>
+    <link href="http://yoursite.com/2019/08/04/C-%E5%85%A8%E6%8E%92%E5%88%97%E5%87%BD%E6%95%B0/"/>
+    <id>http://yoursite.com/2019/08/04/C-%E5%85%A8%E6%8E%92%E5%88%97%E5%87%BD%E6%95%B0/</id>
+    <published>2019-08-04T14:14:24.000Z</published>
+    <updated>2021-02-04T08:50:45.296Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="主角"><a href="#主角" class="headerlink" title="主角"></a>主角</h1><p>C++中的全排列函数很是强大，生成一个长度为$n$的序列的全排列复杂度仅为$O(n)$。</p><p>今天总结一下用法。</p><h2 id="默认-cmp-规则"><a href="#默认-cmp-规则" class="headerlink" title="默认$cmp$规则"></a>默认$cmp$规则</h2><p>对一个数据有序容器$s$，如下代码便可实现全排列。</p><p>为什么必须是有序呢？如果不是有序，$next_permutation$函数便只能生成有序条件下该序列之后的排列。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">while</span>(s.begin(),s.end());</span><br></pre></td></tr></table></figure><h2 id="自定义-cmp-规则"><a href="#自定义-cmp-规则" class="headerlink" title="自定义$cmp$规则"></a>自定义$cmp$规则</h2><p>那么，如果容器内数据的排序规则和正常的排序规则不太一样呢？</p><p>不要慌，我们可以自定义排序规则，手写$cmp$。</p><p>举个栗子。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(<span class="keyword">char</span> a,<span class="keyword">char</span> b)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="keyword">if</span>(<span class="built_in">tolower</span>(a)!=<span class="built_in">tolower</span>(b))<span class="comment">//tolower 是将大写字母转化为小写字母.</span></span><br><span class="line"> <span class="keyword">return</span> <span class="built_in">tolower</span>(a)&lt;<span class="built_in">tolower</span>(b);</span><br><span class="line"> <span class="keyword">else</span></span><br><span class="line"> <span class="keyword">return</span> a&lt;b;</span><br><span class="line">&#125;<span class="comment">//自定义字符比较规则</span></span><br></pre></td></tr></table></figure><p>那么在使用$next_permutation$函数的时候，如下方式实现。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">while</span>(next_permutation(ch,ch+<span class="built_in">strlen</span>(ch),cmp));</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;主角&quot;&gt;&lt;a href=&quot;#主角&quot; class=&quot;headerlink&quot; title=&quot;主角&quot;&gt;&lt;/a&gt;主角&lt;/h1&gt;&lt;p&gt;C++中的全排列函数很是强大，生成一个长度为$n$的序列的全排列复杂度仅为$O(n)$。&lt;/p&gt;
+&lt;p&gt;今天总结一下用法。&lt;/p&gt;
+&lt;h2 </summary>
+      
+    
+    
+    
+    <category term="语言" scheme="http://yoursite.com/categories/语言/"/>
+    
+    <category term="C++" scheme="http://yoursite.com/categories/语言/C/"/>
+    
+    
+    <category term="C++STL" scheme="http://yoursite.com/tags/C-STL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2019牛客多校第六场G题</title>
+    <link href="http://yoursite.com/2019/08/04/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E5%85%AD%E5%9C%BAG%E9%A2%98/"/>
+    <id>http://yoursite.com/2019/08/04/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E5%85%AD%E5%9C%BAG%E9%A2%98/</id>
+    <published>2019-08-04T07:51:08.000Z</published>
+    <updated>2021-02-04T08:49:48.330Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://ac.nowcoder.com/acm/contest/886/G" target="_blank">Is Today Friday?</a></p><h1 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h1><p>这些天是星期五吗？使用$n$个$A-J$构成的$XXXX/XX/XX$，分别代表$0-9$的某一个，要求出满足所有日期都是星期五的一个排列，没有则输出$Impossible$。</p><a id="more"></a><h1 id="思路重现"><a href="#思路重现" class="headerlink" title="思路重现"></a>思路重现</h1><p>比赛的时候其实想到解法了，但是没什么时间写了。</p><p>其实使用全排列函数$next_permutation$函数枚举$0-9$的排列，然后依次判断即可。</p><p>本题的坑点在于，需要去重，去重的话$sort$后使用$unique$函数就好了。</p><p>关于$unique$标准库函数，其实是不重复元素移到前面，这样就可以保证前$realn$个元素是不重复的，因为是相邻元素比较，所以需要先对容器内元素排序。</p><h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100000+50</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXM 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,n,m) for(int i=n;i&lt;=m;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000 + 7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a, b) memset(a, b, sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">"="</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">char</span> ch = getchar();</span><br><span class="line"><span class="keyword">while</span> (ch &lt; <span class="string">'0'</span> || ch &gt; <span class="string">'9'</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">if</span> (ch == <span class="string">'-'</span>)</span><br><span class="line">f = <span class="number">-1</span>;</span><br><span class="line">ch = getchar();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">&#123;</span><br><span class="line">x = <span class="number">10</span> * x + ch - <span class="string">'0'</span>;</span><br><span class="line">ch = getchar();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">string</span> s[MAXN];</span><br><span class="line"><span class="keyword">int</span> day[] = &#123; <span class="number">0</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span> &#125;;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> y, <span class="keyword">int</span> m, <span class="keyword">int</span> d)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">if</span> (y &lt; <span class="number">1600</span> || y&gt;<span class="number">9999</span> || m &lt; <span class="number">1</span> || m&gt;<span class="number">12</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> day_m = day[m];</span><br><span class="line"><span class="keyword">if</span> (m == <span class="number">2</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">if</span> ((y % <span class="number">4</span> == <span class="number">0</span> &amp;&amp; y % <span class="number">100</span> != <span class="number">0</span>) || y % <span class="number">400</span> == <span class="number">0</span>) day_m++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (d&lt;<span class="number">1</span> || d&gt;day_m) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (m &lt;= <span class="number">2</span>) m += <span class="number">12</span>, y--;</span><br><span class="line"><span class="keyword">int</span> c = y / <span class="number">100</span>;</span><br><span class="line">y %= <span class="number">100</span>;</span><br><span class="line"><span class="keyword">int</span> w = ((y + y / <span class="number">4</span> + c / <span class="number">4</span> - <span class="number">2</span> * c + (<span class="number">26</span> * (m + <span class="number">1</span>)) / <span class="number">10</span> + d - <span class="number">1</span>) % <span class="number">7</span> + <span class="number">7</span>) % <span class="number">7</span>;</span><br><span class="line"><span class="keyword">if</span> (w == <span class="number">5</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> T = read();</span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (T--)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">int</span> n = read();</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Case #%d: "</span>, ++cnt);</span><br><span class="line">rep(i, <span class="number">1</span>, n)  <span class="built_in">cin</span> &gt;&gt; s[i];</span><br><span class="line">sort(s + <span class="number">1</span>, s + n + <span class="number">1</span>);</span><br><span class="line"><span class="keyword">int</span> realn = unique(s + <span class="number">1</span>, s + n + <span class="number">1</span>) - s<span class="number">-1</span>;</span><br><span class="line">rep(i, <span class="number">0</span>, <span class="number">9</span>) a[i] = i;</span><br><span class="line"><span class="keyword">bool</span> flag = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line"><span class="keyword">bool</span> flag1 = <span class="number">1</span>;</span><br><span class="line">rep(i, <span class="number">1</span>, realn)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">int</span> y = a[s[i][<span class="number">0</span>] - <span class="string">'A'</span>] * <span class="number">1000</span> + a[s[i][<span class="number">1</span>] - <span class="string">'A'</span>] * <span class="number">100</span> + a[s[i][<span class="number">2</span>] - <span class="string">'A'</span>] * <span class="number">10</span> + a[s[i][<span class="number">3</span>] - <span class="string">'A'</span>];</span><br><span class="line"><span class="keyword">int</span> m = a[s[i][<span class="number">5</span>] - <span class="string">'A'</span>] * <span class="number">10</span> + a[s[i][<span class="number">6</span>] - <span class="string">'A'</span>];</span><br><span class="line"><span class="keyword">int</span> d = a[s[i][<span class="number">8</span>] - <span class="string">'A'</span>] * <span class="number">10</span> + a[s[i][<span class="number">9</span>] - <span class="string">'A'</span>];</span><br><span class="line"><span class="keyword">if</span> (!check(y, m, d))</span><br><span class="line">&#123;</span><br><span class="line">flag1 = <span class="number">0</span>; <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (flag1)</span><br><span class="line">&#123;</span><br><span class="line">flag = <span class="number">1</span>;</span><br><span class="line">rep(i, <span class="number">0</span>, <span class="number">9</span>) <span class="built_in">printf</span>(<span class="string">"%d"</span>, a[i]);</span><br><span class="line"><span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125; <span class="keyword">while</span> (next_permutation(a, a + <span class="number">10</span>));</span><br><span class="line"><span class="keyword">if</span> (!flag) <span class="built_in">puts</span>(<span class="string">"Impossible"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://ac.nowcoder.com/acm/contest/886/G&quot; target=&quot;_blank&quot;&gt;Is Today Friday?&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;题意简述&quot;&gt;&lt;a href=&quot;#题意简述&quot; class=&quot;headerlink&quot; title=&quot;题意简述&quot;&gt;&lt;/a&gt;题意简述&lt;/h1&gt;&lt;p&gt;这些天是星期五吗？使用$n$个$A-J$构成的$XXXX/XX/XX$，分别代表$0-9$的某一个，要求出满足所有日期都是星期五的一个排列，没有则输出$Impossible$。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="http://yoursite.com/categories/算法/"/>
+    
+    <category term="牛客" scheme="http://yoursite.com/categories/算法/牛客/"/>
+    
+    
+    <category term="模拟" scheme="http://yoursite.com/tags/模拟/"/>
+    
+    <category term="暴力" scheme="http://yoursite.com/tags/暴力/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2019牛客多校第五场I题</title>
+    <link href="http://yoursite.com/2019/08/02/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%94%E5%9C%BAI%E9%A2%98/"/>
+    <id>http://yoursite.com/2019/08/02/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%94%E5%9C%BAI%E9%A2%98/</id>
+    <published>2019-08-02T13:14:50.000Z</published>
+    <updated>2021-02-04T08:49:59.446Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://ac.nowcoder.com/acm/contest/885/I" target="_blank">Three points</a></p><h1 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h1><a id="more"></a><p>在一个$w*h$的矩形内，构造三个点$X,Y,Z$要求满足$XY=a,XZ=b,YZ=c$，$1&lt;=w,h,a,b,c&lt;=50$，保证存在解。</p><h1 id="思路重现"><a href="#思路重现" class="headerlink" title="思路重现"></a>思路重现</h1><p>orz一道计算几何水题我却卡了整场比赛，还是太菜了。</p><p>感觉卡住最主要的原因是思路不清晰，不够条理化。</p><p>其实首先需要注意题目保证有解，那么这一组可行解通过旋转，平移，会有两种情况：</p><ul><li>一条边在矩形的边界上</li><li>一个点在原点，同时有一个点在上或右的边上，也就是斜着摆放在矩形中</li></ul><p>为了方便，我们将一个点固定在原点，然后分类讨论另外两个点的情况就好了，再对三个点的顺序排列一下，一共六种可能，这道题就做完了。</p><h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sqr(x) (x)*(x)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,n,m) for(int i=n;i&lt;=m;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> eps 1e-12</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">char</span> ch = getchar();</span><br><span class="line"><span class="keyword">while</span> (ch&lt;<span class="string">'0'</span> || ch&gt;<span class="string">'9'</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">if</span> (ch == <span class="string">'-'</span>) f = <span class="number">-1</span>;</span><br><span class="line">ch = getchar();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">&#123;</span><br><span class="line">x = <span class="number">10</span> * x + ch - <span class="string">'0'</span>;</span><br><span class="line">ch = getchar();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">P</span> &#123;</span></span><br><span class="line"><span class="keyword">double</span> x, y;</span><br><span class="line">P(<span class="keyword">double</span> _x = <span class="number">0</span>, <span class="keyword">double</span> _y = <span class="number">0</span>) :x(_x), y(_y) &#123;&#125;</span><br><span class="line">P <span class="keyword">operator</span>-(<span class="keyword">const</span> P&amp; b)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">return</span> P(x - b.x, y - b.y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">dis</span><span class="params">(<span class="keyword">const</span> P&amp; b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">sqrt</span>(sqr(x - b.x) + sqr(y - b.y));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">dis</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">sqrt</span>(x * x + y * y);</span><br><span class="line">&#125;</span><br><span class="line">&#125;p[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">int</span> w, h, _a, _b, _c;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ok</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">fabs</span>(p[<span class="number">0</span>].dis(p[<span class="number">1</span>]) - _a) &gt; eps || <span class="built_in">fabs</span>(p[<span class="number">0</span>].dis(p[<span class="number">2</span>]) - _b) &gt; eps || <span class="built_in">fabs</span>(p[<span class="number">1</span>].dis(p[<span class="number">2</span>]) - _c) &gt; eps) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">rep(i, <span class="number">0</span>, <span class="number">2</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">if</span> (p[i].x&lt;-eps || p[i].y&lt;-eps || p[i].x&gt;w + eps || p[i].y&gt;h + eps) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c, P&amp; x, P&amp; y, P&amp; z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">x = P();<span class="comment">//将X点放在原点 </span></span><br><span class="line"><span class="keyword">bool</span> flag = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">double</span> angle_1 = <span class="built_in">acos</span>((<span class="keyword">double</span>)(a * a + b * b - c * c) / (<span class="number">2</span> * a * b));</span><br><span class="line"><span class="comment">//开始分类讨论放置点 </span></span><br><span class="line"><span class="keyword">if</span> (a &lt;= w)</span><br><span class="line">&#123;</span><br><span class="line">y = P(a, <span class="number">0</span>);</span><br><span class="line">z = P(b * <span class="built_in">cos</span>(angle_1), b * <span class="built_in">sin</span>(angle_1));</span><br><span class="line"><span class="keyword">if</span> (ok()) flag = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">double</span> y_h = <span class="built_in">sqrt</span>(<span class="number">1.0</span> * a * a - <span class="number">1.0</span> * w * w);</span><br><span class="line">y = P(w, y_h);</span><br><span class="line"><span class="keyword">double</span> angle_2 = <span class="built_in">acos</span>(w * <span class="number">1.0</span> / a);</span><br><span class="line">z = P(b * <span class="built_in">cos</span>(angle_1 + angle_2), b * <span class="built_in">sin</span>(angle_1 + angle_2));</span><br><span class="line"><span class="keyword">if</span> (ok()) flag = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!flag)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">if</span> (b &lt;= h)</span><br><span class="line">&#123;</span><br><span class="line">z = P(<span class="number">0</span>, b);</span><br><span class="line">y = P(a * <span class="built_in">sin</span>(angle_1), a * <span class="built_in">cos</span>(angle_1));</span><br><span class="line"><span class="keyword">if</span> (ok()) flag = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">double</span> z_x = <span class="built_in">sqrt</span>(<span class="number">1.0</span> * b * b - <span class="number">1.0</span> * h * h);</span><br><span class="line">z = P(z_x, h);</span><br><span class="line"><span class="keyword">double</span> angle_2 = <span class="built_in">acos</span>(h * <span class="number">1.0</span> / b);</span><br><span class="line">y = P(a * <span class="built_in">sin</span>(angle_1 + angle_2), a * <span class="built_in">cos</span>(angle_1 + angle_2));</span><br><span class="line"><span class="keyword">if</span> (ok()) flag = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!flag) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">rep(i, <span class="number">0</span>, <span class="number">2</span>) <span class="built_in">printf</span>(<span class="string">"%.12f %.12f%c"</span>, p[i].x, p[i].y, (i == <span class="number">2</span>) ? <span class="string">'\n'</span> : <span class="string">' '</span>);</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">if</span> (</span><br><span class="line">check(_a, _b, _c, p[<span class="number">0</span>], p[<span class="number">1</span>], p[<span class="number">2</span>])</span><br><span class="line">|| check(_a, _c, _b, p[<span class="number">1</span>], p[<span class="number">0</span>], p[<span class="number">2</span>])</span><br><span class="line">|| check(_b, _a, _c, p[<span class="number">0</span>], p[<span class="number">2</span>], p[<span class="number">1</span>])</span><br><span class="line">|| check(_b, _c, _a, p[<span class="number">2</span>], p[<span class="number">0</span>], p[<span class="number">1</span>])</span><br><span class="line">|| check(_c, _b, _a, p[<span class="number">2</span>], p[<span class="number">1</span>], p[<span class="number">0</span>])</span><br><span class="line">|| check(_c, _a, _b, p[<span class="number">1</span>], p[<span class="number">2</span>], p[<span class="number">0</span>])</span><br><span class="line">)</span><br><span class="line"><span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> T = read();</span><br><span class="line"><span class="keyword">while</span> (T--)</span><br><span class="line">&#123;</span><br><span class="line">w = read(), h = read(), _a = read(), _b = read(), _c = read();</span><br><span class="line">solve();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://ac.nowcoder.com/acm/contest/885/I&quot; target=&quot;_blank&quot;&gt;Three points&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;题意简述&quot;&gt;&lt;a href=&quot;#题意简述&quot; class=&quot;headerlink&quot; title=&quot;题意简述&quot;&gt;&lt;/a&gt;题意简述&lt;/h1&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="http://yoursite.com/categories/算法/"/>
+    
+    <category term="牛客" scheme="http://yoursite.com/categories/算法/牛客/"/>
+    
+    
+    <category term="计算几何" scheme="http://yoursite.com/tags/计算几何/"/>
+    
+    <category term="枚举" scheme="http://yoursite.com/tags/枚举/"/>
+    
+  </entry>
+  
+</feed>

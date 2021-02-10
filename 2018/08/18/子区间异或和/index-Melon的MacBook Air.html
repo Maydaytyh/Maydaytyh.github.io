@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpeg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/M-32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/M-16x16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="异或，二进制，真有趣啊。">
+<meta name="keywords" content="异或,按位算贡献,前缀和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="子区间异或和">
+<meta property="og:url" content="http://yoursite.com/2018/08/18/子区间异或和/index.html">
+<meta property="og:site_name" content="GuguMelon&#39;s Blog">
+<meta property="og:description" content="异或，二进制，真有趣啊。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-01-29T15:40:12.683Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="子区间异或和">
+<meta name="twitter:description" content="异或，二进制，真有趣啊。">
+
+<link rel="canonical" href="http://yoursite.com/2018/08/18/子区间异或和/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>子区间异或和 | GuguMelon's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="GuguMelon's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">GuguMelon's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">今天所做之事勿候明天，自己所做之事勿候他人。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/About/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">32</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">31</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/Maydaytyh" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/子区间异或和/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="GuGuMelon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="GuguMelon's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          子区间异或和
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-18 10:26:29" itemprop="dateCreated datePublished" datetime="2018-08-18T10:26:29+08:00">2018-08-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-29 23:40:12" itemprop="dateModified" datetime="2021-01-29T23:40:12+08:00">2021-01-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>异或，二进制，真有趣啊。</p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>rating赛的一道二进制题。比赛的时候瞎搞过了，还是记录一下思路。那个时候好菜啊。</p>
+<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给出n个数（n&lt;=1e5），求出这n个数任意子区间的异或值的和。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>之前提过，异或这个东西具有非常优良的性质。对于任意子区间[i,j]，如果我们预处理出异或前缀和pre[]数组，显然i到j的异或值为pre[j]^pre[i-1]。但是得到这个还是不够，1e5的数据O(n^2)是不行的。那么我们考虑按位来计算贡献，1e9的二进制位数不会超过30，对于每一位都计算贡献，显然时间复杂度较低。<br>如何按位计算？我们知道，对于pre[j]^pre[i-1]，只有pre[j]和pre[i-1]的第k位不同时，他们的第k位才会做贡献，那么我们可以固定子区间的右端点r，计算对于每一个r，每一个k，之前的有多少个在第k位和r不一样，这个计算会不会工作量很大呢？不会，假设我们已经知道r时候的情况，那么r+1和r是只区别在r+1这一位的，如果r+1这一位是0，就给做贡献的位数+前面第k位是1的数目，反之，+前面第k位是0的数目。最后2^k*（做贡献的位数）即可，便可得到最终答案。</p>
+<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><p>异或真的是有优良性质，觉得异或的前缀和应该是一个比较常用的工具。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout&lt;&lt;#x&lt;&lt;<span class="meta-string">"="</span>&lt;&lt;x&lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch = getchar();</span><br><span class="line">	<span class="keyword">while</span> (ch&lt;<span class="string">'0'</span> || ch&gt;<span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (ch == <span class="string">'-'</span>) f = <span class="number">-1</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (ch &gt;= <span class="string">'0'</span>&amp;&amp;ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		x = <span class="number">10</span> * x + ch - <span class="string">'0'</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Out</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (a&gt;<span class="number">9</span>)</span><br><span class="line">		Out(a / <span class="number">10</span>);</span><br><span class="line">	<span class="built_in">putchar</span>(a % <span class="number">10</span> + <span class="string">'0'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n;  </span><br><span class="line">ll a[maxn],x[maxn],ans1;   </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	n=read();  </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;  </span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a[i]);  </span><br><span class="line">        x[i]=x[i<span class="number">-1</span>]^a[i];   </span><br><span class="line">    &#125;     </span><br><span class="line">    ans1=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(ll k=<span class="number">0</span>;k&lt;<span class="number">30</span>;++k)&#123;  </span><br><span class="line">        ll cnt[<span class="number">2</span>]=&#123;&#125;,tmp=<span class="number">0</span>;  </span><br><span class="line">        <span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;=n;i++)&#123;  </span><br><span class="line">            tmp+=cnt[((x[i]&gt;&gt;k)&amp;<span class="number">1</span>)^<span class="number">1</span>];  </span><br><span class="line">            ++cnt[(x[i]&gt;&gt;k)&amp;<span class="number">1</span>];  </span><br><span class="line">        &#125;  </span><br><span class="line">        ans1+=<span class="number">1L</span>L*(<span class="number">1</span>&lt;&lt;k)*tmp;</span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans1&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/异或/" rel="tag"># 异或</a>
+              <a href="/tags/按位算贡献/" rel="tag"># 按位算贡献</a>
+              <a href="/tags/前缀和/" rel="tag"># 前缀和</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/08/14/663e/" rel="prev" title="【FWT】 CodeForces 663E - Binary Table">
+      <i class="fa fa-chevron-left"></i> 【FWT】 CodeForces 663E - Binary Table
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/08/18/3278/" rel="next" title="【BFS】 POJ 3278 抓牛">
+      【BFS】 POJ 3278 抓牛 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题意"><span class="nav-number">2.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思路"><span class="nav-number">3.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收获"><span class="nav-number">4.</span> <span class="nav-text">收获</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">5.</span> <span class="nav-text">代码</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GuGuMelon"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">GuGuMelon</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/maydaytyh" title="GitHub → https://github.com/maydaytyh" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maydaytyh@gmail.com" title="E-Mail → mailto:maydaytyh@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ugorange.com" title="https://ugorange.com" rel="noopener" target="_blank">orange</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuGuMelon</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

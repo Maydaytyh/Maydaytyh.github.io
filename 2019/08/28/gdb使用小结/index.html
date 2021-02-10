@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpeg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/M-32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/M-16x16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="写在前面妈妈再也不用担心我离开$IDE$就不会敲代码啦！ 对于$gdb$功能的基础介绍  设置断点 逐行执行代码 查看变量的值  基础使用首先我们在$gcc$程序的时候需要添加$-g$选项 12//本文仍以test.c为例gcc -g test.c -o test  此时生成的$test$便可通过$gdb$调试辣！ 我们执行 1gdb test  会发现出现了多行信息，只需要添加$-q$，世界会瞬">
+<meta name="keywords" content="学一学,小学期">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gdb使用小结">
+<meta property="og:url" content="http://yoursite.com/2019/08/28/gdb使用小结/index.html">
+<meta property="og:site_name" content="GuguMelon&#39;s Blog">
+<meta property="og:description" content="写在前面妈妈再也不用担心我离开$IDE$就不会敲代码啦！ 对于$gdb$功能的基础介绍  设置断点 逐行执行代码 查看变量的值  基础使用首先我们在$gcc$程序的时候需要添加$-g$选项 12//本文仍以test.c为例gcc -g test.c -o test  此时生成的$test$便可通过$gdb$调试辣！ 我们执行 1gdb test  会发现出现了多行信息，只需要添加$-q$，世界会瞬">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-02-04T08:48:40.147Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gdb使用小结">
+<meta name="twitter:description" content="写在前面妈妈再也不用担心我离开$IDE$就不会敲代码啦！ 对于$gdb$功能的基础介绍  设置断点 逐行执行代码 查看变量的值  基础使用首先我们在$gcc$程序的时候需要添加$-g$选项 12//本文仍以test.c为例gcc -g test.c -o test  此时生成的$test$便可通过$gdb$调试辣！ 我们执行 1gdb test  会发现出现了多行信息，只需要添加$-q$，世界会瞬">
+
+<link rel="canonical" href="http://yoursite.com/2019/08/28/gdb使用小结/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>gdb使用小结 | GuguMelon's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="GuguMelon's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">GuguMelon's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">今天所做之事勿候明天，自己所做之事勿候他人。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/About/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">32</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">31</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/Maydaytyh" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/28/gdb使用小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="GuGuMelon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="GuguMelon's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          gdb使用小结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-08-28 19:59:15" itemprop="dateCreated datePublished" datetime="2019-08-28T19:59:15+08:00">2019-08-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-04 16:48:40" itemprop="dateModified" datetime="2021-02-04T16:48:40+08:00">2021-02-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/语言/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>妈妈再也不用担心我离开$IDE$就不会敲代码啦！</p>
+<p>对于$gdb$功能的基础介绍</p>
+<ul>
+<li>设置断点</li>
+<li>逐行执行代码</li>
+<li>查看变量的值</li>
+</ul>
+<h3 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h3><p>首先我们在$gcc$程序的时候需要添加$-g$选项</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//本文仍以test.c为例</span></span><br><span class="line">gcc -g test.c -o test</span><br></pre></td></tr></table></figure>
+
+<p>此时生成的$test$便可通过$gdb$调试辣！</p>
+<p>我们执行</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb test</span><br></pre></td></tr></table></figure>
+
+<p>会发现出现了多行信息，只需要添加$-q$，世界会瞬间变得清净起来。</p>
+<p>踏入了$gdb$的世界，下面让我们来具体学习一下操作吧！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">file 文件名 //装载文件，如果是直接gdb进入而没有附加文件，则调试前需要装载文件</span><br><span class="line">list begin,end  //展示从begin行到end行的代码，若没加行数限制则默认每次展示10行，回车继续展示</span><br><span class="line">b(reak) num //在num行设置断点</span><br><span class="line">b(reak) 文件名:函数名</span><br><span class="line">r(un)  //运行</span><br><span class="line">p(rint) var //输出变量的值</span><br><span class="line">c(ontinue) //继续执行</span><br><span class="line">n(ext) //下一行</span><br><span class="line">s(tep) //下一行，与next区别为会进入函数内部</span><br><span class="line">set var=   //修改变量值</span><br><span class="line">breakpoints //查看断点</span><br><span class="line">disable num//使第num行的断点失效</span><br><span class="line">enable num //使第num行的断点生效</span><br><span class="line">delete num//删除num行的断点</span><br><span class="line">delete //删除所有断点</span><br><span class="line">kill //停止当前进程</span><br><span class="line">q(uit) //退出gdb</span><br></pre></td></tr></table></figure>
+
+<p>上面便是我们常用的$gdb$的基本操作辣！</p>
+<p>你是不是还有一个疑问呢？如果发生段错误（内存错误）我们怎么知道是哪里出了问题呢？</p>
+<p>这就涉及到一个新的知识点。</p>
+<h3 id="利用-gdb-和-core-dump-快速定位段错误"><a href="#利用-gdb-和-core-dump-快速定位段错误" class="headerlink" title="利用$gdb$和$core dump$快速定位段错误"></a>利用$gdb$和$core dump$快速定位段错误</h3><p>内存错误的程序通常会崩溃掉，即$coredum$（核心转储），这时候会有一个镜像文件留存下来，即$core$，我们可以从其中找到内存错误的代码片段。</p>
+<p>比如这段错误的代码。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> *s;</span><br><span class="line">	gets(s);</span><br><span class="line">	<span class="built_in">puts</span>(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行后，结果为</p>
+<p>去同目录下找$core$文件，可能会找不到，因为默认空间设置为0，我们给空间设置为1000。</p>
+<p>即执行</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ulimit -c <span class="number">1000</span></span><br></pre></td></tr></table></figure>
+
+<p>然后执行</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb -q err core</span><br></pre></td></tr></table></figure>
+
+<p>会得到</p>
+<p>我们通过$bt$命令便可以查看错误的点的信息（具体行数）</p>
+<p>如图所示</p>
+<p>以上。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/学一学/" rel="tag"># 学一学</a>
+              <a href="/tags/小学期/" rel="tag"># 小学期</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/08/28/gcc学习总结/" rel="prev" title="gcc编译命令与makefile总结">
+      <i class="fa fa-chevron-left"></i> gcc编译命令与makefile总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/11/15/操作系统实验二进程控制/" rel="next" title="操作系统实验二进程控制">
+      操作系统实验二进程控制 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础使用"><span class="nav-number">2.</span> <span class="nav-text">基础使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用-gdb-和-core-dump-快速定位段错误"><span class="nav-number">3.</span> <span class="nav-text">利用$gdb$和$core dump$快速定位段错误</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GuGuMelon"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">GuGuMelon</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/maydaytyh" title="GitHub → https://github.com/maydaytyh" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maydaytyh@gmail.com" title="E-Mail → mailto:maydaytyh@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ugorange.com" title="https://ugorange.com" rel="noopener" target="_blank">orange</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuGuMelon</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpeg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/M-32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/M-16x16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="题目Codefoces 663E DescriptionYou are given a table consisting of n rows and m columns. Each cell of the table contains either 0 or 1. In one move, you are allowed to pick any row or any column and inve">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【FWT】 CodeForces 663E - Binary Table">
+<meta property="og:url" content="http://yoursite.com/2018/08/14/663e/index.html">
+<meta property="og:site_name" content="GuguMelon&#39;s Blog">
+<meta property="og:description" content="题目Codefoces 663E DescriptionYou are given a table consisting of n rows and m columns. Each cell of the table contains either 0 or 1. In one move, you are allowed to pick any row or any column and inve">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-01-29T15:40:13.522Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【FWT】 CodeForces 663E - Binary Table">
+<meta name="twitter:description" content="题目Codefoces 663E DescriptionYou are given a table consisting of n rows and m columns. Each cell of the table contains either 0 or 1. In one move, you are allowed to pick any row or any column and inve">
+
+<link rel="canonical" href="http://yoursite.com/2018/08/14/663e/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>【FWT】 CodeForces 663E - Binary Table | GuguMelon's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="GuguMelon's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">GuguMelon's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">今天所做之事勿候明天，自己所做之事勿候他人。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/About/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">32</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">31</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/Maydaytyh" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/14/663e/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="GuGuMelon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="GuguMelon's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【FWT】 CodeForces 663E - Binary Table
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-14 16:00:01" itemprop="dateCreated datePublished" datetime="2018-08-14T16:00:01+08:00">2018-08-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-29 23:40:13" itemprop="dateModified" datetime="2021-01-29T23:40:13+08:00">2021-01-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/Codeforces/" itemprop="url" rel="index"><span itemprop="name">Codeforces</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="http://codeforces.com/problemset/problem/663/E" target="_blank" rel="noopener">Codefoces 663E</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are given a table consisting of n rows and m columns. Each cell of the table contains either 0 or 1. In one move, you are allowed to pick any row or any column and invert all values, that is, replace 0 by 1 and vice versa.</p>
+<p>What is the minimum number of cells with value 1 you can get after applying some number of operations?</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The first line of the input contains two integers n and m (1 ≤ n ≤ 20, 1 ≤ m ≤ 100 000) — the number of rows and the number of columns, respectively.</p>
+<p>Then n lines follows with the descriptions of the rows. Each line has length m and contains only digits ‘0’ and ‘1’.</p>
+<h2 id="Ouput"><a href="#Ouput" class="headerlink" title="Ouput"></a>Ouput</h2><p>Output a single integer — the minimum possible number of ones you can get after applying some sequence of operations.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>3 4<br>0110<br>1010<br>0111</p>
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>2</p>
+<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给出一个n*m的由0和1组成的矩阵，允许你对每行或者每列进行翻转操作（0-&gt;1,1-&gt;0)，问可以得到的最少的1的个数是多少。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>首先想到的肯定是暴力啦<del>~ 菜鸡如我 ~</del>。毫不费力的想到了一个O(m*2<br>^n)的算法，因为n比较小，枚举每行的操作，然后对每一列判断一下就好。<br>正解，其实主要还是得靠异或的优良性质。我们还是需要枚举针对每一行的变化，ans[k]就表示状态为k时最少的1的个数，这里的状态为k指的是k的二进制表示某一位是1就代表这一行进行翻转，否则不翻转。然后用a[i]来表示列表示的二进制数为i的列的个数，i^k=j就是这一行翻转后得到的这一列表示的新的数，然后用b[j]表示这一列当前0和1的个数较少的那个，其实是对这一列是否进行翻转的一个贪心。由于异或优良性质，有i^(i^k)=k，也就是(i^j)=k，所以就可以妥妥的用FWT卷积啦！</p>
+<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><ol>
+<li>暴力出奇迹</li>
+<li>异或具有非常神奇的性质。<ul>
+<li>无论怎样都满足的交换律简直是个大bug</li>
+<li>和自己异或始终等于0，所以就有，i^i^j=i</li>
+<li>在交换，查重之类都有应用</li>
+<li>交换 a=a^b,b=a^b,a=a^b，真的很有趣</li>
+<li>查重，在只有一个重复或者只有一个不重复的情况下</li>
+</ul>
+</li>
+</ol>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 1&lt;&lt;20</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 100000+50</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> eps 1e-8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> PI=<span class="built_in">acos</span>(<span class="number">-1.0</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Max(a,b,c) max(a,max(b,c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout&lt;&lt;#x&lt;&lt;<span class="meta-string">"="</span>&lt;&lt;x&lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ch==<span class="string">'-'</span>) f=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">10</span>*x+ch-<span class="string">'0'</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n,m,len;</span><br><span class="line">ll a[maxn],b[maxn];</span><br><span class="line"><span class="keyword">char</span> s[<span class="number">25</span>][maxm];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fwt</span><span class="params">(ll *P,<span class="keyword">int</span> opt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;i&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> p=i&lt;&lt;<span class="number">1</span>,j=<span class="number">0</span>;j&lt;len;j+=p)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;i;++k)&#123;</span><br><span class="line">                ll x=P[j+k],y=P[j+k+i];</span><br><span class="line">                P[j+k]=(x+y)/opt;P[j+k+i]=(x-y)/opt;            &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mian</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=read();m=read();len=<span class="number">1</span>&lt;&lt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i) <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s[i]+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)&#123;</span><br><span class="line">        <span class="keyword">int</span> x=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;++j) x=(x&lt;&lt;<span class="number">1</span>)+s[j][i]-<span class="string">'0'</span>;a[x]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;++i) b[i]=b[i&gt;&gt;<span class="number">1</span>]+(i&amp;<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;++i) b[i]=min(b[i],n-b[i]);</span><br><span class="line">    fwt(a,<span class="number">1</span>);fwt(b,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;++i) a[i]*=b[i];</span><br><span class="line">    fwt(a,<span class="number">2</span>);</span><br><span class="line">    ll ans=a[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;++i) ans=min(ans,a[i]);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>渐渐明白了自己到底想要什么。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/08/14/4609/" rel="prev" title="【FFT 组合数学】HDU 4609 3-idiots">
+      <i class="fa fa-chevron-left"></i> 【FFT 组合数学】HDU 4609 3-idiots
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/08/18/子区间异或和/" rel="next" title="子区间异或和">
+      子区间异或和 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">1.2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ouput"><span class="nav-number">1.3.</span> <span class="nav-text">Ouput</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">1.4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">1.5.</span> <span class="nav-text">Sample Output</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题意"><span class="nav-number">2.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思路"><span class="nav-number">3.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收获"><span class="nav-number">4.</span> <span class="nav-text">收获</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">5.</span> <span class="nav-text">代码</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GuGuMelon"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">GuGuMelon</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/maydaytyh" title="GitHub → https://github.com/maydaytyh" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maydaytyh@gmail.com" title="E-Mail → mailto:maydaytyh@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ugorange.com" title="https://ugorange.com" rel="noopener" target="_blank">orange</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuGuMelon</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
