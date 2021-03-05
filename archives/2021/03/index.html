@@ -20,23 +20,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="今天玉米问到延河课堂上的视频能不能倍速，想到当时防疫大课堂时的操作，便想直接复现，但是却失败了 于是开始检查网页的代码有什么猫腻  一开始看到注释中写着Flash添加处，还以为是flash播放器，便去寻找flash倍速的方法，感觉还是很麻烦 接着看代码，发现了好几个video标签，便猜测是不能准确捕获video标签的原因，找到视频对应的真实标签，然后通过ID获取此标签，再调整倍速即可  如上图，发">
-<meta name="keywords" content="技巧">
-<meta property="og:type" content="article">
-<meta property="og:title" content="网页视频倍速的小技巧">
-<meta property="og:url" content="http://yoursite.com/2021/02/17/网页视频倍速的小技巧/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="GuguMelon&#39;s Blog">
+<meta property="og:url" content="http://yoursite.com/archives/2021/03/index.html">
 <meta property="og:site_name" content="GuguMelon&#39;s Blog">
-<meta property="og:description" content="今天玉米问到延河课堂上的视频能不能倍速，想到当时防疫大课堂时的操作，便想直接复现，但是却失败了 于是开始检查网页的代码有什么猫腻  一开始看到注释中写着Flash添加处，还以为是flash播放器，便去寻找flash倍速的方法，感觉还是很麻烦 接着看代码，发现了好几个video标签，便猜测是不能准确捕获video标签的原因，找到视频对应的真实标签，然后通过ID获取此标签，再调整倍速即可  如上图，发">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.loli.net/2021/02/17/jx8hNQEyGpZkt4z.png">
-<meta property="og:image" content="https://i.loli.net/2021/02/17/49P3LfGa8E6IjkQ.png">
-<meta property="og:updated_time" content="2021-02-17T13:14:08.994Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="网页视频倍速的小技巧">
-<meta name="twitter:description" content="今天玉米问到延河课堂上的视频能不能倍速，想到当时防疫大课堂时的操作，便想直接复现，但是却失败了 于是开始检查网页的代码有什么猫腻  一开始看到注释中写着Flash添加处，还以为是flash播放器，便去寻找flash倍速的方法，感觉还是很麻烦 接着看代码，发现了好几个video标签，便猜测是不能准确捕获video标签的原因，找到视频对应的真实标签，然后通过ID获取此标签，再调整倍速即可  如上图，发">
-<meta name="twitter:image" content="https://i.loli.net/2021/02/17/jx8hNQEyGpZkt4z.png">
+<meta name="twitter:title" content="GuguMelon&#39;s Blog">
 
-<link rel="canonical" href="http://yoursite.com/2021/02/17/网页视频倍速的小技巧/">
+<link rel="canonical" href="http://yoursite.com/archives/2021/03/">
 
 
 <script id="page-configurations">
@@ -44,12 +36,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'default'
   };
 </script>
 
-  <title>网页视频倍速的小技巧 | GuguMelon's Blog</title>
+  <title>Archive | GuguMelon's Blog</title>
   
 
 
@@ -167,101 +159,51 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content archive">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/17/网页视频倍速的小技巧/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="GuGuMelon">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="GuguMelon's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          网页视频倍速的小技巧
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-02-17 21:02:33 / Modified: 21:14:08" itemprop="dateCreated datePublished" datetime="2021-02-17T21:02:33+08:00">2021-02-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        
+        <span class="collection-header">OK! 33 posts in total. Keep on posting.</span>
+      </div>
 
       
-        <p>今天玉米问到延河课堂上的视频能不能倍速，想到当时防疫大课堂时的操作，便想直接复现，但是却失败了</p>
-<p>于是开始检查网页的代码有什么猫腻</p>
-<p><img src="https://i.loli.net/2021/02/17/jx8hNQEyGpZkt4z.png" alt="image.png"></p>
-<p>一开始看到注释中写着Flash添加处，还以为是flash播放器，便去寻找flash倍速的方法，感觉还是很麻烦</p>
-<p>接着看代码，发现了好几个video标签，便猜测是不能准确捕获video标签的原因，找到视频对应的真实标签，然后通过ID获取此标签，再调整倍速即可</p>
-<p><img src="https://i.loli.net/2021/02/17/49P3LfGa8E6IjkQ.png" alt="image.png"></p>
-<p>如上图，发现所有的视频都是存在ID为”Video2_html5_api”的Video中，使用如下代码即可</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var video= document.getElementById('Video2_html5_api');</span><br><span class="line">video.playbackRate=<span class="number">16</span></span><br></pre></td></tr></table></figure>
-
-<p>注：播放速率可为0.025～16</p>
-
+    <div class="collection-year">
+      <span class="collection-header">2021</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/技巧/" rel="tag"># 技巧</a>
-          </div>
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-03-05T09:50:30+08:00"
+              content="2021-03-05">
+          03-05
+        </time>
+      </div>
 
-        
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/03/05/MACOS配置终端代理/" itemprop="url">
+            <span itemprop="name">MACOS配置终端代理</span>
+          </a>
+      </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/02/09/MACOS更新后提示xcrun-error/" rel="prev" title="MACOS更新后提示xcrun: error">
-      <i class="fa fa-chevron-left"></i> MACOS更新后提示xcrun: error
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/03/05/MACOS配置终端代理/" rel="next" title="MACOS配置终端代理">
-      MACOS配置终端代理 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+
+    </div>
+  </div>
   
   
+  
+
   
 
 

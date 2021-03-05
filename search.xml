@@ -1,27 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>【分治/最小点对】 HDU 1007 Quoit Design</title>
-    <url>/2018/08/12/1007/</url>
-    <content><![CDATA[<p>分治，计算几何第一题。</p>
-<a id="more"></a>
-<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给出平面上的n个点，要求距离最近的两个点的距离的一半。</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>看到这个，肯定想到了二分，但是具体如何二分？<br>距离最近的点可能出现在mid的同一边，也可能出现在mid的两边。对于每一个mid，先得到它的子区间的最小值，然后以最小值为半径，以mid点为圆心，扫一遍，看可不可以更新最小值，先求出的子区间的最小值是作为筛选条件。同时，记录圆内的点，对y值排序，方便后面确定循环的结束，因为x肯定小于ans，所以用y确定结束。之后对圆内的点，两两距离各算一遍，但是当y的差值大于等于ans时，本次循环结束。</p>
-<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><p>感受了分治，现在感觉还是二分加上了递归结果。有时候，看题解，有的步骤你看不明白，不如试试不写那个步骤，会有什么后果，会帮助你理解。也许那个步骤是作者为了迎合代码中其他步骤才写的，这样子有助于提高自己。以及，vscode现在崩盘，都是悄无声息的QAQ。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100000+50</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout&lt;&lt;#x&lt;&lt;<span class="meta-string">"="</span>&lt;&lt;x&lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ch==<span class="string">'-'</span>) f=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">10</span>*x+ch-<span class="string">'0'</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Out</span><span class="params">(<span class="keyword">int</span> a)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a&gt;<span class="number">9</span>)</span><br><span class="line">        Out(a/<span class="number">10</span>);</span><br><span class="line">    <span class="built_in">putchar</span>(a%<span class="number">10</span>+<span class="string">'0'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span>&#123;</span></span><br><span class="line">    <span class="keyword">double</span> x,y;</span><br><span class="line">&#125;p[maxn];</span><br><span class="line"><span class="keyword">int</span> a[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmpx</span><span class="params">(Point x,Point y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x.x&lt;y.x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmpy</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> p[a].y&lt;p[b].y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">dis</span><span class="params">(Point a,Point b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sqrt</span>((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l+<span class="number">1</span>==r) <span class="keyword">return</span> dis(p[l],p[r]);</span><br><span class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">double</span> ans=min(find(l,mid),find(mid,r));</span><br><span class="line">    <span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=l;i&lt;=r;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p[i].x&gt;=p[mid].x-ans&amp;&amp;p[i].x&lt;=p[mid].x+ans) </span><br><span class="line">        a[++cnt]=i;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(a+<span class="number">1</span>,a+cnt+<span class="number">1</span>,cmpy);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cnt;++i)</span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=cnt;++j)</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">if</span>(p[a[j]].y-p[a[i]].y&gt;=ans) <span class="keyword">break</span>;</span><br><span class="line">          ans=min(ans,dis(p[a[i]],p[a[j]])); </span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)&amp;&amp;n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i) <span class="built_in">scanf</span>(<span class="string">"%lf%lf"</span>,&amp;p[i].x,&amp;p[i].y);</span><br><span class="line">        sort(p+<span class="number">1</span>,p+n+<span class="number">1</span>,cmpx);</span><br><span class="line">        <span class="keyword">double</span> ans=find(<span class="number">1</span>,n);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%.2lf\n"</span>,ans/<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>只有当你成长起来，你的一切都才能变得有力量。</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-        <category>HDU</category>
-      </categories>
-      <tags>
-        <tag>分治</tag>
-        <tag>计算几何</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Atcoder ABC 136C</title>
     <url>/2019/08/06/136C/</url>
     <content><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href target="_blank"></a></p>
@@ -45,6 +24,28 @@
       </categories>
       <tags>
         <tag>水</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2019牛客多校第七场B 多项式分解</title>
+    <url>/2019/08/09/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC7%E5%9C%BAB/</url>
+    <content><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://ac.nowcoder.com/acm/contest/887/B" target="_blank">Irreducible Polynomial</a></p>
+<h1 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h1><p>给一个最多$20$次的多项式，问是否能够对该多项式分解因式。能则输出$No$，不能则输出$Yes$。</p>
+<a id="more"></a>
+
+<h1 id="思路重现"><a href="#思路重现" class="headerlink" title="思路重现"></a>思路重现</h1><p>刚开始和$yls$还想着找零点，求导等骚操作，然后$yls$说他找到了规律。</p>
+<p>根据代数基本定理：任何一个非零的一元n次复系数多项式，都正好有n个复数根（重根视为多个根。</p>
+<p>所以，$&lt;2$次的必然不可分解，$&gt;2$次的必然可以至少因式分解出一个式子，$=2$的判断一元二次方程是否有跟即可。</p>
+<h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, LL&gt;P;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">2e3</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> LL mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> LL lINF = <span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ls (rt&lt;&lt;1)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rs (rt&lt;&lt;1|1)</span></span><br><span class="line"><span class="function">LL <span class="title">gcd</span><span class="params">(LL a, LL b)</span> </span>&#123; <span class="keyword">return</span> b ? gcd(b, a%b) : a; &#125;</span><br><span class="line"><span class="keyword">int</span> _;</span><br><span class="line">LL n;</span><br><span class="line">LL a[M];</span><br><span class="line">LL de;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;_);</span><br><span class="line">    <span class="keyword">while</span>(_--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n + <span class="number">1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (n &gt; <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"No\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            de = a[<span class="number">1</span>] * a[<span class="number">1</span>] - <span class="number">4</span> * a[<span class="number">0</span>] * a[<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">if</span> (de &gt;= <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"No\n"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+        <category>牛客</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>结论</tag>
       </tags>
   </entry>
   <entry>
@@ -72,28 +73,6 @@
       <tags>
         <tag>计算几何</tag>
         <tag>枚举</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2019牛客多校第七场B 多项式分解</title>
-    <url>/2019/08/09/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC7%E5%9C%BAB/</url>
-    <content><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://ac.nowcoder.com/acm/contest/887/B" target="_blank">Irreducible Polynomial</a></p>
-<h1 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h1><p>给一个最多$20$次的多项式，问是否能够对该多项式分解因式。能则输出$No$，不能则输出$Yes$。</p>
-<a id="more"></a>
-
-<h1 id="思路重现"><a href="#思路重现" class="headerlink" title="思路重现"></a>思路重现</h1><p>刚开始和$yls$还想着找零点，求导等骚操作，然后$yls$说他找到了规律。</p>
-<p>根据代数基本定理：任何一个非零的一元n次复系数多项式，都正好有n个复数根（重根视为多个根。</p>
-<p>所以，$&lt;2$次的必然不可分解，$&gt;2$次的必然可以至少因式分解出一个式子，$=2$的判断一元二次方程是否有跟即可。</p>
-<h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, LL&gt;P;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">2e3</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> LL mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> LL lINF = <span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ls (rt&lt;&lt;1)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rs (rt&lt;&lt;1|1)</span></span><br><span class="line"><span class="function">LL <span class="title">gcd</span><span class="params">(LL a, LL b)</span> </span>&#123; <span class="keyword">return</span> b ? gcd(b, a%b) : a; &#125;</span><br><span class="line"><span class="keyword">int</span> _;</span><br><span class="line">LL n;</span><br><span class="line">LL a[M];</span><br><span class="line">LL de;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;_);</span><br><span class="line">    <span class="keyword">while</span>(_--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n + <span class="number">1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (n &gt; <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"No\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            de = a[<span class="number">1</span>] * a[<span class="number">1</span>] - <span class="number">4</span> * a[<span class="number">0</span>] * a[<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">if</span> (de &gt;= <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"No\n"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-        <category>牛客</category>
-      </categories>
-      <tags>
-        <tag>数学</tag>
-        <tag>结论</tag>
       </tags>
   </entry>
   <entry>
@@ -140,6 +119,27 @@
       </tags>
   </entry>
   <entry>
+    <title>【分治/最小点对】 HDU 1007 Quoit Design</title>
+    <url>/2018/08/12/1007/</url>
+    <content><![CDATA[<p>分治，计算几何第一题。</p>
+<a id="more"></a>
+<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给出平面上的n个点，要求距离最近的两个点的距离的一半。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>看到这个，肯定想到了二分，但是具体如何二分？<br>距离最近的点可能出现在mid的同一边，也可能出现在mid的两边。对于每一个mid，先得到它的子区间的最小值，然后以最小值为半径，以mid点为圆心，扫一遍，看可不可以更新最小值，先求出的子区间的最小值是作为筛选条件。同时，记录圆内的点，对y值排序，方便后面确定循环的结束，因为x肯定小于ans，所以用y确定结束。之后对圆内的点，两两距离各算一遍，但是当y的差值大于等于ans时，本次循环结束。</p>
+<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><p>感受了分治，现在感觉还是二分加上了递归结果。有时候，看题解，有的步骤你看不明白，不如试试不写那个步骤，会有什么后果，会帮助你理解。也许那个步骤是作者为了迎合代码中其他步骤才写的，这样子有助于提高自己。以及，vscode现在崩盘，都是悄无声息的QAQ。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100000+50</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout&lt;&lt;#x&lt;&lt;<span class="meta-string">"="</span>&lt;&lt;x&lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ch==<span class="string">'-'</span>) f=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">10</span>*x+ch-<span class="string">'0'</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Out</span><span class="params">(<span class="keyword">int</span> a)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a&gt;<span class="number">9</span>)</span><br><span class="line">        Out(a/<span class="number">10</span>);</span><br><span class="line">    <span class="built_in">putchar</span>(a%<span class="number">10</span>+<span class="string">'0'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span>&#123;</span></span><br><span class="line">    <span class="keyword">double</span> x,y;</span><br><span class="line">&#125;p[maxn];</span><br><span class="line"><span class="keyword">int</span> a[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmpx</span><span class="params">(Point x,Point y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x.x&lt;y.x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmpy</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> p[a].y&lt;p[b].y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">dis</span><span class="params">(Point a,Point b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sqrt</span>((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l+<span class="number">1</span>==r) <span class="keyword">return</span> dis(p[l],p[r]);</span><br><span class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">double</span> ans=min(find(l,mid),find(mid,r));</span><br><span class="line">    <span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=l;i&lt;=r;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p[i].x&gt;=p[mid].x-ans&amp;&amp;p[i].x&lt;=p[mid].x+ans) </span><br><span class="line">        a[++cnt]=i;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(a+<span class="number">1</span>,a+cnt+<span class="number">1</span>,cmpy);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=cnt;++i)</span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=cnt;++j)</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">if</span>(p[a[j]].y-p[a[i]].y&gt;=ans) <span class="keyword">break</span>;</span><br><span class="line">          ans=min(ans,dis(p[a[i]],p[a[j]])); </span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)&amp;&amp;n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i) <span class="built_in">scanf</span>(<span class="string">"%lf%lf"</span>,&amp;p[i].x,&amp;p[i].y);</span><br><span class="line">        sort(p+<span class="number">1</span>,p+n+<span class="number">1</span>,cmpx);</span><br><span class="line">        <span class="keyword">double</span> ans=find(<span class="number">1</span>,n);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%.2lf\n"</span>,ans/<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只有当你成长起来，你的一切都才能变得有力量。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+        <category>HDU</category>
+      </categories>
+      <tags>
+        <tag>计算几何</tag>
+        <tag>分治</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【凸包/旋转卡壳】 POJ 2187 Beauty Contest</title>
     <url>/2018/08/12/2187/</url>
     <content><![CDATA[<p>二维平面内最远点对。</p>
@@ -157,70 +157,6 @@
         <tag>凸包</tag>
         <tag>旋转卡壳</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>【BFS】 POJ 3278 抓牛</title>
-    <url>/2018/08/18/3278/</url>
-    <content><![CDATA[<p>现在水题都得调很久qaq。</p>
-<a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>[<a href="http://poj.org/problem?id=3278]" target="_blank" rel="noopener">http://poj.org/problem?id=3278]</a>(Catch That Cow)</p>
-<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Farmer John has been informed of the location of a fugitive cow and wants to catch her immediately. He starts at a point N (0 ≤ N ≤ 100,000) on a number line and the cow is at a point K (0 ≤ K ≤ 100,000) on the same number line. Farmer John has two modes of transportation: walking and teleporting.</p>
-<ul>
-<li>Walking: FJ can move from any point X to the points X - 1 or X + 1 in a single minute</li>
-<li>Teleporting: FJ can move from any point X to the point 2 × X in a single minute.</li>
-</ul>
-<p>If the cow, unaware of its pursuit, does not move at all, how long does it take for Farmer John to retrieve it?</p>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>Line 1: Two space-separated integers: N and K</p>
-<h2 id="Ouput"><a href="#Ouput" class="headerlink" title="Ouput"></a>Ouput</h2><p>Line 1: The least amount of time, in minutes, it takes for Farmer John to catch the fugitive cow.</p>
-<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>5 17</p>
-<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>4</p>
-<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>一条直线上，从A到B最少需要几步，每步可以想左，向右，或者闪现到当前位置*2的位置。</p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>显然如果写dfs会是个无底洞，来写bfs。</p>
-<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><p>刚开始傻乎乎的让开始位置保持小，因为这个wa。<br>后来又因为多组样例wa，算了，多写也不多余，以后每次都加上多组样例，同时注意初始化问题。<br>结构体重载玩的还是不行啊，一直有bug。待调。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 2000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x7fffffff</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout&lt;&lt;#x&lt;&lt;<span class="meta-string">"="</span>&lt;&lt;x&lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch = getchar();</span><br><span class="line">	<span class="keyword">while</span> (ch&lt;<span class="string">'0'</span> || ch&gt;<span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (ch == <span class="string">'-'</span>) f = <span class="number">-1</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (ch &gt;= <span class="string">'0'</span>&amp;&amp;ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		x = <span class="number">10</span> * x + ch - <span class="string">'0'</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Out</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (a&gt;<span class="number">9</span>)</span><br><span class="line">		Out(a / <span class="number">10</span>);</span><br><span class="line">	<span class="built_in">putchar</span>(a % <span class="number">10</span> + <span class="string">'0'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n, k, cnt = <span class="number">0</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> s, dis;</span><br><span class="line">&#125;hh,ss;</span><br><span class="line"><span class="built_in">queue</span>&lt;node&gt; q;</span><br><span class="line"><span class="keyword">int</span> vis[<span class="number">100000</span> + <span class="number">5</span>];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (x &gt;= <span class="number">0</span> &amp;&amp; x &lt;= <span class="number">100000</span> ) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bfs</span><span class="params">(node h)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(!q.empty()) q.pop();</span><br><span class="line"> 	mem(vis, <span class="number">0</span>);</span><br><span class="line">	q.push(h);</span><br><span class="line">	vis[h.s] = <span class="number">1</span>;</span><br><span class="line">	h.dis = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> xx = h.s;</span><br><span class="line">	<span class="keyword">while</span> (!q.empty() &amp;&amp; xx != k)</span><br><span class="line">	&#123;</span><br><span class="line">		node yy=q.front();</span><br><span class="line">		q.pop();</span><br><span class="line">		<span class="keyword">if</span>(yy.s==k) &#123;<span class="keyword">return</span> yy.dis;&#125;</span><br><span class="line">		xx=yy.s+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(check(xx))&#123;</span><br><span class="line">			ss.s=xx;ss.dis=yy.dis+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(!vis[xx])&#123;</span><br><span class="line">				vis[xx]=<span class="number">1</span>;q.push(ss);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(xx==k) &#123;<span class="keyword">return</span> ss.dis;&#125;</span><br><span class="line">		xx=yy.s<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">if</span>(check(xx))&#123;</span><br><span class="line">			ss.s=xx;ss.dis=yy.dis+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(!vis[xx])&#123;</span><br><span class="line">				vis[xx]=<span class="number">1</span>;q.push(ss);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(xx==k) &#123;<span class="keyword">return</span> ss.dis;&#125;</span><br><span class="line">		xx=yy.s&lt;&lt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(check(xx))&#123;</span><br><span class="line">			ss.s=xx;ss.dis=yy.dis+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(!vis[xx])&#123;</span><br><span class="line">				vis[xx]=<span class="number">1</span>;q.push(ss);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(xx==k) &#123;<span class="keyword">return</span> ss.dis;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;k))&#123;</span><br><span class="line">	hh.s=n;hh.dis=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;bfs(hh)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>明天会更好。</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-        <category>POJ</category>
-      </categories>
-      <tags>
-        <tag>BFS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【FWT】 CodeForces 663E - Binary Table</title>
-    <url>/2018/08/14/663e/</url>
-    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="http://codeforces.com/problemset/problem/663/E" target="_blank" rel="noopener">Codefoces 663E</a></p>
-<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are given a table consisting of n rows and m columns. Each cell of the table contains either 0 or 1. In one move, you are allowed to pick any row or any column and invert all values, that is, replace 0 by 1 and vice versa.</p>
-<p>What is the minimum number of cells with value 1 you can get after applying some number of operations?</p>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The first line of the input contains two integers n and m (1 ≤ n ≤ 20, 1 ≤ m ≤ 100 000) — the number of rows and the number of columns, respectively.</p>
-<p>Then n lines follows with the descriptions of the rows. Each line has length m and contains only digits ‘0’ and ‘1’.</p>
-<h2 id="Ouput"><a href="#Ouput" class="headerlink" title="Ouput"></a>Ouput</h2><p>Output a single integer — the minimum possible number of ones you can get after applying some sequence of operations.</p>
-<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>3 4<br>0110<br>1010<br>0111</p>
-<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>2</p>
-<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给出一个n*m的由0和1组成的矩阵，允许你对每行或者每列进行翻转操作（0-&gt;1,1-&gt;0)，问可以得到的最少的1的个数是多少。</p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>首先想到的肯定是暴力啦<del>~ 菜鸡如我 ~</del>。毫不费力的想到了一个O(m*2<br>^n)的算法，因为n比较小，枚举每行的操作，然后对每一列判断一下就好。<br>正解，其实主要还是得靠异或的优良性质。我们还是需要枚举针对每一行的变化，ans[k]就表示状态为k时最少的1的个数，这里的状态为k指的是k的二进制表示某一位是1就代表这一行进行翻转，否则不翻转。然后用a[i]来表示列表示的二进制数为i的列的个数，i^k=j就是这一行翻转后得到的这一列表示的新的数，然后用b[j]表示这一列当前0和1的个数较少的那个，其实是对这一列是否进行翻转的一个贪心。由于异或优良性质，有i^(i^k)=k，也就是(i^j)=k，所以就可以妥妥的用FWT卷积啦！</p>
-<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><ol>
-<li>暴力出奇迹</li>
-<li>异或具有非常神奇的性质。<ul>
-<li>无论怎样都满足的交换律简直是个大bug</li>
-<li>和自己异或始终等于0，所以就有，i^i^j=i</li>
-<li>在交换，查重之类都有应用</li>
-<li>交换 a=a^b,b=a^b,a=a^b，真的很有趣</li>
-<li>查重，在只有一个重复或者只有一个不重复的情况下</li>
-</ul>
-</li>
-</ol>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 1&lt;&lt;20</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 100000+50</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> eps 1e-8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> PI=<span class="built_in">acos</span>(<span class="number">-1.0</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Max(a,b,c) max(a,max(b,c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout&lt;&lt;#x&lt;&lt;<span class="meta-string">"="</span>&lt;&lt;x&lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ch==<span class="string">'-'</span>) f=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">10</span>*x+ch-<span class="string">'0'</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n,m,len;</span><br><span class="line">ll a[maxn],b[maxn];</span><br><span class="line"><span class="keyword">char</span> s[<span class="number">25</span>][maxm];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fwt</span><span class="params">(ll *P,<span class="keyword">int</span> opt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;i&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> p=i&lt;&lt;<span class="number">1</span>,j=<span class="number">0</span>;j&lt;len;j+=p)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;i;++k)&#123;</span><br><span class="line">                ll x=P[j+k],y=P[j+k+i];</span><br><span class="line">                P[j+k]=(x+y)/opt;P[j+k+i]=(x-y)/opt;            &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mian</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=read();m=read();len=<span class="number">1</span>&lt;&lt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i) <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s[i]+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)&#123;</span><br><span class="line">        <span class="keyword">int</span> x=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;++j) x=(x&lt;&lt;<span class="number">1</span>)+s[j][i]-<span class="string">'0'</span>;a[x]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;++i) b[i]=b[i&gt;&gt;<span class="number">1</span>]+(i&amp;<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;++i) b[i]=min(b[i],n-b[i]);</span><br><span class="line">    fwt(a,<span class="number">1</span>);fwt(b,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;++i) a[i]*=b[i];</span><br><span class="line">    fwt(a,<span class="number">2</span>);</span><br><span class="line">    ll ans=a[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;++i) ans=min(ans,a[i]);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>渐渐明白了自己到底想要什么。</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-        <category>Codeforces</category>
-      </categories>
   </entry>
   <entry>
     <title>【FFT 组合数学】HDU 4609 3-idiots</title>
@@ -262,6 +198,86 @@
       </tags>
   </entry>
   <entry>
+    <title>【BFS】 POJ 3278 抓牛</title>
+    <url>/2018/08/18/3278/</url>
+    <content><![CDATA[<p>现在水题都得调很久qaq。</p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>[<a href="http://poj.org/problem?id=3278]" target="_blank" rel="noopener">http://poj.org/problem?id=3278]</a>(Catch That Cow)</p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Farmer John has been informed of the location of a fugitive cow and wants to catch her immediately. He starts at a point N (0 ≤ N ≤ 100,000) on a number line and the cow is at a point K (0 ≤ K ≤ 100,000) on the same number line. Farmer John has two modes of transportation: walking and teleporting.</p>
+<ul>
+<li>Walking: FJ can move from any point X to the points X - 1 or X + 1 in a single minute</li>
+<li>Teleporting: FJ can move from any point X to the point 2 × X in a single minute.</li>
+</ul>
+<p>If the cow, unaware of its pursuit, does not move at all, how long does it take for Farmer John to retrieve it?</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>Line 1: Two space-separated integers: N and K</p>
+<h2 id="Ouput"><a href="#Ouput" class="headerlink" title="Ouput"></a>Ouput</h2><p>Line 1: The least amount of time, in minutes, it takes for Farmer John to catch the fugitive cow.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>5 17</p>
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>4</p>
+<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>一条直线上，从A到B最少需要几步，每步可以想左，向右，或者闪现到当前位置*2的位置。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>显然如果写dfs会是个无底洞，来写bfs。</p>
+<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><p>刚开始傻乎乎的让开始位置保持小，因为这个wa。<br>后来又因为多组样例wa，算了，多写也不多余，以后每次都加上多组样例，同时注意初始化问题。<br>结构体重载玩的还是不行啊，一直有bug。待调。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 2000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x7fffffff</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout&lt;&lt;#x&lt;&lt;<span class="meta-string">"="</span>&lt;&lt;x&lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch = getchar();</span><br><span class="line">	<span class="keyword">while</span> (ch&lt;<span class="string">'0'</span> || ch&gt;<span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (ch == <span class="string">'-'</span>) f = <span class="number">-1</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (ch &gt;= <span class="string">'0'</span>&amp;&amp;ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		x = <span class="number">10</span> * x + ch - <span class="string">'0'</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Out</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (a&gt;<span class="number">9</span>)</span><br><span class="line">		Out(a / <span class="number">10</span>);</span><br><span class="line">	<span class="built_in">putchar</span>(a % <span class="number">10</span> + <span class="string">'0'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n, k, cnt = <span class="number">0</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> s, dis;</span><br><span class="line">&#125;hh,ss;</span><br><span class="line"><span class="built_in">queue</span>&lt;node&gt; q;</span><br><span class="line"><span class="keyword">int</span> vis[<span class="number">100000</span> + <span class="number">5</span>];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (x &gt;= <span class="number">0</span> &amp;&amp; x &lt;= <span class="number">100000</span> ) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bfs</span><span class="params">(node h)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(!q.empty()) q.pop();</span><br><span class="line"> 	mem(vis, <span class="number">0</span>);</span><br><span class="line">	q.push(h);</span><br><span class="line">	vis[h.s] = <span class="number">1</span>;</span><br><span class="line">	h.dis = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> xx = h.s;</span><br><span class="line">	<span class="keyword">while</span> (!q.empty() &amp;&amp; xx != k)</span><br><span class="line">	&#123;</span><br><span class="line">		node yy=q.front();</span><br><span class="line">		q.pop();</span><br><span class="line">		<span class="keyword">if</span>(yy.s==k) &#123;<span class="keyword">return</span> yy.dis;&#125;</span><br><span class="line">		xx=yy.s+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(check(xx))&#123;</span><br><span class="line">			ss.s=xx;ss.dis=yy.dis+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(!vis[xx])&#123;</span><br><span class="line">				vis[xx]=<span class="number">1</span>;q.push(ss);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(xx==k) &#123;<span class="keyword">return</span> ss.dis;&#125;</span><br><span class="line">		xx=yy.s<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">if</span>(check(xx))&#123;</span><br><span class="line">			ss.s=xx;ss.dis=yy.dis+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(!vis[xx])&#123;</span><br><span class="line">				vis[xx]=<span class="number">1</span>;q.push(ss);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(xx==k) &#123;<span class="keyword">return</span> ss.dis;&#125;</span><br><span class="line">		xx=yy.s&lt;&lt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(check(xx))&#123;</span><br><span class="line">			ss.s=xx;ss.dis=yy.dis+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(!vis[xx])&#123;</span><br><span class="line">				vis[xx]=<span class="number">1</span>;q.push(ss);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(xx==k) &#123;<span class="keyword">return</span> ss.dis;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;k))&#123;</span><br><span class="line">	hh.s=n;hh.dis=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;bfs(hh)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>明天会更好。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+        <category>POJ</category>
+      </categories>
+      <tags>
+        <tag>BFS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>7.18随笔.md</title>
+    <url>/2020/07/18/7-18%E9%9A%8F%E7%AC%94/</url>
+    <content><![CDATA[<p>要是自己有本事的话就不会这么难过了。</p>
+<a id="more"></a>
+
+<p>一直处于浑浑噩噩的状态，可能就是觉得考本校太容易了吧，可是你也不想想，你为什么没有保研的资格？不就是浑浑噩噩？不知道自己究竟想要什么！没有目标作为驱动力！</p>
+<p>我不想再因为自己没有努力而导致的自己的没本事而难过，如果我可以选择的话。</p>
+<p>趁现在还有选择的机会，冲吧。</p>
+<p>关于择校，反正都是数一、英一、政治，唯一有区别的可能就是专业课，而今年大势所趋，可能BIT也会把专业课改成408，这种情况下，有可能我会直接选择国科大。。毕竟还是要冲一把的，专业课差别都不大，当然，是在自己复习的不错的情况下，当下还是要好好复习，尤其是数学，得数学者得天下！</p>
+<p>冲呀！！</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>【FWT】 CodeForces 663E - Binary Table</title>
+    <url>/2018/08/14/663e/</url>
+    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="http://codeforces.com/problemset/problem/663/E" target="_blank" rel="noopener">Codefoces 663E</a></p>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are given a table consisting of n rows and m columns. Each cell of the table contains either 0 or 1. In one move, you are allowed to pick any row or any column and invert all values, that is, replace 0 by 1 and vice versa.</p>
+<p>What is the minimum number of cells with value 1 you can get after applying some number of operations?</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The first line of the input contains two integers n and m (1 ≤ n ≤ 20, 1 ≤ m ≤ 100 000) — the number of rows and the number of columns, respectively.</p>
+<p>Then n lines follows with the descriptions of the rows. Each line has length m and contains only digits ‘0’ and ‘1’.</p>
+<h2 id="Ouput"><a href="#Ouput" class="headerlink" title="Ouput"></a>Ouput</h2><p>Output a single integer — the minimum possible number of ones you can get after applying some sequence of operations.</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>3 4<br>0110<br>1010<br>0111</p>
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>2</p>
+<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给出一个n*m的由0和1组成的矩阵，允许你对每行或者每列进行翻转操作（0-&gt;1,1-&gt;0)，问可以得到的最少的1的个数是多少。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>首先想到的肯定是暴力啦<del>~ 菜鸡如我 ~</del>。毫不费力的想到了一个O(m*2<br>^n)的算法，因为n比较小，枚举每行的操作，然后对每一列判断一下就好。<br>正解，其实主要还是得靠异或的优良性质。我们还是需要枚举针对每一行的变化，ans[k]就表示状态为k时最少的1的个数，这里的状态为k指的是k的二进制表示某一位是1就代表这一行进行翻转，否则不翻转。然后用a[i]来表示列表示的二进制数为i的列的个数，i^k=j就是这一行翻转后得到的这一列表示的新的数，然后用b[j]表示这一列当前0和1的个数较少的那个，其实是对这一列是否进行翻转的一个贪心。由于异或优良性质，有i^(i^k)=k，也就是(i^j)=k，所以就可以妥妥的用FWT卷积啦！</p>
+<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><ol>
+<li>暴力出奇迹</li>
+<li>异或具有非常神奇的性质。<ul>
+<li>无论怎样都满足的交换律简直是个大bug</li>
+<li>和自己异或始终等于0，所以就有，i^i^j=i</li>
+<li>在交换，查重之类都有应用</li>
+<li>交换 a=a^b,b=a^b,a=a^b，真的很有趣</li>
+<li>查重，在只有一个重复或者只有一个不重复的情况下</li>
+</ul>
+</li>
+</ol>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 1&lt;&lt;20</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 100000+50</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> eps 1e-8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> PI=<span class="built_in">acos</span>(<span class="number">-1.0</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Max(a,b,c) max(a,max(b,c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout&lt;&lt;#x&lt;&lt;<span class="meta-string">"="</span>&lt;&lt;x&lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ch==<span class="string">'-'</span>) f=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">10</span>*x+ch-<span class="string">'0'</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n,m,len;</span><br><span class="line">ll a[maxn],b[maxn];</span><br><span class="line"><span class="keyword">char</span> s[<span class="number">25</span>][maxm];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fwt</span><span class="params">(ll *P,<span class="keyword">int</span> opt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;i&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> p=i&lt;&lt;<span class="number">1</span>,j=<span class="number">0</span>;j&lt;len;j+=p)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;i;++k)&#123;</span><br><span class="line">                ll x=P[j+k],y=P[j+k+i];</span><br><span class="line">                P[j+k]=(x+y)/opt;P[j+k+i]=(x-y)/opt;            &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mian</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=read();m=read();len=<span class="number">1</span>&lt;&lt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i) <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s[i]+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)&#123;</span><br><span class="line">        <span class="keyword">int</span> x=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;++j) x=(x&lt;&lt;<span class="number">1</span>)+s[j][i]-<span class="string">'0'</span>;a[x]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;++i) b[i]=b[i&gt;&gt;<span class="number">1</span>]+(i&amp;<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;++i) b[i]=min(b[i],n-b[i]);</span><br><span class="line">    fwt(a,<span class="number">1</span>);fwt(b,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;++i) a[i]*=b[i];</span><br><span class="line">    fwt(a,<span class="number">2</span>);</span><br><span class="line">    ll ans=a[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;++i) ans=min(ans,a[i]);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>渐渐明白了自己到底想要什么。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+        <category>Codeforces</category>
+      </categories>
+  </entry>
+  <entry>
     <title>C++全排列函数</title>
     <url>/2019/08/04/C-%E5%85%A8%E6%8E%92%E5%88%97%E5%87%BD%E6%95%B0/</url>
     <content><![CDATA[<h1 id="主角"><a href="#主角" class="headerlink" title="主角"></a>主角</h1><p>C++中的全排列函数很是强大，生成一个长度为$n$的序列的全排列复杂度仅为$O(n)$。</p>
@@ -288,39 +304,24 @@
       </tags>
   </entry>
   <entry>
-    <title>7.18随笔.md</title>
-    <url>/2020/07/18/7-18%E9%9A%8F%E7%AC%94/</url>
-    <content><![CDATA[<p>要是自己有本事的话就不会这么难过了。</p>
-<a id="more"></a>
+    <title>MACOS配置终端代理</title>
+    <url>/2021/03/05/MACOS%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<a id="more"></a>
 
-<p>一直处于浑浑噩噩的状态，可能就是觉得考本校太容易了吧，可是你也不想想，你为什么没有保研的资格？不就是浑浑噩噩？不知道自己究竟想要什么！没有目标作为驱动力！</p>
-<p>我不想再因为自己没有努力而导致的自己的没本事而难过，如果我可以选择的话。</p>
-<p>趁现在还有选择的机会，冲吧。</p>
-<p>关于择校，反正都是数一、英一、政治，唯一有区别的可能就是专业课，而今年大势所趋，可能BIT也会把专业课改成408，这种情况下，有可能我会直接选择国科大。。毕竟还是要冲一把的，专业课差别都不大，当然，是在自己复习的不错的情况下，当下还是要好好复习，尤其是数学，得数学者得天下！</p>
-<p>冲呀！！</p>
+<p>在<code>~/.zshrc</code> 中添加如下内容（如果是是<code>bash</code>用户那么配置文件为<code>~/.bash_profile</code>）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 为终端设置代理</span></span><br><span class="line"><span class="built_in">alias</span> proxy=<span class="string">'export all_proxy=socks5://127.0.0.1:1080'</span></span><br><span class="line"><span class="built_in">alias</span> unproxy=<span class="string">'unset all_proxy'</span></span><br></pre></td></tr></table></figure>
+
+<p>修改完成后<code>source</code>对应的文件即可</p>
+<p>其中，<code>1080</code>为端口号，需要和自己的代理软件的设置保持一致。</p>
+<p>这样在终端中使用<code>proxy</code>命令就可以打开代理，使用<code>unproxy</code>就可以关闭代理。</p>
+<p>效果如图</p>
+<p><img src="https://i.loli.net/2021/03/05/dLYTayxQNJSiEju.png" alt="image.png"></p>
 ]]></content>
       <categories>
-        <category>随笔</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Pyquery 403 Frobidden</title>
-    <url>/2021/01/22/Pyquery-403-Frobidden/</url>
-    <content><![CDATA[<p>自己电脑没事，别人电脑403Forbidden？来，解决这个问题</p>
-<a id="more"></a>
-
-<p>使用Pyquery爬虫时，在自己的Windwos下运行没有问题，但是别人那里爬不到任何信息，而且爬两次就会报错403 Forbidden。</p>
-<p>我很是迷惑，因为报错信息是urllib库的内容，而我没有使用urllib库，检查发现，Pyquery库在解析网页时会调用Requests库</p>
-<p>这时，学长让我加个Header，感觉是被反爬虫机制干了，我提议先装一个Reuqests库试试，果然，是换了个编译器忘了装Requests库了，而我也加上了Header，问题得到了解决。</p>
-<p>附：Agent代码</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'</span></span><br><span class="line">&#125;</span><br><span class="line">webBase += str(year) + <span class="string">"-"</span> + str(month) + <span class="string">"-"</span> + str(day) + <span class="string">"/"</span></span><br><span class="line">doc=pq(webBase, encoding=<span class="string">"utf-8"</span>, headers=headers)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>语言</category>
-        <category>Python</category>
+        <category>MACOS</category>
       </categories>
       <tags>
-        <tag>爬虫</tag>
-        <tag>坑点</tag>
+        <tag>技巧</tag>
       </tags>
   </entry>
   <entry>
@@ -345,68 +346,23 @@
       </tags>
   </entry>
   <entry>
-    <title>Canada游记</title>
-    <url>/2018/08/20/Canada/</url>
-    <content><![CDATA[<p>总是要来回忆一下这两周的时光的吧。</p>
+    <title>Pyquery 403 Frobidden</title>
+    <url>/2021/01/22/Pyquery-403-Frobidden/</url>
+    <content><![CDATA[<p>自己电脑没事，别人电脑403Forbidden？来，解决这个问题</p>
 <a id="more"></a>
-<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>当时接到通知需要去办护照的时候，心里是非常激动的。心里是不安和激动，而且越接近，越不安，越激动。不过当时没有想过需要做多少准备，但是，哪里有不麻烦的事情呢？准备工作应该是办护照-办签证-团队的一些事情？现在想来其实也就是这几件事情，不过可能在各种事情的轰炸之中，会觉得需要做的事情很多很多吧。不过，填那些乱七八糟的表格，真的是有些难受，这个时候，就需要体现个人强大的学习能力了23333，一味的问别人是没有用的。海外手机卡？电源转换器？方便面（划掉，好像重点准备的就是这几样，然后是一些日用品，倒也不麻烦。中间又回家了两天，来了启程。</p>
-<h1 id="行程"><a href="#行程" class="headerlink" title="行程"></a>行程</h1><h2 id="出发"><a href="#出发" class="headerlink" title="出发"></a>出发</h2><p>7.8早上，一行人相聚徐特立图书馆门前，就这样浩浩荡荡去了首都国际机场？坐10号线好漫长啊，和YK，HGF斗了会地主，终于到了还是很漫长的机场线？在机场信号很差的打了一把王者，第一次坐飞机的我也是了解了这么早来机场都做了些什么事儿。在机场其实可以发现许多事情。拿到登机牌后，神奇的发现自己从北京到温哥华的位置靠窗，还想着自己能在空中俯视一下太平洋，解锁空中看海成就，但其实只是想想。飞机一路追着太阳行走，眼看着天快要黑了。可以近距离观察一下星星，突然光亮越来越强，刺眼的光芒让我不得不得拉下窗户，外面的云海是真的很漂亮，一大片一大片。随便看了部电影，时间就过的差不多了。就是一直觉得很热，然而别人都觉得冷（逃。向外面一看，看到的是连绵不绝的冰山，当时真的震撼到了，感觉这边的云都很低，就那样飘在空中，仿佛触手可及，和那样的蓝天比较起来，真的美。</p>
-<h2 id="抵达"><a href="#抵达" class="headerlink" title="抵达"></a>抵达</h2><p>飞机降落途中，看到了温哥华的大致情况，几乎没有特别高的楼房，这就是地广人稀的基本素养吧。辗转到了埃德蒙顿，初见热情的Charles和Salta，坐着学校的大巴到了学校，国外的大学没有门，不过真的很大，导致我们后来很好奇他们平时在校园里都靠走么。第一晚跟着国良老师转悠了一个小时，终于找到一个开门的超市23333。这边的宿舍其实挺不错的，不过床太软了，<del>睡不习惯</del>。</p>
-<h2 id="在这里"><a href="#在这里" class="headerlink" title="在这里"></a>在这里</h2><p>飞机上没怎么睡觉，晚上一直到了十一点才发现天黑了，一觉睡得天昏地暗，早上大家在找我舍友的时候才发现我不见了2333，被推门而入的那一刻突然睁开双眼。没记错的话，第一天的欢迎早餐挺丰盛的，<del>所以我就理所当然的吃了不少</del>第一天其实主要是破冰，上午做了一些小游戏，对了，那个拿糖，我毫不犹豫的抓了一把，结果最后有点小坑hhh。下午逛了逛校园，其实不太能听懂解说说的，不过人家是真的很热情，校园也很漂亮，如果当时听懂了后面调研可能会容易一些吧我觉得。每天最大的挑战其实是吃什么，一般都是中午去hub吃一顿，早上晚上泡面牛奶面包，不过巧克力牛奶是真的好喝（</p>
-<h3 id="日子"><a href="#日子" class="headerlink" title="日子"></a>日子</h3><p>要说这两周都干了什么呢，参观学生自己的实验室，参观义肢实验室，参观阿尔伯塔大学植物园，参观阿尔伯塔省政府，参加街道文化节，埃德蒙顿美食节，两个公园，三节文化体验课，各种各样的讲座，野餐，西贸。这些事情，有的给我感触很深。</p>
-<p>带领我们参观学生自己关于航天方面的实验室是一个小姐姐，一看样子就是坚韧的理科生。我感受到的是他们对于自己喜欢的事情的强烈的热情。当我问到他们有老师指导吗，她说一切on their own。其实他们也是本科生，但是可以为了自己感兴趣的东西而努力，想到自己一切都是等着别人拉自己走，真的很惭愧，喜欢，就去做啊，Just Do It。</p>
-<p>当时报了参观义肢的实验室，却没想到如此高端。他们研究的其实和图像识别，机器学习都有很大关系，但只是粗略的体验了一下那个可以遥控的假肢，对于原理什么的，真的是听不懂，听力好差啊（</p>
-<p>在这里，随处都可以感受到的就是热情，买饭的时候，阿姨会问你从哪里来，和你畅谈许久，公园的导游的热情、逗比让人难以忘怀，把自己藏在一个小隔间里，然后让其他人都沿原路返回，再偷偷冒出头来吓大家一跳。有人说这是他们枯燥的工作生活中的一些调剂，但我觉得这是他们对于自己职业的热爱，所爱干一行爱一行，所谓行行出状元，就是这样的热情才有可能做出点样子来吧。</p>
-<p>其实刚开始的时候，感觉自己英语口语太差了，说不出口，不知道和谁交谈，渐渐地，发现，在这样一个环境里，其实是有很多人愿意和你交谈的，不管是身边经过去上课的学生，还是这里的各种各样的老师教授，还是饭店的工作人员，只要你愿意说，他们愿意和你聊，他们愿意故意放慢语速，愿意仔细倾听你说的话。无论什么时候，总是有人和你说一声，Enjoy yourself ，这样的感觉很棒的。一点也不害怕用英语和别人交流了，我想，这应该是我此行最大的收获吧。</p>
-<h3 id="心有所感"><a href="#心有所感" class="headerlink" title="心有所感"></a>心有所感</h3><p>谈一谈我对于这个国家的印象。</p>
-<p>从前我一直以为加拿大地广人稀，应该是一个生活节奏很慢的地方，但是第一天，温哥华到埃德蒙顿飞机的极速降落，我就有些怀疑自己的判断。可是，还是第一天，这边的饭店，超市之类的下午五点就关门，又让我很疑惑（后来知道因为暑假人比较少）。讲究准时，这确实是的，因为人少，车少，基本上不会堵路，就连公交车都是像国内的地铁一样，有着明确的时间规划，真的没有什么可以迟到的理由。所以他们一切事情都是严格按照既定的时间表来做。飞速的公交车让我再次怀疑自己的观点，但是文化交流课的老师告诉我她觉得Canada’s bus is so slow。我感觉，人少真好，坐公交车都有机会坐出高速的感觉。</p>
-<p>这里的天空是真的漂亮，配上低低的云彩，任何人都会为这样一幅画卷痴狂吧。各色各样的建筑，配上天空，配上云彩，都变得如此精彩纷呈。</p>
-<p>感觉他们讲究快的时候，可是，在马路上，所有的十字路口，不管有没有红绿灯，司机一定会给你让路，让你先过，本来觉得可能是法律比较严格，人也比较遵纪守法，可是有一天碰到车已经走出一半，看到我们过来，又退了回去，这就让我很不好意思，这种情况下，所有的司机都会热情的和你打招呼，让你先过去，这也是可以感受到的热情，那么，他们到底是不是追求快呢。</p>
-<p>这样一个我眼中看似“快节奏”的国家，却有着大片大片的草地，周末外出野餐的人也不在少数，也有着精彩纷呈的街道文化节，街边的酒吧也时常有人。我想，他们想要的应该是生活吧，生活就是无关快慢，总有属于自己的那一种生活方式，生活节奏。</p>
-<p>基础设施这一方面，我不想多提，因为现在和他们比这个没有太大实际意义，毕竟难以实现。但是基础设施真心不错，随处可见的直饮水设施，与国内相比很完善的残障保护措施，超大的图书馆等等。等国内资源不紧张了，可以向他们借鉴的。</p>
-<p>来谈谈教育吧，这个差别还是很大的。首先他们进入大学是不需要通过高考的，你最终大学在哪里上和你高中所上的一些大学的先修课有关系，这其实给了一个很好的衔接，如此，高中和大学反差太大的情况应该不会出现，大学堕落成谜的情况应该会减少。</p>
-<p>再者，他们是纯粹的学分制度。给出必修的学分数目，学生根据自己的需要选择课程来学习，学费也是按所选的科目来计算，但是每年选的课程数量是不受限制的，所以就有很快修完课程的学生，也有学生7年再完成学业，中间则可以做一些自己感兴趣的事情。说到这里，不得不提他们非常正式的学生会，他们的学生会几乎是独立于学校的，有自己产业，主要还是为学生服务，学生会的主要成员还可以在学业上申请缓一段时间，给他们时间搞学生工作，这更能提供一种磨练吧，我觉得和上文提到的断节现象少还是有关系，这样也是社会工作经验的积累吧。说到这儿，我想到了那个担任阿尔伯塔大学研究生会副主席的留学生学长，他想到的是，如果作为中国人，自己没有为自己发声的勇气，能力，又如何指望别人为你发声呢?权利意识真的很重要，有时候不仅仅是为了自己的权利，是一个群体的权利。</p>
-<p>上课嘛，因为人少，超过50人的课堂很少，所以老师和学生有更多互动，玩手机的现象可能少一些？不过大家都一样，该翘的课还是会翘的23333。我印象比较深的是他们对于实验类课程的引导性吧，我们的实验课程是老师一股脑给你讲一遍，几乎是傻子式教学，这样子真的又加深了我对于我学这门课有什么用的怀疑。。他们呢，就更注重引导了，老师主要是引出问题，剩下的时间都是学生自己做实验，虽然挑战性较高，但是更能体会到乐趣吧。毕竟是自己手玩出来的东西，直接按老师说的一步一步，有种打游戏看教程的感觉，没什么意思。</p>
-<p>嗯，感受还是挺多的？</p>
-<p>感受还有最深的地方呢，普天之下，所有机会都是只有一次的，机会再眼前，一定要抓住。同样，要珍惜任何一次机会，也要知道，机会是留给有准备的人的。</p>
-<h3 id="难忘的人儿"><a href="#难忘的人儿" class="headerlink" title="难忘的人儿"></a>难忘的人儿</h3><p>更让我难以忘怀是陪我度过这两周的人儿，无论去到哪里，总有连绵不绝的欢声笑语，这就是我所说的：“生活最妙的不过是一群妙人相聚吧”，这注定是一段我永远难以忘怀的记忆，是挤在厨房抢面条的快感吧，是大厅狼人杀的刺激吧，是公园旋转木马的中二吧，是一起在大统华的疯狂吧2333，是都听不懂英文的强颜欢笑吧，是给老师解释green hat的真的皮吧，是一起吐槽饭菜的乐趣吧，是一起yeah的欢愉吧，是一起awesome的畅快吧，是一起cool的希望吧……难忘的事情太多太多，我选择铭记。</p>
-<h2 id="离开"><a href="#离开" class="headerlink" title="离开"></a>离开</h2><p>时间过得真快啊，转眼就最后一天了呢。最终展示得到的奖品是绿帽子也是出乎意料，不过知道阿尔伯塔大学很喜欢绿色，绿色象征着森林，友好，反正我们也解释过这个在中国的含义了，也就没什么了吧23333</p>
-<p>最后一天吃披萨的时候又和Charles聊了很多，很早就自己一个人来这边留学，所有的苦难，所有的迷惑都经历过，但是只要你自己愿意走出来，总是会有人帮你的。</p>
-<p>知道飞机离开了地面，方知自己真的要离开了。</p>
-<p>再见，Canada。再见，Alberta。再见，Edmonton。</p>
-<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><blockquote>
-<p>Happy is the heart that still feels pain</p>
-<p>Darkness drains and light will come again</p>
-<p>Swing open your chest and let it in</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>经历</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【FFT】 HDU 1402 A * B Problem Plus (FFT求高精度乘法)</title>
-    <url>/2018/08/13/fft1/</url>
-    <content><![CDATA[<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给出A,B两个大数，每个不超过50000位，输出乘积。</p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>第一眼认为是高精度，但是O(n^2)的复杂度显然会炸。这时候，需要学习一下FFT，最核心的思想是把1-&gt;2-&gt;4-&gt;8…我觉得完全把这个搞懂挺难的，先把板子确定下来。然后做题，再慢慢体会其他核心吧。以及，对压位的操作似乎不是很明白。学习一下。</p>
-<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><ol>
-<li>FFT的板子</li>
-<li>压位一个坑（待填）</li>
-<li>重载运算符基本掌握</li>
-</ol>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 200010</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> eps 1e-8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> PI=<span class="built_in">acos</span>(<span class="number">-1.0</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Max(a,b,c) max(a,max(b,c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout&lt;&lt;#x&lt;&lt;<span class="meta-string">"="</span>&lt;&lt;x&lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ch==<span class="string">'-'</span>) f=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">10</span>*x+ch-<span class="string">'0'</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//复数结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">complex1</span>&#123;</span></span><br><span class="line">    <span class="keyword">double</span> r,i;</span><br><span class="line">    complex1(<span class="keyword">double</span> _r=<span class="number">0.0</span>,<span class="keyword">double</span> _i=<span class="number">0.0</span>)&#123;</span><br><span class="line">        r=_r;i=_i;</span><br><span class="line">    &#125;</span><br><span class="line">    complex1 <span class="keyword">operator</span> +(<span class="keyword">const</span> complex1 &amp;b)&#123;</span><br><span class="line">        <span class="keyword">return</span> complex1(r+b.r,i+b.i);</span><br><span class="line">    &#125;</span><br><span class="line">    complex1 <span class="keyword">operator</span> -(<span class="keyword">const</span> complex1 &amp;b)&#123;</span><br><span class="line">        <span class="keyword">return</span> complex1(r-b.r,i-b.i);</span><br><span class="line">    &#125;</span><br><span class="line">    complex1 <span class="keyword">operator</span> *(<span class="keyword">const</span> complex1 &amp;b)&#123;</span><br><span class="line">        <span class="keyword">return</span> complex1(r*b.r-i*b.i,r*b.i+i*b.r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//反转变换</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(complex1 y[],<span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,j=len/<span class="number">2</span>;i&lt;len<span class="number">-1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;j) swap(y[i],y[j]);</span><br><span class="line">        k=len/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(j&gt;=k)&#123;</span><br><span class="line">            j-=k;k/=<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(j&lt;k) j+=k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fft</span><span class="params">(complex1 y[],<span class="keyword">int</span> len,<span class="keyword">int</span> on)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    change(y,len);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> h=<span class="number">2</span>;h&lt;=len;h&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">complex1 <span class="title">wn</span><span class="params">(<span class="built_in">cos</span>(-on*<span class="number">2</span>*PI/h),<span class="built_in">sin</span>(-on*<span class="number">2</span>*PI/h))</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;len;j+=h)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="function">complex1 <span class="title">w</span><span class="params">(<span class="number">1</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=j;k&lt;j+h/<span class="number">2</span>;k++)</span><br><span class="line">            &#123;</span><br><span class="line">                complex1 u=y[k];</span><br><span class="line">                complex1 t=w*y[k+h/<span class="number">2</span>];</span><br><span class="line">                y[k]=u+t;</span><br><span class="line">                y[k+h/<span class="number">2</span>]=u-t;</span><br><span class="line">                w=w*wn;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(on==<span class="number">-1</span>) </span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;++i)</span><br><span class="line">       y[i].r/=len;</span><br><span class="line">&#125;</span><br><span class="line">complex1 x1[maxn],x2[maxn];</span><br><span class="line"><span class="keyword">char</span> str1[maxn/<span class="number">2</span>],str2[maxn/<span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> sum[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%s%s"</span>,str1,str2)==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> len1=<span class="built_in">strlen</span>(str1),len2=<span class="built_in">strlen</span>(str2);</span><br><span class="line">        <span class="keyword">int</span> len=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(len&lt;len1*<span class="number">2</span>||len&lt;len2*<span class="number">2</span>) len&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len1;++i) </span><br><span class="line">            x1[i]=complex1(str1[len1-i<span class="number">-1</span>]-<span class="string">'0'</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=len1;i&lt;len;++i) </span><br><span class="line">            x1[i]=complex1(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len2;++i)</span><br><span class="line">            x2[i]=complex1(str2[len2<span class="number">-1</span>-i]-<span class="string">'0'</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=len2;i&lt;len;++i)</span><br><span class="line">            x2[i]=complex1(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        fft(x1,len,<span class="number">1</span>);</span><br><span class="line">        fft(x2,len,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;++i) </span><br><span class="line">            x1[i]=x1[i]*x2[i];</span><br><span class="line">        fft(x1,len,<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;++i)</span><br><span class="line">         sum[i]=(<span class="keyword">int</span>)(x1[i].r+<span class="number">0.5</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            sum[i+<span class="number">1</span>]+=sum[i]/<span class="number">10</span>;</span><br><span class="line">            sum[i]%=<span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        len=len1+len2<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(sum[len]&lt;=<span class="number">0</span>&amp;&amp;len&gt;<span class="number">0</span>) len--;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=len;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%c"</span>,sum[i]+<span class="string">'0'</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-]]></content>
+<p>使用Pyquery爬虫时，在自己的Windwos下运行没有问题，但是别人那里爬不到任何信息，而且爬两次就会报错403 Forbidden。</p>
+<p>我很是迷惑，因为报错信息是urllib库的内容，而我没有使用urllib库，检查发现，Pyquery库在解析网页时会调用Requests库</p>
+<p>这时，学长让我加个Header，感觉是被反爬虫机制干了，我提议先装一个Reuqests库试试，果然，是换了个编译器忘了装Requests库了，而我也加上了Header，问题得到了解决。</p>
+<p>附：Agent代码</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'</span></span><br><span class="line">&#125;</span><br><span class="line">webBase += str(year) + <span class="string">"-"</span> + str(month) + <span class="string">"-"</span> + str(day) + <span class="string">"/"</span></span><br><span class="line">doc=pq(webBase, encoding=<span class="string">"utf-8"</span>, headers=headers)</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>算法</category>
-        <category>HDU</category>
+        <category>语言</category>
+        <category>Python</category>
       </categories>
       <tags>
-        <tag>FFT</tag>
-        <tag>高精度</tag>
+        <tag>爬虫</tag>
+        <tag>坑点</tag>
       </tags>
   </entry>
   <entry>
@@ -460,6 +416,28 @@
       </tags>
   </entry>
   <entry>
+    <title>【FFT】 HDU 1402 A * B Problem Plus (FFT求高精度乘法)</title>
+    <url>/2018/08/13/fft1/</url>
+    <content><![CDATA[<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给出A,B两个大数，每个不超过50000位，输出乘积。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>第一眼认为是高精度，但是O(n^2)的复杂度显然会炸。这时候，需要学习一下FFT，最核心的思想是把1-&gt;2-&gt;4-&gt;8…我觉得完全把这个搞懂挺难的，先把板子确定下来。然后做题，再慢慢体会其他核心吧。以及，对压位的操作似乎不是很明白。学习一下。</p>
+<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><ol>
+<li>FFT的板子</li>
+<li>压位一个坑（待填）</li>
+<li>重载运算符基本掌握</li>
+</ol>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 200010</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> eps 1e-8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> PI=<span class="built_in">acos</span>(<span class="number">-1.0</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Max(a,b,c) max(a,max(b,c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout&lt;&lt;#x&lt;&lt;<span class="meta-string">"="</span>&lt;&lt;x&lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> dbg(x) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> ch=getchar();</span><br><span class="line">    <span class="keyword">while</span>(ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ch==<span class="string">'-'</span>) f=<span class="number">-1</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">10</span>*x+ch-<span class="string">'0'</span>;</span><br><span class="line">        ch=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//复数结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">complex1</span>&#123;</span></span><br><span class="line">    <span class="keyword">double</span> r,i;</span><br><span class="line">    complex1(<span class="keyword">double</span> _r=<span class="number">0.0</span>,<span class="keyword">double</span> _i=<span class="number">0.0</span>)&#123;</span><br><span class="line">        r=_r;i=_i;</span><br><span class="line">    &#125;</span><br><span class="line">    complex1 <span class="keyword">operator</span> +(<span class="keyword">const</span> complex1 &amp;b)&#123;</span><br><span class="line">        <span class="keyword">return</span> complex1(r+b.r,i+b.i);</span><br><span class="line">    &#125;</span><br><span class="line">    complex1 <span class="keyword">operator</span> -(<span class="keyword">const</span> complex1 &amp;b)&#123;</span><br><span class="line">        <span class="keyword">return</span> complex1(r-b.r,i-b.i);</span><br><span class="line">    &#125;</span><br><span class="line">    complex1 <span class="keyword">operator</span> *(<span class="keyword">const</span> complex1 &amp;b)&#123;</span><br><span class="line">        <span class="keyword">return</span> complex1(r*b.r-i*b.i,r*b.i+i*b.r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//反转变换</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(complex1 y[],<span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,j=len/<span class="number">2</span>;i&lt;len<span class="number">-1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;j) swap(y[i],y[j]);</span><br><span class="line">        k=len/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(j&gt;=k)&#123;</span><br><span class="line">            j-=k;k/=<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(j&lt;k) j+=k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fft</span><span class="params">(complex1 y[],<span class="keyword">int</span> len,<span class="keyword">int</span> on)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    change(y,len);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> h=<span class="number">2</span>;h&lt;=len;h&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">complex1 <span class="title">wn</span><span class="params">(<span class="built_in">cos</span>(-on*<span class="number">2</span>*PI/h),<span class="built_in">sin</span>(-on*<span class="number">2</span>*PI/h))</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;len;j+=h)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="function">complex1 <span class="title">w</span><span class="params">(<span class="number">1</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=j;k&lt;j+h/<span class="number">2</span>;k++)</span><br><span class="line">            &#123;</span><br><span class="line">                complex1 u=y[k];</span><br><span class="line">                complex1 t=w*y[k+h/<span class="number">2</span>];</span><br><span class="line">                y[k]=u+t;</span><br><span class="line">                y[k+h/<span class="number">2</span>]=u-t;</span><br><span class="line">                w=w*wn;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(on==<span class="number">-1</span>) </span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;++i)</span><br><span class="line">       y[i].r/=len;</span><br><span class="line">&#125;</span><br><span class="line">complex1 x1[maxn],x2[maxn];</span><br><span class="line"><span class="keyword">char</span> str1[maxn/<span class="number">2</span>],str2[maxn/<span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> sum[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%s%s"</span>,str1,str2)==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> len1=<span class="built_in">strlen</span>(str1),len2=<span class="built_in">strlen</span>(str2);</span><br><span class="line">        <span class="keyword">int</span> len=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(len&lt;len1*<span class="number">2</span>||len&lt;len2*<span class="number">2</span>) len&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len1;++i) </span><br><span class="line">            x1[i]=complex1(str1[len1-i<span class="number">-1</span>]-<span class="string">'0'</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=len1;i&lt;len;++i) </span><br><span class="line">            x1[i]=complex1(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len2;++i)</span><br><span class="line">            x2[i]=complex1(str2[len2<span class="number">-1</span>-i]-<span class="string">'0'</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=len2;i&lt;len;++i)</span><br><span class="line">            x2[i]=complex1(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        fft(x1,len,<span class="number">1</span>);</span><br><span class="line">        fft(x2,len,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;++i) </span><br><span class="line">            x1[i]=x1[i]*x2[i];</span><br><span class="line">        fft(x1,len,<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;++i)</span><br><span class="line">         sum[i]=(<span class="keyword">int</span>)(x1[i].r+<span class="number">0.5</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            sum[i+<span class="number">1</span>]+=sum[i]/<span class="number">10</span>;</span><br><span class="line">            sum[i]%=<span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        len=len1+len2<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(sum[len]&lt;=<span class="number">0</span>&amp;&amp;len&gt;<span class="number">0</span>) len--;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=len;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%c"</span>,sum[i]+<span class="string">'0'</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+        <category>HDU</category>
+      </categories>
+      <tags>
+        <tag>FFT</tag>
+        <tag>高精度</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>gcc编译命令与makefile总结</title>
     <url>/2019/08/28/gcc%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>今天学习了$gcc$的基本指令，之前总是望而却步，今天一口气。</p>
@@ -508,29 +486,46 @@
       </tags>
   </entry>
   <entry>
-    <title>关于字符串处理的整理</title>
-    <url>/2019/08/22/%E5%85%B3%E4%BA%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E7%9A%84%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>字符串是我们经常要处理的东西，今天在处理方面比如读入处理等方面做一个小小的总结。</p>
-<h3 id="读字符串之前"><a href="#读字符串之前" class="headerlink" title="读字符串之前"></a>读字符串之前</h3><p>如果读字符串之前有读入数的操作，那么需要把其后的换行符给读入消去，$getchar()$即可。</p>
-<h3 id="整行读入字符串的方式"><a href="#整行读入字符串的方式" class="headerlink" title="整行读入字符串的方式"></a>整行读入字符串的方式</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//C++标准string</span></span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line">getline(<span class="built_in">cin</span>,s);</span><br><span class="line"><span class="comment">//char字符数组</span></span><br><span class="line"><span class="keyword">char</span> s[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%[^\n]%*c"</span>,s);</span><br><span class="line">gets(s);</span><br><span class="line"><span class="built_in">cin</span>.get(s,<span class="number">100</span>);</span><br><span class="line"><span class="built_in">cin</span>.getline(s,<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
-
-<h4 id="整行读入原理解释"><a href="#整行读入原理解释" class="headerlink" title="整行读入原理解释"></a>整行读入原理解释</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%[^\n]%*c"</span>,s);</span><br></pre></td></tr></table></figure>
-
-<p>​    $%[\qquad ]$是很有趣的参数，意义是读入一个字符集合，一旦遇到不在集合中的就停止，同时遇到^后面的字符也会停止，所以^\n就是遇到换行符停止，后面的%*c是为了把换行符读入，防止影响接下来的读入。</p>
-<h3 id="cin-get-和cin-getline-之区别"><a href="#cin-get-和cin-getline-之区别" class="headerlink" title="cin.get()和cin.getline()之区别"></a>cin.get()和cin.getline()之区别</h3><p>两者都是只支持$char*$字符数组。</p>
-<p>我们知道读入时存在缓冲区这一说法，比如$cin$，在键盘输入结束后，将数据存入缓冲区m$cin$函数直接从缓冲区读取数据，所以如果缓冲区有残留数据，$cin$会直接读取。</p>
-<p>问题的关键在于，$cin.get$()在一次输入结束后不会删除缓冲区的结束符，而$cin.getline$()会自动丢弃缓冲区字符。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cin</span>.get(数组名，长度，结束符);</span><br><span class="line"><span class="built_in">cin</span>.getline(数组名，长度，结束符);</span><br><span class="line"><span class="comment">//其中，结束符默认为换行符</span></span><br></pre></td></tr></table></figure>
-
-<p>如果要用$cin.get()$读入多组数据，需要写成 $cin.get(数组名，长度).get()$。</p>
+    <title>Canada游记</title>
+    <url>/2018/08/20/Canada/</url>
+    <content><![CDATA[<p>总是要来回忆一下这两周的时光的吧。</p>
+<a id="more"></a>
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>当时接到通知需要去办护照的时候，心里是非常激动的。心里是不安和激动，而且越接近，越不安，越激动。不过当时没有想过需要做多少准备，但是，哪里有不麻烦的事情呢？准备工作应该是办护照-办签证-团队的一些事情？现在想来其实也就是这几件事情，不过可能在各种事情的轰炸之中，会觉得需要做的事情很多很多吧。不过，填那些乱七八糟的表格，真的是有些难受，这个时候，就需要体现个人强大的学习能力了23333，一味的问别人是没有用的。海外手机卡？电源转换器？方便面（划掉，好像重点准备的就是这几样，然后是一些日用品，倒也不麻烦。中间又回家了两天，来了启程。</p>
+<h1 id="行程"><a href="#行程" class="headerlink" title="行程"></a>行程</h1><h2 id="出发"><a href="#出发" class="headerlink" title="出发"></a>出发</h2><p>7.8早上，一行人相聚徐特立图书馆门前，就这样浩浩荡荡去了首都国际机场？坐10号线好漫长啊，和YK，HGF斗了会地主，终于到了还是很漫长的机场线？在机场信号很差的打了一把王者，第一次坐飞机的我也是了解了这么早来机场都做了些什么事儿。在机场其实可以发现许多事情。拿到登机牌后，神奇的发现自己从北京到温哥华的位置靠窗，还想着自己能在空中俯视一下太平洋，解锁空中看海成就，但其实只是想想。飞机一路追着太阳行走，眼看着天快要黑了。可以近距离观察一下星星，突然光亮越来越强，刺眼的光芒让我不得不得拉下窗户，外面的云海是真的很漂亮，一大片一大片。随便看了部电影，时间就过的差不多了。就是一直觉得很热，然而别人都觉得冷（逃。向外面一看，看到的是连绵不绝的冰山，当时真的震撼到了，感觉这边的云都很低，就那样飘在空中，仿佛触手可及，和那样的蓝天比较起来，真的美。</p>
+<h2 id="抵达"><a href="#抵达" class="headerlink" title="抵达"></a>抵达</h2><p>飞机降落途中，看到了温哥华的大致情况，几乎没有特别高的楼房，这就是地广人稀的基本素养吧。辗转到了埃德蒙顿，初见热情的Charles和Salta，坐着学校的大巴到了学校，国外的大学没有门，不过真的很大，导致我们后来很好奇他们平时在校园里都靠走么。第一晚跟着国良老师转悠了一个小时，终于找到一个开门的超市23333。这边的宿舍其实挺不错的，不过床太软了，<del>睡不习惯</del>。</p>
+<h2 id="在这里"><a href="#在这里" class="headerlink" title="在这里"></a>在这里</h2><p>飞机上没怎么睡觉，晚上一直到了十一点才发现天黑了，一觉睡得天昏地暗，早上大家在找我舍友的时候才发现我不见了2333，被推门而入的那一刻突然睁开双眼。没记错的话，第一天的欢迎早餐挺丰盛的，<del>所以我就理所当然的吃了不少</del>第一天其实主要是破冰，上午做了一些小游戏，对了，那个拿糖，我毫不犹豫的抓了一把，结果最后有点小坑hhh。下午逛了逛校园，其实不太能听懂解说说的，不过人家是真的很热情，校园也很漂亮，如果当时听懂了后面调研可能会容易一些吧我觉得。每天最大的挑战其实是吃什么，一般都是中午去hub吃一顿，早上晚上泡面牛奶面包，不过巧克力牛奶是真的好喝（</p>
+<h3 id="日子"><a href="#日子" class="headerlink" title="日子"></a>日子</h3><p>要说这两周都干了什么呢，参观学生自己的实验室，参观义肢实验室，参观阿尔伯塔大学植物园，参观阿尔伯塔省政府，参加街道文化节，埃德蒙顿美食节，两个公园，三节文化体验课，各种各样的讲座，野餐，西贸。这些事情，有的给我感触很深。</p>
+<p>带领我们参观学生自己关于航天方面的实验室是一个小姐姐，一看样子就是坚韧的理科生。我感受到的是他们对于自己喜欢的事情的强烈的热情。当我问到他们有老师指导吗，她说一切on their own。其实他们也是本科生，但是可以为了自己感兴趣的东西而努力，想到自己一切都是等着别人拉自己走，真的很惭愧，喜欢，就去做啊，Just Do It。</p>
+<p>当时报了参观义肢的实验室，却没想到如此高端。他们研究的其实和图像识别，机器学习都有很大关系，但只是粗略的体验了一下那个可以遥控的假肢，对于原理什么的，真的是听不懂，听力好差啊（</p>
+<p>在这里，随处都可以感受到的就是热情，买饭的时候，阿姨会问你从哪里来，和你畅谈许久，公园的导游的热情、逗比让人难以忘怀，把自己藏在一个小隔间里，然后让其他人都沿原路返回，再偷偷冒出头来吓大家一跳。有人说这是他们枯燥的工作生活中的一些调剂，但我觉得这是他们对于自己职业的热爱，所爱干一行爱一行，所谓行行出状元，就是这样的热情才有可能做出点样子来吧。</p>
+<p>其实刚开始的时候，感觉自己英语口语太差了，说不出口，不知道和谁交谈，渐渐地，发现，在这样一个环境里，其实是有很多人愿意和你交谈的，不管是身边经过去上课的学生，还是这里的各种各样的老师教授，还是饭店的工作人员，只要你愿意说，他们愿意和你聊，他们愿意故意放慢语速，愿意仔细倾听你说的话。无论什么时候，总是有人和你说一声，Enjoy yourself ，这样的感觉很棒的。一点也不害怕用英语和别人交流了，我想，这应该是我此行最大的收获吧。</p>
+<h3 id="心有所感"><a href="#心有所感" class="headerlink" title="心有所感"></a>心有所感</h3><p>谈一谈我对于这个国家的印象。</p>
+<p>从前我一直以为加拿大地广人稀，应该是一个生活节奏很慢的地方，但是第一天，温哥华到埃德蒙顿飞机的极速降落，我就有些怀疑自己的判断。可是，还是第一天，这边的饭店，超市之类的下午五点就关门，又让我很疑惑（后来知道因为暑假人比较少）。讲究准时，这确实是的，因为人少，车少，基本上不会堵路，就连公交车都是像国内的地铁一样，有着明确的时间规划，真的没有什么可以迟到的理由。所以他们一切事情都是严格按照既定的时间表来做。飞速的公交车让我再次怀疑自己的观点，但是文化交流课的老师告诉我她觉得Canada’s bus is so slow。我感觉，人少真好，坐公交车都有机会坐出高速的感觉。</p>
+<p>这里的天空是真的漂亮，配上低低的云彩，任何人都会为这样一幅画卷痴狂吧。各色各样的建筑，配上天空，配上云彩，都变得如此精彩纷呈。</p>
+<p>感觉他们讲究快的时候，可是，在马路上，所有的十字路口，不管有没有红绿灯，司机一定会给你让路，让你先过，本来觉得可能是法律比较严格，人也比较遵纪守法，可是有一天碰到车已经走出一半，看到我们过来，又退了回去，这就让我很不好意思，这种情况下，所有的司机都会热情的和你打招呼，让你先过去，这也是可以感受到的热情，那么，他们到底是不是追求快呢。</p>
+<p>这样一个我眼中看似“快节奏”的国家，却有着大片大片的草地，周末外出野餐的人也不在少数，也有着精彩纷呈的街道文化节，街边的酒吧也时常有人。我想，他们想要的应该是生活吧，生活就是无关快慢，总有属于自己的那一种生活方式，生活节奏。</p>
+<p>基础设施这一方面，我不想多提，因为现在和他们比这个没有太大实际意义，毕竟难以实现。但是基础设施真心不错，随处可见的直饮水设施，与国内相比很完善的残障保护措施，超大的图书馆等等。等国内资源不紧张了，可以向他们借鉴的。</p>
+<p>来谈谈教育吧，这个差别还是很大的。首先他们进入大学是不需要通过高考的，你最终大学在哪里上和你高中所上的一些大学的先修课有关系，这其实给了一个很好的衔接，如此，高中和大学反差太大的情况应该不会出现，大学堕落成谜的情况应该会减少。</p>
+<p>再者，他们是纯粹的学分制度。给出必修的学分数目，学生根据自己的需要选择课程来学习，学费也是按所选的科目来计算，但是每年选的课程数量是不受限制的，所以就有很快修完课程的学生，也有学生7年再完成学业，中间则可以做一些自己感兴趣的事情。说到这里，不得不提他们非常正式的学生会，他们的学生会几乎是独立于学校的，有自己产业，主要还是为学生服务，学生会的主要成员还可以在学业上申请缓一段时间，给他们时间搞学生工作，这更能提供一种磨练吧，我觉得和上文提到的断节现象少还是有关系，这样也是社会工作经验的积累吧。说到这儿，我想到了那个担任阿尔伯塔大学研究生会副主席的留学生学长，他想到的是，如果作为中国人，自己没有为自己发声的勇气，能力，又如何指望别人为你发声呢?权利意识真的很重要，有时候不仅仅是为了自己的权利，是一个群体的权利。</p>
+<p>上课嘛，因为人少，超过50人的课堂很少，所以老师和学生有更多互动，玩手机的现象可能少一些？不过大家都一样，该翘的课还是会翘的23333。我印象比较深的是他们对于实验类课程的引导性吧，我们的实验课程是老师一股脑给你讲一遍，几乎是傻子式教学，这样子真的又加深了我对于我学这门课有什么用的怀疑。。他们呢，就更注重引导了，老师主要是引出问题，剩下的时间都是学生自己做实验，虽然挑战性较高，但是更能体会到乐趣吧。毕竟是自己手玩出来的东西，直接按老师说的一步一步，有种打游戏看教程的感觉，没什么意思。</p>
+<p>嗯，感受还是挺多的？</p>
+<p>感受还有最深的地方呢，普天之下，所有机会都是只有一次的，机会再眼前，一定要抓住。同样，要珍惜任何一次机会，也要知道，机会是留给有准备的人的。</p>
+<h3 id="难忘的人儿"><a href="#难忘的人儿" class="headerlink" title="难忘的人儿"></a>难忘的人儿</h3><p>更让我难以忘怀是陪我度过这两周的人儿，无论去到哪里，总有连绵不绝的欢声笑语，这就是我所说的：“生活最妙的不过是一群妙人相聚吧”，这注定是一段我永远难以忘怀的记忆，是挤在厨房抢面条的快感吧，是大厅狼人杀的刺激吧，是公园旋转木马的中二吧，是一起在大统华的疯狂吧2333，是都听不懂英文的强颜欢笑吧，是给老师解释green hat的真的皮吧，是一起吐槽饭菜的乐趣吧，是一起yeah的欢愉吧，是一起awesome的畅快吧，是一起cool的希望吧……难忘的事情太多太多，我选择铭记。</p>
+<h2 id="离开"><a href="#离开" class="headerlink" title="离开"></a>离开</h2><p>时间过得真快啊，转眼就最后一天了呢。最终展示得到的奖品是绿帽子也是出乎意料，不过知道阿尔伯塔大学很喜欢绿色，绿色象征着森林，友好，反正我们也解释过这个在中国的含义了，也就没什么了吧23333</p>
+<p>最后一天吃披萨的时候又和Charles聊了很多，很早就自己一个人来这边留学，所有的苦难，所有的迷惑都经历过，但是只要你自己愿意走出来，总是会有人帮你的。</p>
+<p>知道飞机离开了地面，方知自己真的要离开了。</p>
+<p>再见，Canada。再见，Alberta。再见，Edmonton。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><blockquote>
+<p>Happy is the heart that still feels pain</p>
+<p>Darkness drains and light will come again</p>
+<p>Swing open your chest and let it in</p>
+</blockquote>
 ]]></content>
       <categories>
-        <category>语言</category>
-        <category>C++</category>
+        <category>随笔</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
-        <tag>整理</tag>
+        <tag>经历</tag>
       </tags>
   </entry>
   <entry>
@@ -566,6 +561,32 @@
       </tags>
   </entry>
   <entry>
+    <title>关于字符串处理的整理</title>
+    <url>/2019/08/22/%E5%85%B3%E4%BA%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E7%9A%84%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>字符串是我们经常要处理的东西，今天在处理方面比如读入处理等方面做一个小小的总结。</p>
+<h3 id="读字符串之前"><a href="#读字符串之前" class="headerlink" title="读字符串之前"></a>读字符串之前</h3><p>如果读字符串之前有读入数的操作，那么需要把其后的换行符给读入消去，$getchar()$即可。</p>
+<h3 id="整行读入字符串的方式"><a href="#整行读入字符串的方式" class="headerlink" title="整行读入字符串的方式"></a>整行读入字符串的方式</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//C++标准string</span></span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line">getline(<span class="built_in">cin</span>,s);</span><br><span class="line"><span class="comment">//char字符数组</span></span><br><span class="line"><span class="keyword">char</span> s[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%[^\n]%*c"</span>,s);</span><br><span class="line">gets(s);</span><br><span class="line"><span class="built_in">cin</span>.get(s,<span class="number">100</span>);</span><br><span class="line"><span class="built_in">cin</span>.getline(s,<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="整行读入原理解释"><a href="#整行读入原理解释" class="headerlink" title="整行读入原理解释"></a>整行读入原理解释</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%[^\n]%*c"</span>,s);</span><br></pre></td></tr></table></figure>
+
+<p>​    $%[\qquad ]$是很有趣的参数，意义是读入一个字符集合，一旦遇到不在集合中的就停止，同时遇到^后面的字符也会停止，所以^\n就是遇到换行符停止，后面的%*c是为了把换行符读入，防止影响接下来的读入。</p>
+<h3 id="cin-get-和cin-getline-之区别"><a href="#cin-get-和cin-getline-之区别" class="headerlink" title="cin.get()和cin.getline()之区别"></a>cin.get()和cin.getline()之区别</h3><p>两者都是只支持$char*$字符数组。</p>
+<p>我们知道读入时存在缓冲区这一说法，比如$cin$，在键盘输入结束后，将数据存入缓冲区m$cin$函数直接从缓冲区读取数据，所以如果缓冲区有残留数据，$cin$会直接读取。</p>
+<p>问题的关键在于，$cin.get$()在一次输入结束后不会删除缓冲区的结束符，而$cin.getline$()会自动丢弃缓冲区字符。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cin</span>.get(数组名，长度，结束符);</span><br><span class="line"><span class="built_in">cin</span>.getline(数组名，长度，结束符);</span><br><span class="line"><span class="comment">//其中，结束符默认为换行符</span></span><br></pre></td></tr></table></figure>
+
+<p>如果要用$cin.get()$读入多组数据，需要写成 $cin.get(数组名，长度).get()$。</p>
+]]></content>
+      <categories>
+        <category>语言</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+        <tag>整理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>回首2020</title>
     <url>/2021/01/07/%E5%9B%9E%E9%A6%962020/</url>
     <content><![CDATA[<p>荒诞却又值得纪念的2020。</p>
@@ -596,6 +617,23 @@
       </tags>
   </entry>
   <entry>
+    <title>引用参数与形参区别</title>
+    <url>/2021/02/04/%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0%E4%B8%8E%E5%BD%A2%E5%8F%82%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>发现引用传值真的要快很多。</p>
+<a id="more"></a>
+
+<p>在函数进行参数传递时，如果采用形式参数传递，则需要进行拷贝，将会有额外的时间和空间的开销，而使用引用类型传递，因为自始自终使用的都是一个东西，只是起了几个名字而已，所以就没有额外的开销，时间和空间上都有不小的提升。</p>
+<p>引用传递本质是指针，对于基本数据类型 ，引用传递和非引用基本没有区别（基本类型复制较快）， 而对于<strong>容器</strong>或者<strong>自定义类型</strong> 复制成本非常高（因为这里会调用 拷贝构造函数，具体是深拷贝还是浅拷贝，需要取决于你是否重写拷贝构造函数）</p>
+]]></content>
+      <categories>
+        <category>语言</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>坑点</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>对过去以及未来学习的一些思考</title>
     <url>/2020/07/07/%E5%AF%B9%E8%BF%87%E5%8E%BB%E4%BB%A5%E5%8F%8A%E6%9C%AA%E6%9D%A5%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83-md/</url>
     <content><![CDATA[<p>近来突然意识到自己快要步入社会了，学习确实是一件终身的事情啊。</p>
@@ -622,21 +660,23 @@
       </tags>
   </entry>
   <entry>
-    <title>引用参数与形参区别</title>
-    <url>/2021/02/04/%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0%E4%B8%8E%E5%BD%A2%E5%8F%82%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<p>发现引用传值真的要快很多。</p>
+    <title>some flags</title>
+    <url>/2018/08/29/%E6%96%B0%E5%AD%A6%E6%9C%9F/</url>
+    <content><![CDATA[<p>Promise to myself.</p>
 <a id="more"></a>
-
-<p>在函数进行参数传递时，如果采用形式参数传递，则需要进行拷贝，将会有额外的时间和空间的开销，而使用引用类型传递，因为自始自终使用的都是一个东西，只是起了几个名字而已，所以就没有额外的开销，时间和空间上都有不小的提升。</p>
-<p>引用传递本质是指针，对于基本数据类型 ，引用传递和非引用基本没有区别（基本类型复制较快）， 而对于<strong>容器</strong>或者<strong>自定义类型</strong> 复制成本非常高（因为这里会调用 拷贝构造函数，具体是深拷贝还是浅拷贝，需要取决于你是否重写拷贝构造函数）</p>
+<h1 id="life"><a href="#life" class="headerlink" title="life"></a>life</h1><ul>
+<li>责任</li>
+<li>勇气</li>
+<li>自律</li>
+<li>勤快<h1 id="study"><a href="#study" class="headerlink" title="study"></a>study</h1></li>
+<li>网络相关</li>
+<li>算法</li>
+<li>网页制作</li>
+<li>操作系统</li>
+<li>课程</li>
+</ul>
+<p><img src="https://gitee.com/gugumelon/ownpic/raw/master/img/20200707111315.png" alt></p>
 ]]></content>
-      <categories>
-        <category>语言</category>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>坑点</tag>
-      </tags>
   </entry>
   <entry>
     <title>【提提醒】</title>
@@ -659,23 +699,17 @@
       </tags>
   </entry>
   <entry>
-    <title>some flags</title>
-    <url>/2018/08/29/%E6%96%B0%E5%AD%A6%E6%9C%9F/</url>
-    <content><![CDATA[<p>Promise to myself.</p>
-<a id="more"></a>
-<h1 id="life"><a href="#life" class="headerlink" title="life"></a>life</h1><ul>
-<li>责任</li>
-<li>勇气</li>
-<li>自律</li>
-<li>勤快<h1 id="study"><a href="#study" class="headerlink" title="study"></a>study</h1></li>
-<li>网络相关</li>
-<li>算法</li>
-<li>网页制作</li>
-<li>操作系统</li>
-<li>课程</li>
-</ul>
-<p><img src="https://gitee.com/gugumelon/ownpic/raw/master/img/20200707111315.png" alt></p>
+    <title>编程经验</title>
+    <url>/2018/08/28/%E7%BB%8F%E7%BB%8F%E9%AA%8C/</url>
+    <content><![CDATA[<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><p>数组作为变量传递时会丢失长度信息</p>
 ]]></content>
+      <categories>
+        <category>总结</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+        <tag>经验</tag>
+      </tags>
   </entry>
   <entry>
     <title>数学结论</title>
@@ -699,40 +733,6 @@
       </categories>
       <tags>
         <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网页视频倍速的小技巧</title>
-    <url>/2021/02/17/%E7%BD%91%E9%A1%B5%E8%A7%86%E9%A2%91%E5%80%8D%E9%80%9F%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<p>今天玉米问到延河课堂上的视频能不能倍速，想到当时防疫大课堂时的操作，便想直接复现，但是却失败了</p>
-<p>于是开始检查网页的代码有什么猫腻</p>
-<p><img src="https://i.loli.net/2021/02/17/jx8hNQEyGpZkt4z.png" alt="image.png"></p>
-<p>一开始看到注释中写着Flash添加处，还以为是flash播放器，便去寻找flash倍速的方法，感觉还是很麻烦</p>
-<p>接着看代码，发现了好几个video标签，便猜测是不能准确捕获video标签的原因，找到视频对应的真实标签，然后通过ID获取此标签，再调整倍速即可</p>
-<p><img src="https://i.loli.net/2021/02/17/49P3LfGa8E6IjkQ.png" alt="image.png"></p>
-<p>如上图，发现所有的视频都是存在ID为”Video2_html5_api”的Video中，使用如下代码即可</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">var video= document.getElementById('Video2_html5_api');</span><br><span class="line">video.playbackRate=<span class="number">16</span></span><br></pre></td></tr></table></figure>
-
-<p>注：播放速率可为0.025～16</p>
-]]></content>
-      <categories>
-        <category>JS</category>
-      </categories>
-      <tags>
-        <tag>技巧</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>编程经验</title>
-    <url>/2018/08/28/%E7%BB%8F%E7%BB%8F%E9%AA%8C/</url>
-    <content><![CDATA[<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><p>数组作为变量传递时会丢失长度信息</p>
-]]></content>
-      <categories>
-        <category>总结</category>
-      </categories>
-      <tags>
-        <tag>学习</tag>
-        <tag>经验</tag>
       </tags>
   </entry>
   <entry>
@@ -769,6 +769,27 @@
       </categories>
       <tags>
         <tag>个人思考</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网页视频倍速的小技巧</title>
+    <url>/2021/02/17/%E7%BD%91%E9%A1%B5%E8%A7%86%E9%A2%91%E5%80%8D%E9%80%9F%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<p>今天玉米问到延河课堂上的视频能不能倍速，想到当时防疫大课堂时的操作，便想直接复现，但是却失败了</p>
+<p>于是开始检查网页的代码有什么猫腻</p>
+<p><img src="https://i.loli.net/2021/02/17/jx8hNQEyGpZkt4z.png" alt="image.png"></p>
+<p>一开始看到注释中写着Flash添加处，还以为是flash播放器，便去寻找flash倍速的方法，感觉还是很麻烦</p>
+<p>接着看代码，发现了好几个video标签，便猜测是不能准确捕获video标签的原因，找到视频对应的真实标签，然后通过ID获取此标签，再调整倍速即可</p>
+<p><img src="https://i.loli.net/2021/02/17/49P3LfGa8E6IjkQ.png" alt="image.png"></p>
+<p>如上图，发现所有的视频都是存在ID为”Video2_html5_api”的Video中，使用如下代码即可</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">var video= document.getElementById('Video2_html5_api');</span><br><span class="line">video.playbackRate=<span class="number">16</span></span><br></pre></td></tr></table></figure>
+
+<p>注：播放速率可为0.025～16</p>
+]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>技巧</tag>
       </tags>
   </entry>
   <entry>
