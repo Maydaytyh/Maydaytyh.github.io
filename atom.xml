@@ -127,9 +127,9 @@
     <link href="http://yoursite.com/2021/02/04/%E6%95%B0%E5%AD%A6%E7%BB%93%E8%AE%BA/"/>
     <id>http://yoursite.com/2021/02/04/%E6%95%B0%E5%AD%A6%E7%BB%93%E8%AE%BA/</id>
     <published>2021-02-04T13:44:07.000Z</published>
-    <updated>2021-02-06T03:47:19.000Z</updated>
+    <updated>2021-03-10T08:24:29.974Z</updated>
     
-    <content type="html"><![CDATA[<a id="more"></a><h2 id="均值不等式"><a href="#均值不等式" class="headerlink" title="均值不等式"></a>均值不等式</h2><p><a href="https://zhuanlan.zhihu.com/p/58362884" target="_blank" rel="noopener">均值不等式证明</a></p><h3 id="整数拆分问题"><a href="#整数拆分问题" class="headerlink" title="整数拆分问题"></a>整数拆分问题</h3><p>即将一个数$ $拆分为$k$个数，使得$k$个数乘积最大。</p><p>由均值不等式易得$k$个数相等时 乘积是最大的，那么这$k$个数应该等于多少呢？</p><p>即求$f(x)=x^{\left(\frac{n}{x}\right)}$的最大值</p><p>$f(x)=x^{\left(\frac{n}{x}\right)}=e^{\frac{n}{x} \ln x}$</p><p>易得$h(x)=\frac{1}{x} \ln x$ 与$f(x)$有相同的单调性</p><p>$h^{\prime}(x)=\frac{1-\ln x}{x^{2}}$</p><p>可知，x=e时，$f(x)$取得最大值，由于2不是整数，所以可以是2或3.</p><p>则将$n$拆分为尽量多的3以及少量2即可。</p><p>总结可得</p><p><img src="https://i.loli.net/2021/02/06/K5jFsLWkHzJ7tgx.png" alt="image.png"></p>]]></content>
+    <content type="html"><![CDATA[<a id="more"></a><h2 id="均值不等式"><a href="#均值不等式" class="headerlink" title="均值不等式"></a>均值不等式</h2><p><a href="https://zhuanlan.zhihu.com/p/58362884" target="_blank" rel="noopener">均值不等式证明</a></p><h3 id="整数拆分问题"><a href="#整数拆分问题" class="headerlink" title="整数拆分问题"></a>整数拆分问题</h3><p>即将一个数$ $拆分为$k$个数，使得$k$个数乘积最大。</p><p>由均值不等式易得$k$个数相等时 乘积是最大的，那么这$k$个数应该等于多少呢？</p><p>即求$f(x)=x^{\left(\frac{n}{x}\right)}$的最大值</p><p>$f(x)=x^{\left(\frac{n}{x}\right)}=e^{\frac{n}{x} \ln x}$</p><p>易得$h(x)=\frac{1}{x} \ln x$ 与$f(x)$有相同的单调性</p><p>$h^{\prime}(x)=\frac{1-\ln x}{x^{2}}$</p><p>可知，x=e时，$f(x)$取得最大值，由于2不是整数，所以可以是2或3.</p><p>则将$n$拆分为尽量多的3以及少量2即可。</p><p>总结可得</p><p><img src="https://i.loli.net/2021/02/06/K5jFsLWkHzJ7tgx.png" alt="image.png"></p><h2 id="线性代数性质"><a href="#线性代数性质" class="headerlink" title="线性代数性质"></a>线性代数性质</h2><p>$$<br>\operatorname{tr}(A B)=\operatorname{tr}(B A)<br>$$</p><p>证明：<br>$$<br>\operatorname{tr}(A B)=\sum_{i=1}^{m}(A B)<em>{i i}=\sum</em>{i=1}^{m} \sum_{j=1}^{n} a_{i j} b_{j i}=\sum_{i=1}^{m} \sum_{j=1}^{n} b_{j i} a_{i j}=\sum_{i=1}^{n}(B A)_{i i}=\operatorname{tr}(B A)<br>$$</p>]]></content>
     
     
       

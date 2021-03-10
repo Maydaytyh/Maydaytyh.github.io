@@ -727,6 +727,8 @@
 <p>则将$n$拆分为尽量多的3以及少量2即可。</p>
 <p>总结可得</p>
 <p><img src="https://i.loli.net/2021/02/06/K5jFsLWkHzJ7tgx.png" alt="image.png"></p>
+<h2 id="线性代数性质"><a href="#线性代数性质" class="headerlink" title="线性代数性质"></a>线性代数性质</h2><p>$$<br>\operatorname{tr}(A B)=\operatorname{tr}(B A)<br>$$</p>
+<p>证明：<br>$$<br>\operatorname{tr}(A B)=\sum_{i=1}^{m}(A B)<em>{i i}=\sum</em>{i=1}^{m} \sum_{j=1}^{n} a_{i j} b_{j i}=\sum_{i=1}^{m} \sum_{j=1}^{n} b_{j i} a_{i j}=\sum_{i=1}^{n}(B A)_{i i}=\operatorname{tr}(B A)<br>$$</p>
 ]]></content>
       <categories>
         <category>数学</category>
