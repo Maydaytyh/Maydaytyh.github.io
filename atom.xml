@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-03-05T02:00:09.028Z</updated>
+  <updated>2021-03-10T08:30:10.364Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2021/03/05/MACOS%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/"/>
     <id>http://yoursite.com/2021/03/05/MACOS%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/</id>
     <published>2021-03-05T01:50:30.000Z</published>
-    <updated>2021-03-05T02:00:09.028Z</updated>
+    <updated>2021-03-10T08:30:10.364Z</updated>
     
-    <content type="html"><![CDATA[<a id="more"></a><p>在<code>~/.zshrc</code> 中添加如下内容（如果是是<code>bash</code>用户那么配置文件为<code>~/.bash_profile</code>）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 为终端设置代理</span></span><br><span class="line"><span class="built_in">alias</span> proxy=<span class="string">'export all_proxy=socks5://127.0.0.1:1080'</span></span><br><span class="line"><span class="built_in">alias</span> unproxy=<span class="string">'unset all_proxy'</span></span><br></pre></td></tr></table></figure><p>修改完成后<code>source</code>对应的文件即可</p><p>其中，<code>1080</code>为端口号，需要和自己的代理软件的设置保持一致。</p><p>这样在终端中使用<code>proxy</code>命令就可以打开代理，使用<code>unproxy</code>就可以关闭代理。</p><p>效果如图</p><p><img src="https://i.loli.net/2021/03/05/dLYTayxQNJSiEju.png" alt="image.png"></p>]]></content>
+    <content type="html"><![CDATA[<a id="more"></a><p>在<code>~/.zshrc</code> 中添加如下内容（如果是是<code>bash</code>用户那么配置文件为<code>~/.bash_profile</code>）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 为终端设置代理</span></span><br><span class="line"><span class="built_in">alias</span> proxy=<span class="string">'export all_proxy=socks5://127.0.0.1:1080'</span></span><br><span class="line"><span class="built_in">alias</span> unproxy=<span class="string">'unset all_proxy'</span></span><br></pre></td></tr></table></figure><p>修改完成后<code>source</code>对应的文件即可</p><p>其中，<code>1080</code>为端口号，需要和自己的代理软件的设置保持一致。</p><p>这样在终端中使用<code>proxy</code>命令就可以打开代理，使用<code>unproxy</code>就可以关闭代理。</p><p>效果如图</p><p><a href="https://imgtu.com/i/6JUgqU" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/03/10/6JUgqU.png" alt="6JUgqU.png"></a></p>]]></content>
     
     
       
