@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-03-10T08:30:10.364Z</updated>
+  <updated>2021-04-14T07:49:38.411Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>生成学习算法</title>
+    <link href="http://yoursite.com/2021/04/13/%E7%94%9F%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/"/>
+    <id>http://yoursite.com/2021/04/13/%E7%94%9F%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/</id>
+    <published>2021-04-13T08:47:44.000Z</published>
+    <updated>2021-04-14T07:49:38.411Z</updated>
+    
+    <content type="html"><![CDATA[<p>判别学习算法的模型是通过一条分隔线把两种类别区分开，而生成学习算法是对两种可能的结果分别进行建模，然后分别和输入进行比对，计算出相应的概率.</p><a id="more"></a><h1 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h1><p>我们常用的算法是逻辑回归，判别模型，即找到0和1之间的界限，找到一个决策边界，来区分0和1，而生成学习算法是通过0的特征学习出一个0的模型，根据1的特征学习出一个1的模型，对于一个新的样本，分别放入0 1的模型中，先求得是0的概率，再求是1的概率，进行比较，即可确定类型。这里计算概率使用的是贝叶斯公式。主要完成对$p(x|y)$和$p(y)$的建模</p><h1 id="二、高斯判别分析（Gaussian-Discriminant-Analysis）"><a href="#二、高斯判别分析（Gaussian-Discriminant-Analysis）" class="headerlink" title="二、高斯判别分析（Gaussian Discriminant Analysis）"></a>二、高斯判别分析（Gaussian Discriminant Analysis）</h1><p>假设$p(x|y)$满足多维正态分布<br><img src="https://i.loli.net/2021/04/13/TRWUmFtn3zkEeAr.png" alt="image.png"></p><p>概率分布为<br><img src="https://i.loli.net/2021/04/13/XaSEhYct9eJKRl3.png" alt="image.png"><br>极大似然估计求得所有的参数<br><img src="https://i.loli.net/2021/04/14/CV4r56NKAXZhvMU.png" alt="image.png"><br>其中，$ϕ$ 是训练样本中结果y=1占有的比例，$μ_0$是y=0的样本中特征均值，$μ_1$ 是y=1的样本中特征均值，$Σ$ 是样本特征方差均值。</p><p>注意这里的参数有$μ_0$和$μ_1$，表示在不同的结果模型下，特征均值不同，但我们假设协方差相同。反映在图上就是不同模型中心位置不同，但形状相同。这样就可以用直线来进行分隔判别。</p><p>所以我们得到这样的图像<br><img src="https://i.loli.net/2021/04/13/RndUHTPAOmJFz7V.png" alt="image.png"></p><h1 id="三、朴素贝叶斯（Naive-Bayes）"><a href="#三、朴素贝叶斯（Naive-Bayes）" class="headerlink" title="三、朴素贝叶斯（Naive Bayes）"></a>三、朴素贝叶斯（Naive Bayes）</h1><p>当$x$是离散值时，我们假设垃圾邮件分类的情况。将一封邮件作为输入向量，如果字典中第$i$个词在字典中出现，则$x_i$=1，反之$x_i$=0，这样我们得到所需的特征向量。</p><p>现在对$p(x|y)$建模，假设字典中有50000个词，如果采用多项式建模， 将会有$2^{50000}$种结果，$2^{50000}$−1维的参数向量，这样明显参数过多，很难进行计算。所以为了对$p(x|y)$建模，需要做一个强假设，假设x的特征是条件独立的，这个假设称为朴素贝叶斯假设(Naive Bayes (NB) assumption),这个算法就称为朴素贝叶斯分类(Naive Bayes classifier).</p><p>根据概率论的链式法则性质和朴素贝叶斯假设，我们可以得到如下等式<br><img src="https://i.loli.net/2021/04/14/UhLlwdFQGpriZ32.png" alt="image.png"></p><p>根据联合似然函数，再依次得到参数的最大似然估计值，我们对一个全新的样本进行预测，特征为$x$，则有<br><img src="https://i.loli.net/2021/04/14/vna2tAU735JVwZI.png" alt="image.png"></p><p>因为分母对于y取0或1是一样的，所以只需要计算比较分子即可确定分类。</p><h1 id="四、拉普拉斯平滑（Laplace-smoothing）"><a href="#四、拉普拉斯平滑（Laplace-smoothing）" class="headerlink" title="四、拉普拉斯平滑（Laplace smoothing）"></a>四、拉普拉斯平滑（Laplace smoothing）</h1><p>朴素贝叶斯模型已经能不错的解决离散值的问题，可是对于数据稀疏问题，朴素贝叶斯模型并不能很好的解决，还是针对邮件分类问题，假设收到了一封含有NIPS的邮件，但是NIPS从未在垃圾邮件或者正常邮件中出现过，假设NIPS在字典中位子伟35000，则计算概率时，<img src="https://i.loli.net/2021/04/14/DmwZnKpdGavJBjy.png" alt="image.png"><br>而后验概率计算得到的为$\frac{0}0$，也就不知道该如何预测了。</p><p>这里我们引入拉普拉斯平滑，将估计替换为</p><p><img src="https://i.loli.net/2021/04/14/mriZuhLe2sbWIJA.png" alt="image.png"></p><p>这里首先是对分子加1，然后对分母加k，要注意$\sum^k_{j=1} \phi_j = 1$依然成立（自己检验一下），这是一个必须有的性质，因为$\phi_j$<br>是对概率的估计，然后所有的概率加到一起必然等于1。另外对于所有的$j$值，都有$\phi_j \neq 0$，这就解决了刚刚的概率估计为零的问题了。在某些特定的条件下（相当强的假设条件下，arguably quite strong），可以发现拉普拉斯平滑还真能给出对参数$\phi_j$ 的最佳估计（optimal estimator）</p><p>在朴素贝叶斯问题上，使用拉普拉斯平滑后得到的公式则为<br><img src="https://i.loli.net/2021/04/14/WpkzK7cf4hrBH1F.png" alt="image.png"></p><p>注：在实际应用中，是否对$\phi_y$使用拉普拉斯平滑影响不大，因为$\phi_y$是对$p(y=1)$的一个合理估计，而垃圾邮件与正常邮件是成一定比例的，所以$\phi_y$与零点存在一定的距离。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;判别学习算法的模型是通过一条分隔线把两种类别区分开，而生成学习算法是对两种可能的结果分别进行建模，然后分别和输入进行比对，计算出相应的概率.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="cs229" scheme="http://yoursite.com/categories/cs229/"/>
+    
+    
+    <category term="算法" scheme="http://yoursite.com/tags/算法/"/>
+    
+  </entry>
   
   <entry>
     <title>MACOS配置终端代理</title>
@@ -127,7 +148,7 @@
     <link href="http://yoursite.com/2021/02/04/%E6%95%B0%E5%AD%A6%E7%BB%93%E8%AE%BA/"/>
     <id>http://yoursite.com/2021/02/04/%E6%95%B0%E5%AD%A6%E7%BB%93%E8%AE%BA/</id>
     <published>2021-02-04T13:44:07.000Z</published>
-    <updated>2021-03-10T08:24:29.974Z</updated>
+    <updated>2021-03-10T08:31:23.855Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a><h2 id="均值不等式"><a href="#均值不等式" class="headerlink" title="均值不等式"></a>均值不等式</h2><p><a href="https://zhuanlan.zhihu.com/p/58362884" target="_blank" rel="noopener">均值不等式证明</a></p><h3 id="整数拆分问题"><a href="#整数拆分问题" class="headerlink" title="整数拆分问题"></a>整数拆分问题</h3><p>即将一个数$ $拆分为$k$个数，使得$k$个数乘积最大。</p><p>由均值不等式易得$k$个数相等时 乘积是最大的，那么这$k$个数应该等于多少呢？</p><p>即求$f(x)=x^{\left(\frac{n}{x}\right)}$的最大值</p><p>$f(x)=x^{\left(\frac{n}{x}\right)}=e^{\frac{n}{x} \ln x}$</p><p>易得$h(x)=\frac{1}{x} \ln x$ 与$f(x)$有相同的单调性</p><p>$h^{\prime}(x)=\frac{1-\ln x}{x^{2}}$</p><p>可知，x=e时，$f(x)$取得最大值，由于2不是整数，所以可以是2或3.</p><p>则将$n$拆分为尽量多的3以及少量2即可。</p><p>总结可得</p><p><img src="https://i.loli.net/2021/02/06/K5jFsLWkHzJ7tgx.png" alt="image.png"></p><h2 id="线性代数性质"><a href="#线性代数性质" class="headerlink" title="线性代数性质"></a>线性代数性质</h2><p>$$<br>\operatorname{tr}(A B)=\operatorname{tr}(B A)<br>$$</p><p>证明：<br>$$<br>\operatorname{tr}(A B)=\sum_{i=1}^{m}(A B)<em>{i i}=\sum</em>{i=1}^{m} \sum_{j=1}^{n} a_{i j} b_{j i}=\sum_{i=1}^{m} \sum_{j=1}^{n} b_{j i} a_{i j}=\sum_{i=1}^{n}(B A)_{i i}=\operatorname{tr}(B A)<br>$$</p>]]></content>
     
@@ -493,34 +514,6 @@
     
     
     <category term="水" scheme="http://yoursite.com/tags/水/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++全排列函数</title>
-    <link href="http://yoursite.com/2019/08/04/C-%E5%85%A8%E6%8E%92%E5%88%97%E5%87%BD%E6%95%B0/"/>
-    <id>http://yoursite.com/2019/08/04/C-%E5%85%A8%E6%8E%92%E5%88%97%E5%87%BD%E6%95%B0/</id>
-    <published>2019-08-04T14:14:24.000Z</published>
-    <updated>2021-02-04T08:50:45.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="主角"><a href="#主角" class="headerlink" title="主角"></a>主角</h1><p>C++中的全排列函数很是强大，生成一个长度为$n$的序列的全排列复杂度仅为$O(n)$。</p><p>今天总结一下用法。</p><h2 id="默认-cmp-规则"><a href="#默认-cmp-规则" class="headerlink" title="默认$cmp$规则"></a>默认$cmp$规则</h2><p>对一个数据有序容器$s$，如下代码便可实现全排列。</p><p>为什么必须是有序呢？如果不是有序，$next_permutation$函数便只能生成有序条件下该序列之后的排列。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">while</span>(s.begin(),s.end());</span><br></pre></td></tr></table></figure><h2 id="自定义-cmp-规则"><a href="#自定义-cmp-规则" class="headerlink" title="自定义$cmp$规则"></a>自定义$cmp$规则</h2><p>那么，如果容器内数据的排序规则和正常的排序规则不太一样呢？</p><p>不要慌，我们可以自定义排序规则，手写$cmp$。</p><p>举个栗子。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(<span class="keyword">char</span> a,<span class="keyword">char</span> b)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="keyword">if</span>(<span class="built_in">tolower</span>(a)!=<span class="built_in">tolower</span>(b))<span class="comment">//tolower 是将大写字母转化为小写字母.</span></span><br><span class="line"> <span class="keyword">return</span> <span class="built_in">tolower</span>(a)&lt;<span class="built_in">tolower</span>(b);</span><br><span class="line"> <span class="keyword">else</span></span><br><span class="line"> <span class="keyword">return</span> a&lt;b;</span><br><span class="line">&#125;<span class="comment">//自定义字符比较规则</span></span><br></pre></td></tr></table></figure><p>那么在使用$next_permutation$函数的时候，如下方式实现。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">while</span>(next_permutation(ch,ch+<span class="built_in">strlen</span>(ch),cmp));</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;主角&quot;&gt;&lt;a href=&quot;#主角&quot; class=&quot;headerlink&quot; title=&quot;主角&quot;&gt;&lt;/a&gt;主角&lt;/h1&gt;&lt;p&gt;C++中的全排列函数很是强大，生成一个长度为$n$的序列的全排列复杂度仅为$O(n)$。&lt;/p&gt;
-&lt;p&gt;今天总结一下用法。&lt;/p&gt;
-&lt;h2 </summary>
-      
-    
-    
-    
-    <category term="语言" scheme="http://yoursite.com/categories/语言/"/>
-    
-    <category term="C++" scheme="http://yoursite.com/categories/语言/C/"/>
-    
-    
-    <category term="C++STL" scheme="http://yoursite.com/tags/C-STL/"/>
     
   </entry>
   
