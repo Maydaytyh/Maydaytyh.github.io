@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/04/14/DmwZnKpdGavJBjy.png">
 <meta property="og:image" content="https://i.loli.net/2021/04/14/mriZuhLe2sbWIJA.png">
 <meta property="og:image" content="https://i.loli.net/2021/04/14/WpkzK7cf4hrBH1F.png">
-<meta property="og:updated_time" content="2021-04-14T07:49:38.411Z">
+<meta property="og:updated_time" content="2021-04-14T07:52:49.471Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="生成学习算法">
 <meta name="twitter:description" content="判别学习算法的模型是通过一条分隔线把两种类别区分开，而生成学习算法是对两种可能的结果分别进行建模，然后分别和输入进行比对，计算出相应的概率.">
@@ -211,7 +211,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-14 15:49:38" itemprop="dateModified" datetime="2021-04-14T15:49:38+08:00">2021-04-14</time>
+                <time title="Modified: 2021-04-14 15:52:49" itemprop="dateModified" datetime="2021-04-14T15:52:49+08:00">2021-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,7 +242,7 @@
 <p>注意这里的参数有$μ_0$和$μ_1$，表示在不同的结果模型下，特征均值不同，但我们假设协方差相同。反映在图上就是不同模型中心位置不同，但形状相同。这样就可以用直线来进行分隔判别。</p>
 <p>所以我们得到这样的图像<br><img src="https://i.loli.net/2021/04/13/RndUHTPAOmJFz7V.png" alt="image.png"></p>
 <h1 id="三、朴素贝叶斯（Naive-Bayes）"><a href="#三、朴素贝叶斯（Naive-Bayes）" class="headerlink" title="三、朴素贝叶斯（Naive Bayes）"></a>三、朴素贝叶斯（Naive Bayes）</h1><p>当$x$是离散值时，我们假设垃圾邮件分类的情况。将一封邮件作为输入向量，如果字典中第$i$个词在字典中出现，则$x_i$=1，反之$x_i$=0，这样我们得到所需的特征向量。</p>
-<p>现在对$p(x|y)$建模，假设字典中有50000个词，如果采用多项式建模， 将会有$2^{50000}$种结果，$2^{50000}$−1维的参数向量，这样明显参数过多，很难进行计算。所以为了对$p(x|y)$建模，需要做一个强假设，假设x的特征是条件独立的，这个假设称为朴素贝叶斯假设(Naive Bayes (NB) assumption),这个算法就称为朴素贝叶斯分类(Naive Bayes classifier).</p>
+<p>现在对$p(x|y)$建模，假设字典中有50000个词，$x \in{0,1}^{50000}$，如果采用多项式建模， 将会有$2^{50000}$种结果，$2^{50000}$−1维的参数向量，这样明显参数过多，很难进行计算。所以为了对$p(x|y)$建模，需要做一个强假设，假设x的特征是条件独立的，这个假设称为朴素贝叶斯假设(Naive Bayes (NB) assumption),这个算法就称为朴素贝叶斯分类(Naive Bayes classifier).</p>
 <p>根据概率论的链式法则性质和朴素贝叶斯假设，我们可以得到如下等式<br><img src="https://i.loli.net/2021/04/14/UhLlwdFQGpriZ32.png" alt="image.png"></p>
 <p>根据联合似然函数，再依次得到参数的最大似然估计值，我们对一个全新的样本进行预测，特征为$x$，则有<br><img src="https://i.loli.net/2021/04/14/vna2tAU735JVwZI.png" alt="image.png"></p>
 <p>因为分母对于y取0或1是一样的，所以只需要计算比较分子即可确定分类。</p>
