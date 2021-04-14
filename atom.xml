@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-04-14T07:52:49.471Z</updated>
+  <updated>2021-04-14T08:11:47.942Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>毕设代码阅读笔记</title>
+    <link href="http://yoursite.com/2021/04/14/%E6%AF%95%E8%AE%BE%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    <id>http://yoursite.com/2021/04/14/%E6%AF%95%E8%AE%BE%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</id>
+    <published>2021-04-14T08:08:33.000Z</published>
+    <updated>2021-04-14T08:11:47.942Z</updated>
+    
+    <content type="html"><![CDATA[<p>第一次阅读Pytorch代码。</p><a id="more"></a>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;第一次阅读Pytorch代码。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="语言" scheme="http://yoursite.com/categories/语言/"/>
+    
+    <category term="代码阅读" scheme="http://yoursite.com/categories/代码阅读/"/>
+    
+    <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+    
+    
+    <category term="Pytorch" scheme="http://yoursite.com/tags/Pytorch/"/>
+    
+    <category term="毕设" scheme="http://yoursite.com/tags/毕设/"/>
+    
+  </entry>
   
   <entry>
     <title>生成学习算法</title>
@@ -490,30 +517,6 @@
     <category term="数学" scheme="http://yoursite.com/tags/数学/"/>
     
     <category term="结论" scheme="http://yoursite.com/tags/结论/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Atcoder ABC 136C</title>
-    <link href="http://yoursite.com/2019/08/06/136C/"/>
-    <id>http://yoursite.com/2019/08/06/136C/</id>
-    <published>2019-08-06T08:04:10.000Z</published>
-    <updated>2021-02-04T08:49:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href target="_blank"></a></p><h1 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h1><p>给$n$个数，对每个数可以执行减一操作，也可以不执行，能否把这$n$个数变成非减的数列。</p><a id="more"></a><h1 id="思路重现"><a href="#思路重现" class="headerlink" title="思路重现"></a>思路重现</h1><p>我一开始的想法：循环判断。对于相差大于$1$的相邻数，直接退出，返回$false$，对于连续的递减，比如$3、2、1$也退出，返回$false$，但是死$WA$，没找到原因。</p><p>后来发现如果有连续的数，比如$5、5、4$就会错误。</p><p>那么就需要正解了。</p><p>从后往前，如果前一个数比这个数大，就把前面的数减$1$，然后再循环一遍，如果有递减存在，就返回$false$。为什么从后往前呢，想一下$5、5、4$的情况。</p><p>同样的，如果要打造一个非递增数列，允许减一，就需要从前往后了。</p><p>再想一下，如果非递减允许加一，就是从前往后了</p><p>总结一下，就是要保证被操作的数要先被访问到，不然可能会错过。</p><h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100000+50</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXM 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,n,m) for(int i=n;i&lt;=m;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000 + 7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a, b) memset(a, b, sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">"="</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> ch = getchar();</span><br><span class="line">    <span class="keyword">while</span> (ch &lt; <span class="string">'0'</span> || ch &gt; <span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (ch == <span class="string">'-'</span>)</span><br><span class="line">            f = <span class="number">-1</span>;</span><br><span class="line">        ch = getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x = <span class="number">10</span> * x + ch - <span class="string">'0'</span>;</span><br><span class="line">        ch = getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> a[MAXN];</span><br><span class="line"><span class="comment">//1 1 1 1 1   RL R L R    L   RL R R  </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//while(1)&#123;</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">int</span> n=read();</span><br><span class="line">    rep(i,<span class="number">1</span>,n) a[i]=read();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&gt;<span class="number">1</span>;--i)</span><br><span class="line">    <span class="keyword">if</span>(a[i]-a[i<span class="number">-1</span>]&lt;<span class="number">0</span>) a[i<span class="number">-1</span>]--;</span><br><span class="line">    <span class="keyword">bool</span> flag=<span class="number">0</span>;</span><br><span class="line">    rep(i,<span class="number">1</span>,n<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i]-a[i+<span class="number">1</span>]&gt;<span class="number">0</span>) &#123;flag=<span class="number">1</span>;<span class="keyword">break</span>;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(flag) <span class="built_in">puts</span>(<span class="string">"No"</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">"Yes"</span>);</span><br><span class="line">   <span class="comment">// &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>​        </p>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目链接&quot;&gt;&lt;a href=&quot;#题目链接&quot; class=&quot;headerlink&quot; title=&quot;题目链接&quot;&gt;&lt;/a&gt;题目链接&lt;/h1&gt;&lt;p&gt;&lt;a href target=&quot;_blank&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;题意简述&quot;&gt;&lt;a href=&quot;#题意简述&quot; class=&quot;headerlink&quot; title=&quot;题意简述&quot;&gt;&lt;/a&gt;题意简述&lt;/h1&gt;&lt;p&gt;给$n$个数，对每个数可以执行减一操作，也可以不执行，能否把这$n$个数变成非减的数列。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="算法" scheme="http://yoursite.com/categories/算法/"/>
-    
-    <category term="Atcoder" scheme="http://yoursite.com/categories/算法/Atcoder/"/>
-    
-    
-    <category term="水" scheme="http://yoursite.com/tags/水/"/>
     
   </entry>
   
