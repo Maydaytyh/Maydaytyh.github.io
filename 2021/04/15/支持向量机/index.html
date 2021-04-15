@@ -20,20 +20,22 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="题目链接Road Construction 题意简述题意很简单，给出$n$个点的坐标，寻找一条直线，使得直线两边的点的数量相同，并且所有点到直线的距离最大，要求求出直线的斜率。">
-<meta name="keywords" content="计算几何">
+  <meta name="description" content="慢慢学习。">
+<meta name="keywords" content="算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2019牛客多校第十场G">
-<meta property="og:url" content="http://yoursite.com/2019/08/28/2019牛客多校第十场G/index.html">
+<meta property="og:title" content="支持向量机">
+<meta property="og:url" content="http://yoursite.com/2021/04/15/支持向量机/index.html">
 <meta property="og:site_name" content="GuguMelon&#39;s Blog">
-<meta property="og:description" content="题目链接Road Construction 题意简述题意很简单，给出$n$个点的坐标，寻找一条直线，使得直线两边的点的数量相同，并且所有点到直线的距离最大，要求求出直线的斜率。">
+<meta property="og:description" content="慢慢学习。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2021-02-04T08:49:55.000Z">
+<meta property="og:image" content="https://i.loli.net/2021/04/15/dlyDaGeNZmQFk7r.png">
+<meta property="og:updated_time" content="2021-04-15T04:05:13.885Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2019牛客多校第十场G">
-<meta name="twitter:description" content="题目链接Road Construction 题意简述题意很简单，给出$n$个点的坐标，寻找一条直线，使得直线两边的点的数量相同，并且所有点到直线的距离最大，要求求出直线的斜率。">
+<meta name="twitter:title" content="支持向量机">
+<meta name="twitter:description" content="慢慢学习。">
+<meta name="twitter:image" content="https://i.loli.net/2021/04/15/dlyDaGeNZmQFk7r.png">
 
-<link rel="canonical" href="http://yoursite.com/2019/08/28/2019牛客多校第十场G/">
+<link rel="canonical" href="http://yoursite.com/2021/04/15/支持向量机/">
 
 
 <script id="page-configurations">
@@ -46,7 +48,7 @@
   };
 </script>
 
-  <title>2019牛客多校第十场G | GuguMelon's Blog</title>
+  <title>支持向量机 | GuguMelon's Blog</title>
   
 
 
@@ -171,7 +173,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/28/2019牛客多校第十场G/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/15/支持向量机/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -184,7 +186,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          2019牛客多校第十场G
+          支持向量机
         </h1>
 
         <div class="post-meta">
@@ -193,27 +195,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-08-28 14:16:39" itemprop="dateCreated datePublished" datetime="2019-08-28T14:16:39+08:00">2019-08-28</time>
+              <time title="Created: 2021-04-15 11:58:54 / Modified: 12:05:13" itemprop="dateCreated datePublished" datetime="2021-04-15T11:58:54+08:00">2021-04-15</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-04 16:49:55" itemprop="dateModified" datetime="2021-02-04T16:49:55+08:00">2021-02-04</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/牛客/" itemprop="url" rel="index"><span itemprop="name">牛客</span></a>
+                  <a href="/categories/cs229/" itemprop="url" rel="index"><span itemprop="name">cs229</span></a>
                 </span>
             </span>
 
@@ -228,14 +220,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://ac.nowcoder.com/acm/contest/890/G" target="_blank">Road Construction</a></p>
-<h1 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h1><p>题意很简单，给出$n$个点的坐标，寻找一条直线，使得直线两边的点的数量相同，并且所有点到直线的距离最大，要求求出直线的斜率。</p>
+        <p>慢慢学习。</p>
 <a id="more"></a>
-
-<h1 id="思路重现"><a href="#思路重现" class="headerlink" title="思路重现"></a>思路重现</h1><p>这个题还是需要一点思路的。</p>
-<p>一个优美的结论，这条直线一定是和某两点之间连线平行或垂直。</p>
-<h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<h4 id="几何距离"><a href="#几何距离" class="headerlink" title="几何距离"></a>几何距离</h4><p><img src="https://i.loli.net/2021/04/15/dlyDaGeNZmQFk7r.png" alt="image.png"></p>
 
     </div>
 
@@ -245,7 +232,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/计算几何/" rel="tag"># 计算几何</a>
+              <a href="/tags/算法/" rel="tag"># 算法</a>
           </div>
 
         
@@ -254,13 +241,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/08/22/关于字符串处理的整理/" rel="prev" title="关于字符串处理的整理">
-      <i class="fa fa-chevron-left"></i> 关于字符串处理的整理
+    <a href="/2021/04/14/毕设代码阅读笔记/" rel="prev" title="毕设代码阅读笔记">
+      <i class="fa fa-chevron-left"></i> 毕设代码阅读笔记
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/08/28/gcc学习总结/" rel="next" title="gcc编译命令与makefile总结">
-      gcc编译命令与makefile总结 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -319,7 +303,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题意简述"><span class="nav-number">2.</span> <span class="nav-text">题意简述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思路重现"><span class="nav-number">3.</span> <span class="nav-text">思路重现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考代码"><span class="nav-number">4.</span> <span class="nav-text">参考代码</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#几何距离"><span class="nav-number">1.</span> <span class="nav-text">几何距离</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
