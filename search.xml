@@ -814,7 +814,9 @@
 <li>numpy.linalg.solve()<br>该函数给出了矩阵形式的线性方程的解</li>
 <li>numpy.matmul()<br>函数返回两个数组的矩阵乘积。当两个数组都是二维数组的时候，就是数学上的两个矩阵的乘积。</li>
 </ul>
-]]></content>
+<h3 id="pytorch学习"><a href="#pytorch学习" class="headerlink" title="pytorch学习"></a>pytorch学习</h3><h5 id="clamp-和clamp-的区别"><a href="#clamp-和clamp-的区别" class="headerlink" title="clamp()和clamp_()的区别"></a>clamp()和clamp_()的区别</h5><p>clamp()函数的作用是将a数组的每个元素的值压缩到[min,max]之间，并返回一个新的张量<br>而clamp_()函数是直接在原张量上进行操作，而不是返回一个新的张量</p>
+<h1 id="二、机器学习常用函数"><a href="#二、机器学习常用函数" class="headerlink" title="二、机器学习常用函数"></a>二、机器学习常用函数</h1><h3 id="train-test-split"><a href="#train-test-split" class="headerlink" title="train_test_split()"></a>train_test_split()</h3><p>train_test_split()函数是用来随机划分样本数据为训练集和测试集的，当然也可以人为的切片划分。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">train_X,test_X,train_y,test_y = train_test_split(train_data,train_target,test_size=<span class="number">0.3</span>,random_state=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">参数解释：</span><br><span class="line"></span><br><span class="line">train_data：待划分样本数据</span><br><span class="line"></span><br><span class="line">train_target：待划分样本数据的结果（标签）</span><br><span class="line"></span><br><span class="line">test_size：测试数据占样本数据的比例，若整数则样本数量</span><br><span class="line"></span><br><span class="line">random_state：设置随机数种子，保证每次都是同一个随机数。若为<span class="number">0</span>或不填，则每次得到数据都不一样</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Python</category>
         <category>代码阅读</category>
