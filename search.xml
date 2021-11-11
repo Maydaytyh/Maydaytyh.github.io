@@ -780,7 +780,8 @@
   <entry>
     <title>李宏毅机器学习笔记-Week1</title>
     <url>/2021/11/10/%E6%9D%8E%E5%AE%8F%E6%AF%85%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>搭建简单的DNN来解决一个回归问题，感觉学到了很多。</p>
+<a id="more"></a>
 
 <h2 id="LHY-ML-HW1-Regression"><a href="#LHY-ML-HW1-Regression" class="headerlink" title="LHY_ML_HW1_Regression"></a>LHY_ML_HW1_Regression</h2><p>重新熟悉了一下Colab的使用方式，还是挺好用的。</p>
 <h3 id="Baseline"><a href="#Baseline" class="headerlink" title="Baseline"></a>Baseline</h3><p>直接运行给出的Sample Code即可通过Baseline，不得不说这倒是给了同学们选择，想躺平的起码能学会最基本的操作，也能获得一些分数，但是如果想获得更多的分数，就得自己进行进一步优化咯。</p>
