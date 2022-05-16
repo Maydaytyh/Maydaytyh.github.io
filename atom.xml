@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-03-25T08:35:21.289Z</updated>
+  <updated>2022-05-16T14:10:42.511Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test</title>
+    <title>The Missing Semester of Your CS Education</title>
     <link href="http://yoursite.com/2022/03/21/The_Missing_Semester_of_MIT/"/>
     <id>http://yoursite.com/2022/03/21/The_Missing_Semester_of_MIT/</id>
     <published>2022-03-21T13:45:06.000Z</published>
-    <updated>2022-03-25T08:35:21.289Z</updated>
+    <updated>2022-05-16T14:10:42.511Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a><p>用于记录<a href="https://missing.csail.mit.edu/" target="_blank" rel="noopener">The Missing Semester of Your CS Education</a></p><h1 id="Lecture1–The-Shell"><a href="#Lecture1–The-Shell" class="headerlink" title="Lecture1–The Shell"></a>Lecture1–The Shell</h1><h4 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h4><p><code>-l</code> indicates use a long listing format</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">missing:~$ ls -l /home</span><br><span class="line">drwxr-xr-x 1 missing  users  4096 Jun 15  2019 missing</span><br></pre></td></tr></table></figure><p>第一个参数表示文件类型</p><table><thead><tr><th align="center">-</th><th align="center">代表普通文件</th></tr></thead><tbody><tr><td align="center">d</td><td align="center">代表目录</td></tr><tr><td align="center">c</td><td align="center">代表字符型文件</td></tr><tr><td align="center">l</td><td align="center">代表链接文件</td></tr></tbody></table><p>后面三组共9个参数用来表示不同用户对该文件的操作权限</p><p>| 属主权限 | 属组权限 | 其他人权限 | 属主 | 属组</p><table><thead><tr><th>权限项</th><th>读</th><th>写</th><th>执行</th><th>读</th><th>写</th><th>执行</th><th>读</th><th>写</th><th>执行</th></tr></thead><tbody><tr><td>字符表示</td><td>r</td><td>w</td><td>x</td><td>r</td><td>w</td><td>x</td><td>r</td><td>w</td><td>x</td></tr><tr><td>数字表示</td><td>4</td><td>2</td><td>1</td><td>4</td><td>2</td><td>1</td><td>4</td><td>2</td><td>1</td></tr><tr><td>权限分配</td><td>文件所有者(属主)</td><td>文件所有者(属主)</td><td>文件所有者(属主)</td><td>文件所属组(属组)</td><td>文件所属组(属组)</td><td>文件所属组(属组)</td><td>其他用户</td><td>其他用户</td><td>其他用户</td></tr></tbody></table><h4 id="find"><a href="#find" class="headerlink" title="find"></a>find</h4><h4 id="Shebang"><a href="#Shebang" class="headerlink" title="Shebang"></a>Shebang</h4><p>在<a href="https://zh.wikipedia.org/wiki/计算" target="_blank" rel="noopener">计算</a>领域中，<strong>Shebang</strong>（也称为<strong>Hashbang</strong>）是一个由<a href="https://zh.wikipedia.org/wiki/井号" target="_blank" rel="noopener">井号</a>和<a href="https://zh.wikipedia.org/wiki/叹号" target="_blank" rel="noopener">叹号</a>构成的字符序列<em><code>#!</code></em>，其出现在文本文件的第一行的前两个字符。 在文件中存在Shebang的情况下，<a href="https://zh.wikipedia.org/wiki/类Unix操作系统" target="_blank" rel="noopener">类Unix操作系统</a>的<a href="https://zh.wikipedia.org/w/index.php?title=程序载入器&action=edit&redlink=1" target="_blank" rel="noopener">程序加载器</a>会分析Shebang后的内容，将这些内容作为解释器指令，并调用该指令，并将载有Shebang的文件路径作为该解释器的参数</p><p>例如，以指令<code>#!/bin/sh</code>开头的文件在执行时会实际调用<em>/bin/sh</em>程序（通常是<a href="https://zh.wikipedia.org/wiki/Bourne_shell" target="_blank" rel="noopener">Bourne shell</a>或兼容的<a href="https://zh.wikipedia.org/wiki/Unix_shell" target="_blank" rel="noopener">shell</a>，例如<a href="https://zh.wikipedia.org/wiki/Bash" target="_blank" rel="noopener">bash</a>、<a href="https://zh.wikipedia.org/wiki/Debian_Almquist_shell" target="_blank" rel="noopener">dash</a>等）来执行。这行内容也是<a href="https://zh.wikipedia.org/wiki/Shell脚本" target="_blank" rel="noopener">shell脚本</a>的标准起始行</p><p>这也是为什么<code>bash</code>文件前面会添加一个<code>#!/bin/sh</code></p>]]></content>
     
