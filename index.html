@@ -132,7 +132,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">42</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">43</span></a>
 
   </li>
   </ul>
@@ -161,6 +161,77 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/29/Git-多行提交信息的简单方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="GuGuMelon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="GuguMelon's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/29/Git-多行提交信息的简单方法/" class="post-title-link" itemprop="url">Git 多行提交信息的简单方法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-29 17:26:31 / Modified: 17:50:31" itemprop="dateCreated datePublished" datetime="2022-05-29T17:26:31+08:00">2022-05-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+<p>虽然被安利了<code>Pycharm</code>中的集成化<code>Git</code>，但很多时候命令行更加直接。<br>在命令行中我们提交<code>git commit</code>时采用的命令为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">"commit message"</span></span><br></pre></td></tr></table></figure>
+
+<p>但是这样只能写一行说明语句，若想写多行说明语句，则可以多次使用<code>-m</code>选项<br>如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">"commit title"</span> -m <span class="string">"commit description"</span></span><br></pre></td></tr></table></figure>
+
+<p>则会导致如下结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Author: Maydaytyh</span><br><span class="line">Date:   Sun June  17:46:21 2022</span><br><span class="line"></span><br><span class="line">    commit title</span><br><span class="line"></span><br><span class="line">    commit description</span><br><span class="line"></span><br><span class="line"> test.txt | 0</span><br><span class="line"> 1 file changed, 0 insertions(+), 0 deletions(-)</span><br></pre></td></tr></table></figure>
+
+<p>此外，可以通过不封闭引号来达到相同的提交结构，也可以达到相同的目的，如下所示。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">"commit title</span></span><br><span class="line"><span class="string">&gt;</span></span><br><span class="line"><span class="string">&gt; commit description"</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1012,89 +1083,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/05/MACOS配置终端代理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="GuGuMelon">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="GuguMelon's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/05/MACOS配置终端代理/" class="post-title-link" itemprop="url">MACOS配置终端代理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-05 09:50:30" itemprop="dateCreated datePublished" datetime="2021-03-05T09:50:30+08:00">2021-03-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-10 16:30:10" itemprop="dateModified" datetime="2021-03-10T16:30:10+08:00">2021-03-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MACOS/" itemprop="url" rel="index"><span itemprop="name">MACOS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <a id="more"></a>
-
-<p>在<code>~/.zshrc</code> 中添加如下内容（如果是是<code>bash</code>用户那么配置文件为<code>~/.bash_profile</code>）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 为终端设置代理</span></span><br><span class="line"><span class="built_in">alias</span> proxy=<span class="string">'export all_proxy=socks5://127.0.0.1:1080'</span></span><br><span class="line"><span class="built_in">alias</span> unproxy=<span class="string">'unset all_proxy'</span></span><br></pre></td></tr></table></figure>
-
-<p>修改完成后<code>source</code>对应的文件即可</p>
-<p>其中，<code>1080</code>为端口号，需要和自己的代理软件的设置保持一致。</p>
-<p>这样在终端中使用<code>proxy</code>命令就可以打开代理，使用<code>unproxy</code>就可以关闭代理。</p>
-<p>效果如图</p>
-<p><a href="https://imgtu.com/i/6JUgqU" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/03/10/6JUgqU.png" alt="6JUgqU.png"></a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1166,7 +1154,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-05-22T13:02:43.465Z</updated>
+  <updated>2022-05-29T09:50:31.806Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git 多行提交信息的简单方法</title>
+    <link href="http://yoursite.com/2022/05/29/Git-%E5%A4%9A%E8%A1%8C%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E7%9A%84%E7%AE%80%E5%8D%95%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2022/05/29/Git-%E5%A4%9A%E8%A1%8C%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E7%9A%84%E7%AE%80%E5%8D%95%E6%96%B9%E6%B3%95/</id>
+    <published>2022-05-29T09:26:31.000Z</published>
+    <updated>2022-05-29T09:50:31.806Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a><p>虽然被安利了<code>Pycharm</code>中的集成化<code>Git</code>，但很多时候命令行更加直接。<br>在命令行中我们提交<code>git commit</code>时采用的命令为</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">"commit message"</span></span><br></pre></td></tr></table></figure><p>但是这样只能写一行说明语句，若想写多行说明语句，则可以多次使用<code>-m</code>选项<br>如</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">"commit title"</span> -m <span class="string">"commit description"</span></span><br></pre></td></tr></table></figure><p>则会导致如下结果</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Author: Maydaytyh</span><br><span class="line">Date:   Sun June  17:46:21 2022</span><br><span class="line"></span><br><span class="line">    commit title</span><br><span class="line"></span><br><span class="line">    commit description</span><br><span class="line"></span><br><span class="line"> test.txt | 0</span><br><span class="line"> 1 file changed, 0 insertions(+), 0 deletions(-)</span><br></pre></td></tr></table></figure><p>此外，可以通过不封闭引号来达到相同的提交结构，也可以达到相同的目的，如下所示。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">"commit title</span></span><br><span class="line"><span class="string">&gt;</span></span><br><span class="line"><span class="string">&gt; commit description"</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;虽然被安利了&lt;code&gt;Pycharm&lt;/code&gt;中的集成化&lt;code&gt;Git&lt;/code&gt;，但很多时候命令行更加直接。&lt;br&gt;在命令行中我们提交&lt;code&gt;git commit&lt;/code&gt;时采用的命令为&lt;/p&gt;
+&lt;figure cl</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>中文技术文档写作风格指南阅读报告</title>
@@ -460,25 +482,6 @@
     
     
     <category term="个人思考" scheme="http://yoursite.com/tags/个人思考/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>7.18随笔.md</title>
-    <link href="http://yoursite.com/2020/07/18/7-18%E9%9A%8F%E7%AC%94/"/>
-    <id>http://yoursite.com/2020/07/18/7-18%E9%9A%8F%E7%AC%94/</id>
-    <published>2020-07-18T01:31:42.000Z</published>
-    <updated>2021-01-29T15:40:12.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>要是自己有本事的话就不会这么难过了。</p><a id="more"></a><p>一直处于浑浑噩噩的状态，可能就是觉得考本校太容易了吧，可是你也不想想，你为什么没有保研的资格？不就是浑浑噩噩？不知道自己究竟想要什么！没有目标作为驱动力！</p><p>我不想再因为自己没有努力而导致的自己的没本事而难过，如果我可以选择的话。</p><p>趁现在还有选择的机会，冲吧。</p><p>关于择校，反正都是数一、英一、政治，唯一有区别的可能就是专业课，而今年大势所趋，可能BIT也会把专业课改成408，这种情况下，有可能我会直接选择国科大。。毕竟还是要冲一把的，专业课差别都不大，当然，是在自己复习的不错的情况下，当下还是要好好复习，尤其是数学，得数学者得天下！</p><p>冲呀！！</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;要是自己有本事的话就不会这么难过了。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="随笔" scheme="http://yoursite.com/categories/随笔/"/>
-    
     
   </entry>
   

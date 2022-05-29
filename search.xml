@@ -44,25 +44,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【凸包/旋转卡壳】 POJ 2187 Beauty Contest</title>
-    <url>/2018/08/12/2187/</url>
-    <content><![CDATA[<p>二维平面内最远点对。</p>
-<a id="more"></a>
-<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给出n个点，求最远点对的距离的平方。2&lt;=n&lt;=50000</p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>暴力肯定是不行的，需要学习一下新的姿势，凸包和旋转卡壳。</p>
-<h2 id="凸包"><a href="#凸包" class="headerlink" title="凸包"></a>凸包</h2><p>二维平面内能把所有当前点收纳起来的多边形，我们称之为凸包。那么在已知点的情况下，如何求解凸包呢？</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-        <category>POJ</category>
-      </categories>
-      <tags>
-        <tag>计算几何</tag>
-        <tag>凸包</tag>
-        <tag>旋转卡壳</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Atcoder ABC 136C</title>
     <url>/2019/08/06/136C/</url>
     <content><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href target="_blank"></a></p>
@@ -109,6 +90,52 @@
       </tags>
   </entry>
   <entry>
+    <title>2019牛客多校第五场I题</title>
+    <url>/2019/08/02/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%94%E5%9C%BAI%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://ac.nowcoder.com/acm/contest/885/I" target="_blank">Three points</a></p>
+<h1 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h1><a id="more"></a>
+
+<p>在一个$w*h$的矩形内，构造三个点$X,Y,Z$要求满足$XY=a,XZ=b,YZ=c$，$1&lt;=w,h,a,b,c&lt;=50$，保证存在解。</p>
+<h1 id="思路重现"><a href="#思路重现" class="headerlink" title="思路重现"></a>思路重现</h1><p>orz一道计算几何水题我却卡了整场比赛，还是太菜了。</p>
+<p>感觉卡住最主要的原因是思路不清晰，不够条理化。</p>
+<p>其实首先需要注意题目保证有解，那么这一组可行解通过旋转，平移，会有两种情况：</p>
+<ul>
+<li>一条边在矩形的边界上</li>
+<li>一个点在原点，同时有一个点在上或右的边上，也就是斜着摆放在矩形中</li>
+</ul>
+<p>为了方便，我们将一个点固定在原点，然后分类讨论另外两个点的情况就好了，再对三个点的顺序排列一下，一共六种可能，这道题就做完了。</p>
+<h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sqr(x) (x)*(x)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,n,m) for(int i=n;i&lt;=m;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> eps 1e-12</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch = getchar();</span><br><span class="line">	<span class="keyword">while</span> (ch&lt;<span class="string">'0'</span> || ch&gt;<span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (ch == <span class="string">'-'</span>) f = <span class="number">-1</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		x = <span class="number">10</span> * x + ch - <span class="string">'0'</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">P</span> &#123;</span></span><br><span class="line">	<span class="keyword">double</span> x, y;</span><br><span class="line">	P(<span class="keyword">double</span> _x = <span class="number">0</span>, <span class="keyword">double</span> _y = <span class="number">0</span>) :x(_x), y(_y) &#123;&#125;</span><br><span class="line">	P <span class="keyword">operator</span>-(<span class="keyword">const</span> P&amp; b)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> P(x - b.x, y - b.y);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">dis</span><span class="params">(<span class="keyword">const</span> P&amp; b)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">sqrt</span>(sqr(x - b.x) + sqr(y - b.y));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">dis</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">sqrt</span>(x * x + y * y);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;p[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">int</span> w, h, _a, _b, _c;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ok</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">fabs</span>(p[<span class="number">0</span>].dis(p[<span class="number">1</span>]) - _a) &gt; eps || <span class="built_in">fabs</span>(p[<span class="number">0</span>].dis(p[<span class="number">2</span>]) - _b) &gt; eps || <span class="built_in">fabs</span>(p[<span class="number">1</span>].dis(p[<span class="number">2</span>]) - _c) &gt; eps) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	rep(i, <span class="number">0</span>, <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (p[i].x&lt;-eps || p[i].y&lt;-eps || p[i].x&gt;w + eps || p[i].y&gt;h + eps) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c, P&amp; x, P&amp; y, P&amp; z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	x = P();<span class="comment">//将X点放在原点 </span></span><br><span class="line">	<span class="keyword">bool</span> flag = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">double</span> angle_1 = <span class="built_in">acos</span>((<span class="keyword">double</span>)(a * a + b * b - c * c) / (<span class="number">2</span> * a * b));</span><br><span class="line">	<span class="comment">//开始分类讨论放置点 </span></span><br><span class="line">	<span class="keyword">if</span> (a &lt;= w)</span><br><span class="line">	&#123;</span><br><span class="line">		y = P(a, <span class="number">0</span>);</span><br><span class="line">		z = P(b * <span class="built_in">cos</span>(angle_1), b * <span class="built_in">sin</span>(angle_1));</span><br><span class="line">		<span class="keyword">if</span> (ok()) flag = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">double</span> y_h = <span class="built_in">sqrt</span>(<span class="number">1.0</span> * a * a - <span class="number">1.0</span> * w * w);</span><br><span class="line">		y = P(w, y_h);</span><br><span class="line">		<span class="keyword">double</span> angle_2 = <span class="built_in">acos</span>(w * <span class="number">1.0</span> / a);</span><br><span class="line">		z = P(b * <span class="built_in">cos</span>(angle_1 + angle_2), b * <span class="built_in">sin</span>(angle_1 + angle_2));</span><br><span class="line">		<span class="keyword">if</span> (ok()) flag = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (!flag)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (b &lt;= h)</span><br><span class="line">		&#123;</span><br><span class="line">			z = P(<span class="number">0</span>, b);</span><br><span class="line">			y = P(a * <span class="built_in">sin</span>(angle_1), a * <span class="built_in">cos</span>(angle_1));</span><br><span class="line">			<span class="keyword">if</span> (ok()) flag = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">double</span> z_x = <span class="built_in">sqrt</span>(<span class="number">1.0</span> * b * b - <span class="number">1.0</span> * h * h);</span><br><span class="line">			z = P(z_x, h);</span><br><span class="line">			<span class="keyword">double</span> angle_2 = <span class="built_in">acos</span>(h * <span class="number">1.0</span> / b);</span><br><span class="line">			y = P(a * <span class="built_in">sin</span>(angle_1 + angle_2), a * <span class="built_in">cos</span>(angle_1 + angle_2));</span><br><span class="line">			<span class="keyword">if</span> (ok()) flag = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (!flag) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	rep(i, <span class="number">0</span>, <span class="number">2</span>) <span class="built_in">printf</span>(<span class="string">"%.12f %.12f%c"</span>, p[i].x, p[i].y, (i == <span class="number">2</span>) ? <span class="string">'\n'</span> : <span class="string">' '</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (</span><br><span class="line">		check(_a, _b, _c, p[<span class="number">0</span>], p[<span class="number">1</span>], p[<span class="number">2</span>])</span><br><span class="line">		|| check(_a, _c, _b, p[<span class="number">1</span>], p[<span class="number">0</span>], p[<span class="number">2</span>])</span><br><span class="line">		|| check(_b, _a, _c, p[<span class="number">0</span>], p[<span class="number">2</span>], p[<span class="number">1</span>])</span><br><span class="line">		|| check(_b, _c, _a, p[<span class="number">2</span>], p[<span class="number">0</span>], p[<span class="number">1</span>])</span><br><span class="line">		|| check(_c, _b, _a, p[<span class="number">2</span>], p[<span class="number">1</span>], p[<span class="number">0</span>])</span><br><span class="line">		|| check(_c, _a, _b, p[<span class="number">1</span>], p[<span class="number">2</span>], p[<span class="number">0</span>])</span><br><span class="line">		)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> T = read();</span><br><span class="line">	<span class="keyword">while</span> (T--)</span><br><span class="line">	&#123;</span><br><span class="line">		w = read(), h = read(), _a = read(), _b = read(), _c = read();</span><br><span class="line">		solve();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+        <category>牛客</category>
+      </categories>
+      <tags>
+        <tag>计算几何</tag>
+        <tag>枚举</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【凸包/旋转卡壳】 POJ 2187 Beauty Contest</title>
+    <url>/2018/08/12/2187/</url>
+    <content><![CDATA[<p>二维平面内最远点对。</p>
+<a id="more"></a>
+<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给出n个点，求最远点对的距离的平方。2&lt;=n&lt;=50000</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>暴力肯定是不行的，需要学习一下新的姿势，凸包和旋转卡壳。</p>
+<h2 id="凸包"><a href="#凸包" class="headerlink" title="凸包"></a>凸包</h2><p>二维平面内能把所有当前点收纳起来的多边形，我们称之为凸包。那么在已知点的情况下，如何求解凸包呢？</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+        <category>POJ</category>
+      </categories>
+      <tags>
+        <tag>计算几何</tag>
+        <tag>凸包</tag>
+        <tag>旋转卡壳</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【BFS】 POJ 3278 抓牛</title>
     <url>/2018/08/18/3278/</url>
     <content><![CDATA[<p>现在水题都得调很久qaq。</p>
@@ -137,33 +164,6 @@
       </categories>
       <tags>
         <tag>BFS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2019牛客多校第五场I题</title>
-    <url>/2019/08/02/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%94%E5%9C%BAI%E9%A2%98/</url>
-    <content><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://ac.nowcoder.com/acm/contest/885/I" target="_blank">Three points</a></p>
-<h1 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h1><a id="more"></a>
-
-<p>在一个$w*h$的矩形内，构造三个点$X,Y,Z$要求满足$XY=a,XZ=b,YZ=c$，$1&lt;=w,h,a,b,c&lt;=50$，保证存在解。</p>
-<h1 id="思路重现"><a href="#思路重现" class="headerlink" title="思路重现"></a>思路重现</h1><p>orz一道计算几何水题我却卡了整场比赛，还是太菜了。</p>
-<p>感觉卡住最主要的原因是思路不清晰，不够条理化。</p>
-<p>其实首先需要注意题目保证有解，那么这一组可行解通过旋转，平移，会有两种情况：</p>
-<ul>
-<li>一条边在矩形的边界上</li>
-<li>一个点在原点，同时有一个点在上或右的边上，也就是斜着摆放在矩形中</li>
-</ul>
-<p>为了方便，我们将一个点固定在原点，然后分类讨论另外两个点的情况就好了，再对三个点的顺序排列一下，一共六种可能，这道题就做完了。</p>
-<h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sqr(x) (x)*(x)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,n,m) for(int i=n;i&lt;=m;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> eps 1e-12</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch = getchar();</span><br><span class="line">	<span class="keyword">while</span> (ch&lt;<span class="string">'0'</span> || ch&gt;<span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (ch == <span class="string">'-'</span>) f = <span class="number">-1</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		x = <span class="number">10</span> * x + ch - <span class="string">'0'</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">P</span> &#123;</span></span><br><span class="line">	<span class="keyword">double</span> x, y;</span><br><span class="line">	P(<span class="keyword">double</span> _x = <span class="number">0</span>, <span class="keyword">double</span> _y = <span class="number">0</span>) :x(_x), y(_y) &#123;&#125;</span><br><span class="line">	P <span class="keyword">operator</span>-(<span class="keyword">const</span> P&amp; b)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> P(x - b.x, y - b.y);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">dis</span><span class="params">(<span class="keyword">const</span> P&amp; b)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">sqrt</span>(sqr(x - b.x) + sqr(y - b.y));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">dis</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">sqrt</span>(x * x + y * y);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;p[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">int</span> w, h, _a, _b, _c;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ok</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">fabs</span>(p[<span class="number">0</span>].dis(p[<span class="number">1</span>]) - _a) &gt; eps || <span class="built_in">fabs</span>(p[<span class="number">0</span>].dis(p[<span class="number">2</span>]) - _b) &gt; eps || <span class="built_in">fabs</span>(p[<span class="number">1</span>].dis(p[<span class="number">2</span>]) - _c) &gt; eps) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	rep(i, <span class="number">0</span>, <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (p[i].x&lt;-eps || p[i].y&lt;-eps || p[i].x&gt;w + eps || p[i].y&gt;h + eps) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c, P&amp; x, P&amp; y, P&amp; z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	x = P();<span class="comment">//将X点放在原点 </span></span><br><span class="line">	<span class="keyword">bool</span> flag = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">double</span> angle_1 = <span class="built_in">acos</span>((<span class="keyword">double</span>)(a * a + b * b - c * c) / (<span class="number">2</span> * a * b));</span><br><span class="line">	<span class="comment">//开始分类讨论放置点 </span></span><br><span class="line">	<span class="keyword">if</span> (a &lt;= w)</span><br><span class="line">	&#123;</span><br><span class="line">		y = P(a, <span class="number">0</span>);</span><br><span class="line">		z = P(b * <span class="built_in">cos</span>(angle_1), b * <span class="built_in">sin</span>(angle_1));</span><br><span class="line">		<span class="keyword">if</span> (ok()) flag = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">double</span> y_h = <span class="built_in">sqrt</span>(<span class="number">1.0</span> * a * a - <span class="number">1.0</span> * w * w);</span><br><span class="line">		y = P(w, y_h);</span><br><span class="line">		<span class="keyword">double</span> angle_2 = <span class="built_in">acos</span>(w * <span class="number">1.0</span> / a);</span><br><span class="line">		z = P(b * <span class="built_in">cos</span>(angle_1 + angle_2), b * <span class="built_in">sin</span>(angle_1 + angle_2));</span><br><span class="line">		<span class="keyword">if</span> (ok()) flag = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (!flag)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (b &lt;= h)</span><br><span class="line">		&#123;</span><br><span class="line">			z = P(<span class="number">0</span>, b);</span><br><span class="line">			y = P(a * <span class="built_in">sin</span>(angle_1), a * <span class="built_in">cos</span>(angle_1));</span><br><span class="line">			<span class="keyword">if</span> (ok()) flag = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">double</span> z_x = <span class="built_in">sqrt</span>(<span class="number">1.0</span> * b * b - <span class="number">1.0</span> * h * h);</span><br><span class="line">			z = P(z_x, h);</span><br><span class="line">			<span class="keyword">double</span> angle_2 = <span class="built_in">acos</span>(h * <span class="number">1.0</span> / b);</span><br><span class="line">			y = P(a * <span class="built_in">sin</span>(angle_1 + angle_2), a * <span class="built_in">cos</span>(angle_1 + angle_2));</span><br><span class="line">			<span class="keyword">if</span> (ok()) flag = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (!flag) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	rep(i, <span class="number">0</span>, <span class="number">2</span>) <span class="built_in">printf</span>(<span class="string">"%.12f %.12f%c"</span>, p[i].x, p[i].y, (i == <span class="number">2</span>) ? <span class="string">'\n'</span> : <span class="string">' '</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (</span><br><span class="line">		check(_a, _b, _c, p[<span class="number">0</span>], p[<span class="number">1</span>], p[<span class="number">2</span>])</span><br><span class="line">		|| check(_a, _c, _b, p[<span class="number">1</span>], p[<span class="number">0</span>], p[<span class="number">2</span>])</span><br><span class="line">		|| check(_b, _a, _c, p[<span class="number">0</span>], p[<span class="number">2</span>], p[<span class="number">1</span>])</span><br><span class="line">		|| check(_b, _c, _a, p[<span class="number">2</span>], p[<span class="number">0</span>], p[<span class="number">1</span>])</span><br><span class="line">		|| check(_c, _b, _a, p[<span class="number">2</span>], p[<span class="number">1</span>], p[<span class="number">0</span>])</span><br><span class="line">		|| check(_c, _a, _b, p[<span class="number">1</span>], p[<span class="number">2</span>], p[<span class="number">0</span>])</span><br><span class="line">		)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> T = read();</span><br><span class="line">	<span class="keyword">while</span> (T--)</span><br><span class="line">	&#123;</span><br><span class="line">		w = read(), h = read(), _a = read(), _b = read(), _c = read();</span><br><span class="line">		solve();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-        <category>牛客</category>
-      </categories>
-      <tags>
-        <tag>计算几何</tag>
-        <tag>枚举</tag>
       </tags>
   </entry>
   <entry>
@@ -222,29 +222,6 @@
       </categories>
   </entry>
   <entry>
-    <title>2019牛客多校第六场G题</title>
-    <url>/2019/08/04/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E5%85%AD%E5%9C%BAG%E9%A2%98/</url>
-    <content><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://ac.nowcoder.com/acm/contest/886/G" target="_blank">Is Today Friday?</a></p>
-<h1 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h1><p>这些天是星期五吗？使用$n$个$A-J$构成的$XXXX/XX/XX$，分别代表$0-9$的某一个，要求出满足所有日期都是星期五的一个排列，没有则输出$Impossible$。</p>
-<a id="more"></a>
-
-<h1 id="思路重现"><a href="#思路重现" class="headerlink" title="思路重现"></a>思路重现</h1><p>比赛的时候其实想到解法了，但是没什么时间写了。</p>
-<p>其实使用全排列函数$next_permutation$函数枚举$0-9$的排列，然后依次判断即可。</p>
-<p>本题的坑点在于，需要去重，去重的话$sort$后使用$unique$函数就好了。</p>
-<p>关于$unique$标准库函数，其实是不重复元素移到前面，这样就可以保证前$realn$个元素是不重复的，因为是相邻元素比较，所以需要先对容器内元素排序。</p>
-<h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100000+50</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXM 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,n,m) for(int i=n;i&lt;=m;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000 + 7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a, b) memset(a, b, sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">"="</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch = getchar();</span><br><span class="line">	<span class="keyword">while</span> (ch &lt; <span class="string">'0'</span> || ch &gt; <span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (ch == <span class="string">'-'</span>)</span><br><span class="line">			f = <span class="number">-1</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		x = <span class="number">10</span> * x + ch - <span class="string">'0'</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">string</span> s[MAXN];</span><br><span class="line"><span class="keyword">int</span> day[] = &#123; <span class="number">0</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span> &#125;;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> y, <span class="keyword">int</span> m, <span class="keyword">int</span> d)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (y &lt; <span class="number">1600</span> || y&gt;<span class="number">9999</span> || m &lt; <span class="number">1</span> || m&gt;<span class="number">12</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> day_m = day[m];</span><br><span class="line">	<span class="keyword">if</span> (m == <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> ((y % <span class="number">4</span> == <span class="number">0</span> &amp;&amp; y % <span class="number">100</span> != <span class="number">0</span>) || y % <span class="number">400</span> == <span class="number">0</span>) day_m++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (d&lt;<span class="number">1</span> || d&gt;day_m) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (m &lt;= <span class="number">2</span>) m += <span class="number">12</span>, y--;</span><br><span class="line">	<span class="keyword">int</span> c = y / <span class="number">100</span>;</span><br><span class="line">	y %= <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">int</span> w = ((y + y / <span class="number">4</span> + c / <span class="number">4</span> - <span class="number">2</span> * c + (<span class="number">26</span> * (m + <span class="number">1</span>)) / <span class="number">10</span> + d - <span class="number">1</span>) % <span class="number">7</span> + <span class="number">7</span>) % <span class="number">7</span>;</span><br><span class="line">	<span class="keyword">if</span> (w == <span class="number">5</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> T = read();</span><br><span class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (T--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> n = read();</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Case #%d: "</span>, ++cnt);</span><br><span class="line">		rep(i, <span class="number">1</span>, n)  <span class="built_in">cin</span> &gt;&gt; s[i];</span><br><span class="line">		sort(s + <span class="number">1</span>, s + n + <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">int</span> realn = unique(s + <span class="number">1</span>, s + n + <span class="number">1</span>) - s<span class="number">-1</span>;</span><br><span class="line">		rep(i, <span class="number">0</span>, <span class="number">9</span>) a[i] = i;</span><br><span class="line">		<span class="keyword">bool</span> flag = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">do</span> &#123;</span><br><span class="line">			<span class="keyword">bool</span> flag1 = <span class="number">1</span>;</span><br><span class="line">			rep(i, <span class="number">1</span>, realn)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> y = a[s[i][<span class="number">0</span>] - <span class="string">'A'</span>] * <span class="number">1000</span> + a[s[i][<span class="number">1</span>] - <span class="string">'A'</span>] * <span class="number">100</span> + a[s[i][<span class="number">2</span>] - <span class="string">'A'</span>] * <span class="number">10</span> + a[s[i][<span class="number">3</span>] - <span class="string">'A'</span>];</span><br><span class="line">				<span class="keyword">int</span> m = a[s[i][<span class="number">5</span>] - <span class="string">'A'</span>] * <span class="number">10</span> + a[s[i][<span class="number">6</span>] - <span class="string">'A'</span>];</span><br><span class="line">				<span class="keyword">int</span> d = a[s[i][<span class="number">8</span>] - <span class="string">'A'</span>] * <span class="number">10</span> + a[s[i][<span class="number">9</span>] - <span class="string">'A'</span>];</span><br><span class="line">				<span class="keyword">if</span> (!check(y, m, d))</span><br><span class="line">				&#123;</span><br><span class="line">					flag1 = <span class="number">0</span>; <span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (flag1)</span><br><span class="line">			&#123;</span><br><span class="line">				flag = <span class="number">1</span>;</span><br><span class="line">				rep(i, <span class="number">0</span>, <span class="number">9</span>) <span class="built_in">printf</span>(<span class="string">"%d"</span>, a[i]);</span><br><span class="line">				<span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">while</span> (next_permutation(a, a + <span class="number">10</span>));</span><br><span class="line">		<span class="keyword">if</span> (!flag) <span class="built_in">puts</span>(<span class="string">"Impossible"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-        <category>牛客</category>
-      </categories>
-      <tags>
-        <tag>模拟</tag>
-        <tag>暴力</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【FWT】 CodeForces 663E - Binary Table</title>
     <url>/2018/08/14/663e/</url>
     <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="http://codeforces.com/problemset/problem/663/E" target="_blank" rel="noopener">Codefoces 663E</a></p>
@@ -278,24 +255,22 @@
       </categories>
   </entry>
   <entry>
-    <title>Pyquery 403 Frobidden</title>
-    <url>/2021/01/22/Pyquery-403-Frobidden/</url>
-    <content><![CDATA[<p>自己电脑没事，别人电脑403Forbidden？来，解决这个问题</p>
-<a id="more"></a>
+    <title>Git 多行提交信息的简单方法</title>
+    <url>/2022/05/29/Git-%E5%A4%9A%E8%A1%8C%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E7%9A%84%E7%AE%80%E5%8D%95%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<a id="more"></a>
+<p>虽然被安利了<code>Pycharm</code>中的集成化<code>Git</code>，但很多时候命令行更加直接。<br>在命令行中我们提交<code>git commit</code>时采用的命令为</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">"commit message"</span></span><br></pre></td></tr></table></figure>
 
-<p>使用Pyquery爬虫时，在自己的Windwos下运行没有问题，但是别人那里爬不到任何信息，而且爬两次就会报错403 Forbidden。</p>
-<p>我很是迷惑，因为报错信息是urllib库的内容，而我没有使用urllib库，检查发现，Pyquery库在解析网页时会调用Requests库</p>
-<p>这时，学长让我加个Header，感觉是被反爬虫机制干了，我提议先装一个Reuqests库试试，果然，是换了个编译器忘了装Requests库了，而我也加上了Header，问题得到了解决。</p>
-<p>附：Agent代码</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'</span></span><br><span class="line">&#125;</span><br><span class="line">webBase += str(year) + <span class="string">"-"</span> + str(month) + <span class="string">"-"</span> + str(day) + <span class="string">"/"</span></span><br><span class="line">doc=pq(webBase, encoding=<span class="string">"utf-8"</span>, headers=headers)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>语言</category>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>爬虫</tag>
-        <tag>坑点</tag>
-      </tags>
+<p>但是这样只能写一行说明语句，若想写多行说明语句，则可以多次使用<code>-m</code>选项<br>如</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">"commit title"</span> -m <span class="string">"commit description"</span></span><br></pre></td></tr></table></figure>
+
+<p>则会导致如下结果</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Author: Maydaytyh</span><br><span class="line">Date:   Sun June  17:46:21 2022</span><br><span class="line"></span><br><span class="line">    commit title</span><br><span class="line"></span><br><span class="line">    commit description</span><br><span class="line"></span><br><span class="line"> test.txt | 0</span><br><span class="line"> 1 file changed, 0 insertions(+), 0 deletions(-)</span><br></pre></td></tr></table></figure>
+
+<p>此外，可以通过不封闭引号来达到相同的提交结构，也可以达到相同的目的，如下所示。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">"commit title</span></span><br><span class="line"><span class="string">&gt;</span></span><br><span class="line"><span class="string">&gt; commit description"</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
   </entry>
   <entry>
     <title>C++全排列函数</title>
@@ -321,6 +296,68 @@
       </categories>
       <tags>
         <tag>C++STL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pyquery 403 Frobidden</title>
+    <url>/2021/01/22/Pyquery-403-Frobidden/</url>
+    <content><![CDATA[<p>自己电脑没事，别人电脑403Forbidden？来，解决这个问题</p>
+<a id="more"></a>
+
+<p>使用Pyquery爬虫时，在自己的Windwos下运行没有问题，但是别人那里爬不到任何信息，而且爬两次就会报错403 Forbidden。</p>
+<p>我很是迷惑，因为报错信息是urllib库的内容，而我没有使用urllib库，检查发现，Pyquery库在解析网页时会调用Requests库</p>
+<p>这时，学长让我加个Header，感觉是被反爬虫机制干了，我提议先装一个Reuqests库试试，果然，是换了个编译器忘了装Requests库了，而我也加上了Header，问题得到了解决。</p>
+<p>附：Agent代码</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'</span></span><br><span class="line">&#125;</span><br><span class="line">webBase += str(year) + <span class="string">"-"</span> + str(month) + <span class="string">"-"</span> + str(day) + <span class="string">"/"</span></span><br><span class="line">doc=pq(webBase, encoding=<span class="string">"utf-8"</span>, headers=headers)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>语言</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>爬虫</tag>
+        <tag>坑点</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MACOS更新后提示xcrun: error</title>
+    <url>/2021/02/09/MACOS%E6%9B%B4%E6%96%B0%E5%90%8E%E6%8F%90%E7%A4%BAxcrun-error/</url>
+    <content><![CDATA[<a id="more"></a>
+
+<p>第一次更新BigSur，在命令行运行gcc出现了xcrun: error: invalid active developer path, missing xcrun的报错。</p>
+<p>经搜索，需要重新安装命令行工具Command Line Tools，是因为更新系统时原来的 <strong>Command Line Tools</strong> 被自动卸载了，所以重新安装即可。</p>
+<p>在终端中执行如下指令即可</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure>
+
+<p>Command Line Tools包含的工具很多，如下所示</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ar</span><br><span class="line">as</span><br><span class="line">asa</span><br><span class="line">bison</span><br><span class="line">BuildStrings</span><br><span class="line">c++</span><br><span class="line">c89</span><br><span class="line">c99</span><br><span class="line">cc</span><br><span class="line">clang</span><br><span class="line">clang++</span><br><span class="line">cmpdylib</span><br><span class="line">codesign_allocate</span><br><span class="line">CpMac</span><br><span class="line">cpp</span><br><span class="line">ctags</span><br><span class="line">ctf_insert</span><br><span class="line">DeRez</span><br><span class="line">dsymutil</span><br><span class="line">dwarfdump</span><br><span class="line">dyldinfo</span><br><span class="line">flex</span><br><span class="line">flex++</span><br><span class="line">g++</span><br><span class="line">gatherheaderdoc</span><br><span class="line">gcc</span><br><span class="line">gcov</span><br><span class="line">GetFileInfo</span><br><span class="line">git</span><br><span class="line">git-cvsserver</span><br><span class="line">git-receive-pack</span><br><span class="line">git-shell</span><br><span class="line">git-upload-archive</span><br><span class="line">git-upload-pack</span><br><span class="line">gm4</span><br><span class="line">gnumake</span><br><span class="line">gperf</span><br><span class="line">hdxml2manxml</span><br><span class="line">headerdoc2html</span><br><span class="line">indent</span><br><span class="line">install_name_tool</span><br><span class="line">ld</span><br><span class="line">lex</span><br><span class="line">libtool</span><br><span class="line">lipo</span><br><span class="line">lldb</span><br><span class="line">lorder</span><br><span class="line">m4</span><br><span class="line">make</span><br><span class="line">MergePef</span><br><span class="line">mig</span><br><span class="line">mkdep</span><br><span class="line">MvMac</span><br><span class="line">nasm</span><br><span class="line">ndisasm</span><br><span class="line">nm</span><br><span class="line">nmedit</span><br><span class="line">otool</span><br><span class="line">pagestuff</span><br><span class="line">projectInfo</span><br><span class="line">ranlib</span><br><span class="line">rebase</span><br><span class="line">redo_prebinding</span><br><span class="line">ResMerger</span><br><span class="line">resolveLinks</span><br><span class="line">Rez</span><br><span class="line">RezDet</span><br><span class="line">RezWack</span><br><span class="line">rpcgen</span><br><span class="line">segedit</span><br><span class="line">SetFile</span><br><span class="line">size</span><br><span class="line">SplitForks</span><br><span class="line">strings</span><br><span class="line">strip</span><br><span class="line">svn</span><br><span class="line">svnadmin</span><br><span class="line">svndumpfilter</span><br><span class="line">svnlook</span><br><span class="line">svnrdump</span><br><span class="line">svnserve</span><br><span class="line">svnsync</span><br><span class="line">svnversion</span><br><span class="line">unifdef</span><br><span class="line">unifdefall</span><br><span class="line">UnRezWack</span><br><span class="line">unwinddump</span><br><span class="line">what</span><br><span class="line">xml2man</span><br><span class="line">yacc</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>MACOS</category>
+      </categories>
+      <tags>
+        <tag>Bug</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MACOS配置终端代理</title>
+    <url>/2021/03/05/MACOS%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<a id="more"></a>
+
+<p>在<code>~/.zshrc</code> 中添加如下内容（如果是是<code>bash</code>用户那么配置文件为<code>~/.bash_profile</code>）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 为终端设置代理</span></span><br><span class="line"><span class="built_in">alias</span> proxy=<span class="string">'export all_proxy=socks5://127.0.0.1:1080'</span></span><br><span class="line"><span class="built_in">alias</span> unproxy=<span class="string">'unset all_proxy'</span></span><br></pre></td></tr></table></figure>
+
+<p>修改完成后<code>source</code>对应的文件即可</p>
+<p>其中，<code>1080</code>为端口号，需要和自己的代理软件的设置保持一致。</p>
+<p>这样在终端中使用<code>proxy</code>命令就可以打开代理，使用<code>unproxy</code>就可以关闭代理。</p>
+<p>效果如图</p>
+<p><a href="https://imgtu.com/i/6JUgqU" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/03/10/6JUgqU.png" alt="6JUgqU.png"></a></p>
+]]></content>
+      <categories>
+        <category>MACOS</category>
+      </categories>
+      <tags>
+        <tag>技巧</tag>
       </tags>
   </entry>
   <entry>
@@ -444,24 +481,69 @@
       </tags>
   </entry>
   <entry>
-    <title>MACOS更新后提示xcrun: error</title>
-    <url>/2021/02/09/MACOS%E6%9B%B4%E6%96%B0%E5%90%8E%E6%8F%90%E7%A4%BAxcrun-error/</url>
-    <content><![CDATA[<a id="more"></a>
+    <title>2019牛客多校第六场G题</title>
+    <url>/2019/08/04/2019%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E5%85%AD%E5%9C%BAG%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://ac.nowcoder.com/acm/contest/886/G" target="_blank">Is Today Friday?</a></p>
+<h1 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h1><p>这些天是星期五吗？使用$n$个$A-J$构成的$XXXX/XX/XX$，分别代表$0-9$的某一个，要求出满足所有日期都是星期五的一个排列，没有则输出$Impossible$。</p>
+<a id="more"></a>
 
-<p>第一次更新BigSur，在命令行运行gcc出现了xcrun: error: invalid active developer path, missing xcrun的报错。</p>
-<p>经搜索，需要重新安装命令行工具Command Line Tools，是因为更新系统时原来的 <strong>Command Line Tools</strong> 被自动卸载了，所以重新安装即可。</p>
-<p>在终端中执行如下指令即可</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure>
-
-<p>Command Line Tools包含的工具很多，如下所示</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ar</span><br><span class="line">as</span><br><span class="line">asa</span><br><span class="line">bison</span><br><span class="line">BuildStrings</span><br><span class="line">c++</span><br><span class="line">c89</span><br><span class="line">c99</span><br><span class="line">cc</span><br><span class="line">clang</span><br><span class="line">clang++</span><br><span class="line">cmpdylib</span><br><span class="line">codesign_allocate</span><br><span class="line">CpMac</span><br><span class="line">cpp</span><br><span class="line">ctags</span><br><span class="line">ctf_insert</span><br><span class="line">DeRez</span><br><span class="line">dsymutil</span><br><span class="line">dwarfdump</span><br><span class="line">dyldinfo</span><br><span class="line">flex</span><br><span class="line">flex++</span><br><span class="line">g++</span><br><span class="line">gatherheaderdoc</span><br><span class="line">gcc</span><br><span class="line">gcov</span><br><span class="line">GetFileInfo</span><br><span class="line">git</span><br><span class="line">git-cvsserver</span><br><span class="line">git-receive-pack</span><br><span class="line">git-shell</span><br><span class="line">git-upload-archive</span><br><span class="line">git-upload-pack</span><br><span class="line">gm4</span><br><span class="line">gnumake</span><br><span class="line">gperf</span><br><span class="line">hdxml2manxml</span><br><span class="line">headerdoc2html</span><br><span class="line">indent</span><br><span class="line">install_name_tool</span><br><span class="line">ld</span><br><span class="line">lex</span><br><span class="line">libtool</span><br><span class="line">lipo</span><br><span class="line">lldb</span><br><span class="line">lorder</span><br><span class="line">m4</span><br><span class="line">make</span><br><span class="line">MergePef</span><br><span class="line">mig</span><br><span class="line">mkdep</span><br><span class="line">MvMac</span><br><span class="line">nasm</span><br><span class="line">ndisasm</span><br><span class="line">nm</span><br><span class="line">nmedit</span><br><span class="line">otool</span><br><span class="line">pagestuff</span><br><span class="line">projectInfo</span><br><span class="line">ranlib</span><br><span class="line">rebase</span><br><span class="line">redo_prebinding</span><br><span class="line">ResMerger</span><br><span class="line">resolveLinks</span><br><span class="line">Rez</span><br><span class="line">RezDet</span><br><span class="line">RezWack</span><br><span class="line">rpcgen</span><br><span class="line">segedit</span><br><span class="line">SetFile</span><br><span class="line">size</span><br><span class="line">SplitForks</span><br><span class="line">strings</span><br><span class="line">strip</span><br><span class="line">svn</span><br><span class="line">svnadmin</span><br><span class="line">svndumpfilter</span><br><span class="line">svnlook</span><br><span class="line">svnrdump</span><br><span class="line">svnserve</span><br><span class="line">svnsync</span><br><span class="line">svnversion</span><br><span class="line">unifdef</span><br><span class="line">unifdefall</span><br><span class="line">UnRezWack</span><br><span class="line">unwinddump</span><br><span class="line">what</span><br><span class="line">xml2man</span><br><span class="line">yacc</span><br></pre></td></tr></table></figure>
+<h1 id="思路重现"><a href="#思路重现" class="headerlink" title="思路重现"></a>思路重现</h1><p>比赛的时候其实想到解法了，但是没什么时间写了。</p>
+<p>其实使用全排列函数$next_permutation$函数枚举$0-9$的排列，然后依次判断即可。</p>
+<p>本题的坑点在于，需要去重，去重的话$sort$后使用$unique$函数就好了。</p>
+<p>关于$unique$标准库函数，其实是不重复元素移到前面，这样就可以保证前$realn$个元素是不重复的，因为是相邻元素比较，所以需要先对容器内元素排序。</p>
+<h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100000+50</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXM 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,n,m) for(int i=n;i&lt;=m;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000 + 7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a, b) memset(a, b, sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout &lt;&lt; #x &lt;&lt; <span class="meta-string">"="</span> &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch = getchar();</span><br><span class="line">	<span class="keyword">while</span> (ch &lt; <span class="string">'0'</span> || ch &gt; <span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (ch == <span class="string">'-'</span>)</span><br><span class="line">			f = <span class="number">-1</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		x = <span class="number">10</span> * x + ch - <span class="string">'0'</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">string</span> s[MAXN];</span><br><span class="line"><span class="keyword">int</span> day[] = &#123; <span class="number">0</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span> &#125;;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> y, <span class="keyword">int</span> m, <span class="keyword">int</span> d)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (y &lt; <span class="number">1600</span> || y&gt;<span class="number">9999</span> || m &lt; <span class="number">1</span> || m&gt;<span class="number">12</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> day_m = day[m];</span><br><span class="line">	<span class="keyword">if</span> (m == <span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> ((y % <span class="number">4</span> == <span class="number">0</span> &amp;&amp; y % <span class="number">100</span> != <span class="number">0</span>) || y % <span class="number">400</span> == <span class="number">0</span>) day_m++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (d&lt;<span class="number">1</span> || d&gt;day_m) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (m &lt;= <span class="number">2</span>) m += <span class="number">12</span>, y--;</span><br><span class="line">	<span class="keyword">int</span> c = y / <span class="number">100</span>;</span><br><span class="line">	y %= <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">int</span> w = ((y + y / <span class="number">4</span> + c / <span class="number">4</span> - <span class="number">2</span> * c + (<span class="number">26</span> * (m + <span class="number">1</span>)) / <span class="number">10</span> + d - <span class="number">1</span>) % <span class="number">7</span> + <span class="number">7</span>) % <span class="number">7</span>;</span><br><span class="line">	<span class="keyword">if</span> (w == <span class="number">5</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> T = read();</span><br><span class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (T--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> n = read();</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Case #%d: "</span>, ++cnt);</span><br><span class="line">		rep(i, <span class="number">1</span>, n)  <span class="built_in">cin</span> &gt;&gt; s[i];</span><br><span class="line">		sort(s + <span class="number">1</span>, s + n + <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">int</span> realn = unique(s + <span class="number">1</span>, s + n + <span class="number">1</span>) - s<span class="number">-1</span>;</span><br><span class="line">		rep(i, <span class="number">0</span>, <span class="number">9</span>) a[i] = i;</span><br><span class="line">		<span class="keyword">bool</span> flag = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">do</span> &#123;</span><br><span class="line">			<span class="keyword">bool</span> flag1 = <span class="number">1</span>;</span><br><span class="line">			rep(i, <span class="number">1</span>, realn)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> y = a[s[i][<span class="number">0</span>] - <span class="string">'A'</span>] * <span class="number">1000</span> + a[s[i][<span class="number">1</span>] - <span class="string">'A'</span>] * <span class="number">100</span> + a[s[i][<span class="number">2</span>] - <span class="string">'A'</span>] * <span class="number">10</span> + a[s[i][<span class="number">3</span>] - <span class="string">'A'</span>];</span><br><span class="line">				<span class="keyword">int</span> m = a[s[i][<span class="number">5</span>] - <span class="string">'A'</span>] * <span class="number">10</span> + a[s[i][<span class="number">6</span>] - <span class="string">'A'</span>];</span><br><span class="line">				<span class="keyword">int</span> d = a[s[i][<span class="number">8</span>] - <span class="string">'A'</span>] * <span class="number">10</span> + a[s[i][<span class="number">9</span>] - <span class="string">'A'</span>];</span><br><span class="line">				<span class="keyword">if</span> (!check(y, m, d))</span><br><span class="line">				&#123;</span><br><span class="line">					flag1 = <span class="number">0</span>; <span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (flag1)</span><br><span class="line">			&#123;</span><br><span class="line">				flag = <span class="number">1</span>;</span><br><span class="line">				rep(i, <span class="number">0</span>, <span class="number">9</span>) <span class="built_in">printf</span>(<span class="string">"%d"</span>, a[i]);</span><br><span class="line">				<span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">while</span> (next_permutation(a, a + <span class="number">10</span>));</span><br><span class="line">		<span class="keyword">if</span> (!flag) <span class="built_in">puts</span>(<span class="string">"Impossible"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
-        <category>MACOS</category>
+        <category>算法</category>
+        <category>牛客</category>
       </categories>
       <tags>
-        <tag>Bug</tag>
+        <tag>模拟</tag>
+        <tag>暴力</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Canada游记</title>
+    <url>/2018/08/20/Canada/</url>
+    <content><![CDATA[<p>总是要来回忆一下这两周的时光的吧。</p>
+<a id="more"></a>
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>当时接到通知需要去办护照的时候，心里是非常激动的。心里是不安和激动，而且越接近，越不安，越激动。不过当时没有想过需要做多少准备，但是，哪里有不麻烦的事情呢？准备工作应该是办护照-办签证-团队的一些事情？现在想来其实也就是这几件事情，不过可能在各种事情的轰炸之中，会觉得需要做的事情很多很多吧。不过，填那些乱七八糟的表格，真的是有些难受，这个时候，就需要体现个人强大的学习能力了23333，一味的问别人是没有用的。海外手机卡？电源转换器？方便面（划掉，好像重点准备的就是这几样，然后是一些日用品，倒也不麻烦。中间又回家了两天，来了启程。</p>
+<h1 id="行程"><a href="#行程" class="headerlink" title="行程"></a>行程</h1><h2 id="出发"><a href="#出发" class="headerlink" title="出发"></a>出发</h2><p>7.8早上，一行人相聚徐特立图书馆门前，就这样浩浩荡荡去了首都国际机场？坐10号线好漫长啊，和YK，HGF斗了会地主，终于到了还是很漫长的机场线？在机场信号很差的打了一把王者，第一次坐飞机的我也是了解了这么早来机场都做了些什么事儿。在机场其实可以发现许多事情。拿到登机牌后，神奇的发现自己从北京到温哥华的位置靠窗，还想着自己能在空中俯视一下太平洋，解锁空中看海成就，但其实只是想想。飞机一路追着太阳行走，眼看着天快要黑了。可以近距离观察一下星星，突然光亮越来越强，刺眼的光芒让我不得不得拉下窗户，外面的云海是真的很漂亮，一大片一大片。随便看了部电影，时间就过的差不多了。就是一直觉得很热，然而别人都觉得冷（逃。向外面一看，看到的是连绵不绝的冰山，当时真的震撼到了，感觉这边的云都很低，就那样飘在空中，仿佛触手可及，和那样的蓝天比较起来，真的美。</p>
+<h2 id="抵达"><a href="#抵达" class="headerlink" title="抵达"></a>抵达</h2><p>飞机降落途中，看到了温哥华的大致情况，几乎没有特别高的楼房，这就是地广人稀的基本素养吧。辗转到了埃德蒙顿，初见热情的Charles和Salta，坐着学校的大巴到了学校，国外的大学没有门，不过真的很大，导致我们后来很好奇他们平时在校园里都靠走么。第一晚跟着国良老师转悠了一个小时，终于找到一个开门的超市23333。这边的宿舍其实挺不错的，不过床太软了，<del>睡不习惯</del>。</p>
+<h2 id="在这里"><a href="#在这里" class="headerlink" title="在这里"></a>在这里</h2><p>飞机上没怎么睡觉，晚上一直到了十一点才发现天黑了，一觉睡得天昏地暗，早上大家在找我舍友的时候才发现我不见了2333，被推门而入的那一刻突然睁开双眼。没记错的话，第一天的欢迎早餐挺丰盛的，<del>所以我就理所当然的吃了不少</del>第一天其实主要是破冰，上午做了一些小游戏，对了，那个拿糖，我毫不犹豫的抓了一把，结果最后有点小坑hhh。下午逛了逛校园，其实不太能听懂解说说的，不过人家是真的很热情，校园也很漂亮，如果当时听懂了后面调研可能会容易一些吧我觉得。每天最大的挑战其实是吃什么，一般都是中午去hub吃一顿，早上晚上泡面牛奶面包，不过巧克力牛奶是真的好喝（</p>
+<h3 id="日子"><a href="#日子" class="headerlink" title="日子"></a>日子</h3><p>要说这两周都干了什么呢，参观学生自己的实验室，参观义肢实验室，参观阿尔伯塔大学植物园，参观阿尔伯塔省政府，参加街道文化节，埃德蒙顿美食节，两个公园，三节文化体验课，各种各样的讲座，野餐，西贸。这些事情，有的给我感触很深。</p>
+<p>带领我们参观学生自己关于航天方面的实验室是一个小姐姐，一看样子就是坚韧的理科生。我感受到的是他们对于自己喜欢的事情的强烈的热情。当我问到他们有老师指导吗，她说一切on their own。其实他们也是本科生，但是可以为了自己感兴趣的东西而努力，想到自己一切都是等着别人拉自己走，真的很惭愧，喜欢，就去做啊，Just Do It。</p>
+<p>当时报了参观义肢的实验室，却没想到如此高端。他们研究的其实和图像识别，机器学习都有很大关系，但只是粗略的体验了一下那个可以遥控的假肢，对于原理什么的，真的是听不懂，听力好差啊（</p>
+<p>在这里，随处都可以感受到的就是热情，买饭的时候，阿姨会问你从哪里来，和你畅谈许久，公园的导游的热情、逗比让人难以忘怀，把自己藏在一个小隔间里，然后让其他人都沿原路返回，再偷偷冒出头来吓大家一跳。有人说这是他们枯燥的工作生活中的一些调剂，但我觉得这是他们对于自己职业的热爱，所爱干一行爱一行，所谓行行出状元，就是这样的热情才有可能做出点样子来吧。</p>
+<p>其实刚开始的时候，感觉自己英语口语太差了，说不出口，不知道和谁交谈，渐渐地，发现，在这样一个环境里，其实是有很多人愿意和你交谈的，不管是身边经过去上课的学生，还是这里的各种各样的老师教授，还是饭店的工作人员，只要你愿意说，他们愿意和你聊，他们愿意故意放慢语速，愿意仔细倾听你说的话。无论什么时候，总是有人和你说一声，Enjoy yourself ，这样的感觉很棒的。一点也不害怕用英语和别人交流了，我想，这应该是我此行最大的收获吧。</p>
+<h3 id="心有所感"><a href="#心有所感" class="headerlink" title="心有所感"></a>心有所感</h3><p>谈一谈我对于这个国家的印象。</p>
+<p>从前我一直以为加拿大地广人稀，应该是一个生活节奏很慢的地方，但是第一天，温哥华到埃德蒙顿飞机的极速降落，我就有些怀疑自己的判断。可是，还是第一天，这边的饭店，超市之类的下午五点就关门，又让我很疑惑（后来知道因为暑假人比较少）。讲究准时，这确实是的，因为人少，车少，基本上不会堵路，就连公交车都是像国内的地铁一样，有着明确的时间规划，真的没有什么可以迟到的理由。所以他们一切事情都是严格按照既定的时间表来做。飞速的公交车让我再次怀疑自己的观点，但是文化交流课的老师告诉我她觉得Canada’s bus is so slow。我感觉，人少真好，坐公交车都有机会坐出高速的感觉。</p>
+<p>这里的天空是真的漂亮，配上低低的云彩，任何人都会为这样一幅画卷痴狂吧。各色各样的建筑，配上天空，配上云彩，都变得如此精彩纷呈。</p>
+<p>感觉他们讲究快的时候，可是，在马路上，所有的十字路口，不管有没有红绿灯，司机一定会给你让路，让你先过，本来觉得可能是法律比较严格，人也比较遵纪守法，可是有一天碰到车已经走出一半，看到我们过来，又退了回去，这就让我很不好意思，这种情况下，所有的司机都会热情的和你打招呼，让你先过去，这也是可以感受到的热情，那么，他们到底是不是追求快呢。</p>
+<p>这样一个我眼中看似“快节奏”的国家，却有着大片大片的草地，周末外出野餐的人也不在少数，也有着精彩纷呈的街道文化节，街边的酒吧也时常有人。我想，他们想要的应该是生活吧，生活就是无关快慢，总有属于自己的那一种生活方式，生活节奏。</p>
+<p>基础设施这一方面，我不想多提，因为现在和他们比这个没有太大实际意义，毕竟难以实现。但是基础设施真心不错，随处可见的直饮水设施，与国内相比很完善的残障保护措施，超大的图书馆等等。等国内资源不紧张了，可以向他们借鉴的。</p>
+<p>来谈谈教育吧，这个差别还是很大的。首先他们进入大学是不需要通过高考的，你最终大学在哪里上和你高中所上的一些大学的先修课有关系，这其实给了一个很好的衔接，如此，高中和大学反差太大的情况应该不会出现，大学堕落成谜的情况应该会减少。</p>
+<p>再者，他们是纯粹的学分制度。给出必修的学分数目，学生根据自己的需要选择课程来学习，学费也是按所选的科目来计算，但是每年选的课程数量是不受限制的，所以就有很快修完课程的学生，也有学生7年再完成学业，中间则可以做一些自己感兴趣的事情。说到这里，不得不提他们非常正式的学生会，他们的学生会几乎是独立于学校的，有自己产业，主要还是为学生服务，学生会的主要成员还可以在学业上申请缓一段时间，给他们时间搞学生工作，这更能提供一种磨练吧，我觉得和上文提到的断节现象少还是有关系，这样也是社会工作经验的积累吧。说到这儿，我想到了那个担任阿尔伯塔大学研究生会副主席的留学生学长，他想到的是，如果作为中国人，自己没有为自己发声的勇气，能力，又如何指望别人为你发声呢?权利意识真的很重要，有时候不仅仅是为了自己的权利，是一个群体的权利。</p>
+<p>上课嘛，因为人少，超过50人的课堂很少，所以老师和学生有更多互动，玩手机的现象可能少一些？不过大家都一样，该翘的课还是会翘的23333。我印象比较深的是他们对于实验类课程的引导性吧，我们的实验课程是老师一股脑给你讲一遍，几乎是傻子式教学，这样子真的又加深了我对于我学这门课有什么用的怀疑。。他们呢，就更注重引导了，老师主要是引出问题，剩下的时间都是学生自己做实验，虽然挑战性较高，但是更能体会到乐趣吧。毕竟是自己手玩出来的东西，直接按老师说的一步一步，有种打游戏看教程的感觉，没什么意思。</p>
+<p>嗯，感受还是挺多的？</p>
+<p>感受还有最深的地方呢，普天之下，所有机会都是只有一次的，机会再眼前，一定要抓住。同样，要珍惜任何一次机会，也要知道，机会是留给有准备的人的。</p>
+<h3 id="难忘的人儿"><a href="#难忘的人儿" class="headerlink" title="难忘的人儿"></a>难忘的人儿</h3><p>更让我难以忘怀是陪我度过这两周的人儿，无论去到哪里，总有连绵不绝的欢声笑语，这就是我所说的：“生活最妙的不过是一群妙人相聚吧”，这注定是一段我永远难以忘怀的记忆，是挤在厨房抢面条的快感吧，是大厅狼人杀的刺激吧，是公园旋转木马的中二吧，是一起在大统华的疯狂吧2333，是都听不懂英文的强颜欢笑吧，是给老师解释green hat的真的皮吧，是一起吐槽饭菜的乐趣吧，是一起yeah的欢愉吧，是一起awesome的畅快吧，是一起cool的希望吧……难忘的事情太多太多，我选择铭记。</p>
+<h2 id="离开"><a href="#离开" class="headerlink" title="离开"></a>离开</h2><p>时间过得真快啊，转眼就最后一天了呢。最终展示得到的奖品是绿帽子也是出乎意料，不过知道阿尔伯塔大学很喜欢绿色，绿色象征着森林，友好，反正我们也解释过这个在中国的含义了，也就没什么了吧23333</p>
+<p>最后一天吃披萨的时候又和Charles聊了很多，很早就自己一个人来这边留学，所有的苦难，所有的迷惑都经历过，但是只要你自己愿意走出来，总是会有人帮你的。</p>
+<p>知道飞机离开了地面，方知自己真的要离开了。</p>
+<p>再见，Canada。再见，Alberta。再见，Edmonton。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><blockquote>
+<p>Happy is the heart that still feels pain</p>
+<p>Darkness drains and light will come again</p>
+<p>Swing open your chest and let it in</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>经历</tag>
       </tags>
   </entry>
   <entry>
@@ -554,182 +636,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>MACOS配置终端代理</title>
-    <url>/2021/03/05/MACOS%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/</url>
-    <content><![CDATA[<a id="more"></a>
-
-<p>在<code>~/.zshrc</code> 中添加如下内容（如果是是<code>bash</code>用户那么配置文件为<code>~/.bash_profile</code>）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 为终端设置代理</span></span><br><span class="line"><span class="built_in">alias</span> proxy=<span class="string">'export all_proxy=socks5://127.0.0.1:1080'</span></span><br><span class="line"><span class="built_in">alias</span> unproxy=<span class="string">'unset all_proxy'</span></span><br></pre></td></tr></table></figure>
-
-<p>修改完成后<code>source</code>对应的文件即可</p>
-<p>其中，<code>1080</code>为端口号，需要和自己的代理软件的设置保持一致。</p>
-<p>这样在终端中使用<code>proxy</code>命令就可以打开代理，使用<code>unproxy</code>就可以关闭代理。</p>
-<p>效果如图</p>
-<p><a href="https://imgtu.com/i/6JUgqU" target="_blank" rel="noopener"><img src="https://s3.ax1x.com/2021/03/10/6JUgqU.png" alt="6JUgqU.png"></a></p>
-]]></content>
-      <categories>
-        <category>MACOS</category>
-      </categories>
-      <tags>
-        <tag>技巧</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>回首2020</title>
-    <url>/2021/01/07/%E5%9B%9E%E9%A6%962020/</url>
-    <content><![CDATA[<p>荒诞却又值得纪念的2020。</p>
-<a id="more"></a>
-
-<p>2020年初，我还在欢乐地带着玉米接待sjy和wsy，那几天真的好快乐喔，尽管sjy这个闷骚的家伙在玉米在的时候就能憋着不说话，晚上回去又属他话多，但还是真的好快乐，记得和他们在大学城北站告别的时候，我在回学校的路上一直在想，为什么无比欢乐的时光总是这么短暂呢？不由想起来，两年前清明节他们俩来找我，结果wsy因为要上军理先溜了，sjy因为要回去数学建模培训也先溜了，那个时候就在想，无忧无虑的时光早已一去不复返了，我们身上都已经背上了一份份责任，对自己，对别人。</p>
-<p>快乐有在变少吗？其实也未必，只是我们获得快乐越来越难了。生活中也许还有百般简单的快乐，但是真正的大快乐在于我们一直担心的事情有了好结果那一瞬间，那一个如释重负的瞬间，或许是在阳光微醺的午后，或许是在星空寂语的深夜，一天中的时时刻刻，都可能会带给我们惊喜。每个接到惊喜的人，怎么能抑制住心中的兴奋呢？所以，其实我们快乐的能力并没有丧失，只是我们获得快乐越来越难了。</p>
-<p>这怎么就扯远了呢。</p>
-<p>软测考试是元旦之前还是之后我都记不清了，只是依稀记得有一个1.4的考试，那应该就是了吧。那这里不得不提前说一下之后的软测大作业，真的离谱，让我们自己爬代码，写自动化测试程序，测试java7和java8的输入、形式都相同，但是结果不同的API。。虽然这门课最后得分还挺好的，但是写大作业的那几天想做点东西却不知道做什么的无力感是真的难受。</p>
-<p>时间来到了每年年前期末的生病阶段，肠胃型感冒，一晚上起来七八次，校医院医生只是直说赶紧转诊急救去，别来找我。生病并不可怕，可怕的是几天之后考试。那几天也几乎没怎么复习，在床上躺尸。不过那几天每天喝粥，吃自己和玉米整的一大堆药，还是挺印象深刻的。考完试搞了几天软测的大作业就回家了，回家当天是生日，回家前一天和玉米在图书馆提前过了一个生日，吃了一个可可爱爱的小蛋糕，火车上了度过了一天，晚上回去又吃了一个大大的大蛋糕，吃了两个蛋糕还是蛮开心的。</p>
-<p>生活总是这么有趣。</p>
-<p>而之后的日子却一天天灰暗了起来。</p>
-<p>某天清晨惊醒看到的科比去世的消息消息，一天天增长的疫情人数，惶惶终日。其实也猜到了开不了学，但是没想到这开不了学的日子一直持续到了9月。在家的日子谈不上索然无味，就是总少了点东西，这里折腾两天，那里折腾两天，不是很如意。而生活也好像喜欢和我开玩笑，上半年光快递就丢了4次，买本旧书还折腾了好多天，电脑还三天两头出问题，课程的作业一天天的堆积着，本来说着复习考研，可是在家的低效率，计网的一堆堆作业，编译原理每周让我焦头烂额的实验，以及家里的一些事情，生活突然就变得不那么有期待了……不过也好在我还是熬过来了，并且完成的还不错。整个暑假其实还是比较扯的，虽然还是完成了些东西，但现在看来我对这个暑假是极其不满意的，但是已经过去了，大概是7月还处于焦虑不安的时期，进了8月就开始每天想着开学了吧，安不下心来。</p>
-<p>8.29抵达北京，阔别良久的良乡，却要在31号就搬离，玉米30号到，晚上见了从1.15以来的第一面，真是难忘的一年啊，这么难都熬过来了，还有什么害怕的呢？未来可期～收拾宿舍发现自己真是一个怀旧的人啊，太多太多的东西都舍不得扔，导致最后我的行李是比别人多一些。当断则断，还是扔了不少东西的，以及好像不小心把自己的录取通知书等等资料给弄丢了……记得当时告诉自己，这是要给你发一个新的录取通知书呢，好兆头。可能确实人在最无助的时候就会turn to 老天爷吧，总把一些东西当成老天爷的馈赠。搬到村里后，地方是真的小啊，慢慢倒是也习惯了，刚开学那会儿每天就想着往良乡跑，确实学不进去，就这我还以为来了学校生活的旋律就慢慢到学习上来了。小学期开始后，生活确实转移到学习上来了，但是我却发现自己没有时间学习考研的东西……每天忙于造CPU，大家都说大四了水一水水一水，可是一个个的还是牟足了劲的做，可能是习惯了把作业完成的很好吧，虽然确实划水了，但是还是用了很大的力气去完成这个作业，以为大四的小学期不用熬夜了，可是还是每天熬夜到一两点；顺便顺便，以为小学期结束就不用熬夜了，可是考研期间其实也是一两点才睡，小学期终于结束了，也就10月了，以为生活的重心终于要转移到考研上来了，不过也确实，中间因为入党材料的事情耽搁了加起来几天的时间吧，不过这件事情好在最后有了好结果。</p>
-<p>十一期间也没怎么学习，十一之后好像才慢慢有了学习的状态吧，那个时候学习还不是很苦，每天7点多点起来，吃个饭就去图书馆学习，晚上学到10.30回来，每天看上去游刃有余，其实看到别人的进度，自己心里还是很慌的，自己确实进度慢慢，也不知道怎么就进入了资料收集的大误区，每天沉迷于收集资料，把自己的百度网盘塞的满满的，各种pdf层出不穷，却没有细看其中哪怕就一份。</p>
-<p>10.31玉米21岁生日生日，本来想着去故宫，吃海底捞完美规划，谁知道地铁上手机被狗东西给偷了，于是去派出所做了一上午笔录笔录，虽然也根本找不回来，可是对于丢手机这个流程，是很熟悉了，该冻结什么，改什么密码，也进一步提醒了自己备份的重要性，还好之前大部分照片都备份了，就是损失了手机，用了两年1个月，结果换了个新手机，是该高兴高兴，还是该哭泣呢？不知道……:( 反正，我自己的资金–了</p>
-<p>11月就这样悄无声息的来临了，还是按部就班的学习，每天给自己打打气，到了到了11月中旬吧，发现大家都开始找导师找毕设了，惊觉与导师的重要性，我觉得找个好导师比较重要，四处打听，其实也没打听到什么，大家好像都不怎么了解，想着要不找那个很push的老师算了，想起来pyq还有一个老师，但是感觉这个老师好厉害，估计保研的都招满了吧，不管了，先试一下，抱着试一试的态度我问了老师招不招考研的学生，没想到老师回复了我招。然后在玉米的教导下，我给老师发了我的基本信息，并表明了我想跟着老师做毕设，以后也想读老师的研究生，老师秒回，欢迎欢迎。然后老师让我去找她聊聊，这一聊，就从不到一点聊到了两点，虽然外卖凉了，但是心里好踏实，我告诉自己我告诉自己，又多了一条上岸的理由。之后老师的种种言行举止都让我觉得自己好幸运，当然我要是考上的话，那我真的好幸运。</p>
-<p>进入进入12月后，开始变得焦虑起来，时间越来越短，而感觉自己的复习毫无进展，简单来说，就是感觉自己啥都不会，唉，现在我还是忘不了那二十多天的煎熬，疲惫的身体已经不支持7点多起来了，而身体问题频出，晚上焦虑的睡不着觉，头疼，不过我还是坚持了下来，坚持学习。12月初其实还好，每天都在做数学卷子赶进度，大概是六级之后，十五天左右，我的眼睛开始废了，每天眼睛肿胀睁不开，而压力也真的好大，自己一个人坐在一楼的沙发那里，看着书，看着看着头就炸掉了，眼泪止不住的往下流，但是我告诉自己千万不能放弃，都坚持到这里了，走下去，一定要走下去，现在想起来，我都忘不了那最后15天昏暗的日子。理了个发，去了趟校医院，医生很温柔，让我注意用眼，坚持下去，眼睛满满的好了，后脑勺又出了一个大疙瘩，根本不能抬头，觉得自己真是倒霉啊那会儿，不过现在都过去了就看起来觉得没什么了。</p>
-<p>最后一周，王晗喊我调整作息，于是每天中午回去午睡，结果没有一天是考试时间起来的。。。不过也保证了身体不会再出现什么问题了，休息好比什么都强强。</p>
-<p>考试前，心情却异常的平静，也不是有多平静，就是这两天一直在积极调整自己的心态，所以从发挥上来看，是没有太大的问题的，数学也算是尽力了吧，粗心的分数不会太多，能拿多少分全看老师大题怎么给分，好了好了，不说这些，总之这一年就这样以考试结束了，果然，结束的时候并不会有什么仪式感，平淡的像什么都没发生什么都没发生。一切都挺好都挺好。</p>
-<p>感谢一直陪伴着我的人儿，自己一个人真的顶不住的，有一群和你每天哈哈哈哈的人不容易，有一个永远陪着你听你诉说的人不容易，这样看来，我还真是幸运的！</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>个人思考</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于字符串处理的整理</title>
-    <url>/2019/08/22/%E5%85%B3%E4%BA%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E7%9A%84%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>字符串是我们经常要处理的东西，今天在处理方面比如读入处理等方面做一个小小的总结。</p>
-<h3 id="读字符串之前"><a href="#读字符串之前" class="headerlink" title="读字符串之前"></a>读字符串之前</h3><p>如果读字符串之前有读入数的操作，那么需要把其后的换行符给读入消去，$getchar()$即可。</p>
-<h3 id="整行读入字符串的方式"><a href="#整行读入字符串的方式" class="headerlink" title="整行读入字符串的方式"></a>整行读入字符串的方式</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//C++标准string</span></span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line">getline(<span class="built_in">cin</span>,s);</span><br><span class="line"><span class="comment">//char字符数组</span></span><br><span class="line"><span class="keyword">char</span> s[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%[^\n]%*c"</span>,s);</span><br><span class="line">gets(s);</span><br><span class="line"><span class="built_in">cin</span>.get(s,<span class="number">100</span>);</span><br><span class="line"><span class="built_in">cin</span>.getline(s,<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
-
-<h4 id="整行读入原理解释"><a href="#整行读入原理解释" class="headerlink" title="整行读入原理解释"></a>整行读入原理解释</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%[^\n]%*c"</span>,s);</span><br></pre></td></tr></table></figure>
-
-<p>​    $%[\qquad ]$是很有趣的参数，意义是读入一个字符集合，一旦遇到不在集合中的就停止，同时遇到^后面的字符也会停止，所以^\n就是遇到换行符停止，后面的%*c是为了把换行符读入，防止影响接下来的读入。</p>
-<h3 id="cin-get-和cin-getline-之区别"><a href="#cin-get-和cin-getline-之区别" class="headerlink" title="cin.get()和cin.getline()之区别"></a>cin.get()和cin.getline()之区别</h3><p>两者都是只支持$char*$字符数组。</p>
-<p>我们知道读入时存在缓冲区这一说法，比如$cin$，在键盘输入结束后，将数据存入缓冲区m$cin$函数直接从缓冲区读取数据，所以如果缓冲区有残留数据，$cin$会直接读取。</p>
-<p>问题的关键在于，$cin.get$()在一次输入结束后不会删除缓冲区的结束符，而$cin.getline$()会自动丢弃缓冲区字符。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cin</span>.get(数组名，长度，结束符);</span><br><span class="line"><span class="built_in">cin</span>.getline(数组名，长度，结束符);</span><br><span class="line"><span class="comment">//其中，结束符默认为换行符</span></span><br></pre></td></tr></table></figure>
-
-<p>如果要用$cin.get()$读入多组数据，需要写成 $cin.get(数组名，长度).get()$。</p>
-]]></content>
-      <categories>
-        <category>语言</category>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>字符串</tag>
-        <tag>整理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>子区间异或和</title>
-    <url>/2018/08/18/%E5%AD%90%E5%8C%BA%E9%97%B4%E5%BC%82%E6%88%96%E5%92%8C/</url>
-    <content><![CDATA[<p>异或，二进制，真有趣啊。</p>
-<a id="more"></a>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>rating赛的一道二进制题。比赛的时候瞎搞过了，还是记录一下思路。那个时候好菜啊。</p>
-<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给出n个数（n&lt;=1e5），求出这n个数任意子区间的异或值的和。</p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>之前提过，异或这个东西具有非常优良的性质。对于任意子区间[i,j]，如果我们预处理出异或前缀和pre[]数组，显然i到j的异或值为pre[j]^pre[i-1]。但是得到这个还是不够，1e5的数据O(n^2)是不行的。那么我们考虑按位来计算贡献，1e9的二进制位数不会超过30，对于每一位都计算贡献，显然时间复杂度较低。<br>如何按位计算？我们知道，对于pre[j]^pre[i-1]，只有pre[j]和pre[i-1]的第k位不同时，他们的第k位才会做贡献，那么我们可以固定子区间的右端点r，计算对于每一个r，每一个k，之前的有多少个在第k位和r不一样，这个计算会不会工作量很大呢？不会，假设我们已经知道r时候的情况，那么r+1和r是只区别在r+1这一位的，如果r+1这一位是0，就给做贡献的位数+前面第k位是1的数目，反之，+前面第k位是0的数目。最后2^k*（做贡献的位数）即可，便可得到最终答案。</p>
-<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><p>异或真的是有优良性质，觉得异或的前缀和应该是一个比较常用的工具。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout&lt;&lt;#x&lt;&lt;<span class="meta-string">"="</span>&lt;&lt;x&lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch = getchar();</span><br><span class="line">	<span class="keyword">while</span> (ch&lt;<span class="string">'0'</span> || ch&gt;<span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (ch == <span class="string">'-'</span>) f = <span class="number">-1</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (ch &gt;= <span class="string">'0'</span>&amp;&amp;ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		x = <span class="number">10</span> * x + ch - <span class="string">'0'</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Out</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (a&gt;<span class="number">9</span>)</span><br><span class="line">		Out(a / <span class="number">10</span>);</span><br><span class="line">	<span class="built_in">putchar</span>(a % <span class="number">10</span> + <span class="string">'0'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n;  </span><br><span class="line">ll a[maxn],x[maxn],ans1;   </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	n=read();  </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;  </span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a[i]);  </span><br><span class="line">        x[i]=x[i<span class="number">-1</span>]^a[i];   </span><br><span class="line">    &#125;     </span><br><span class="line">    ans1=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(ll k=<span class="number">0</span>;k&lt;<span class="number">30</span>;++k)&#123;  </span><br><span class="line">        ll cnt[<span class="number">2</span>]=&#123;&#125;,tmp=<span class="number">0</span>;  </span><br><span class="line">        <span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;=n;i++)&#123;  </span><br><span class="line">            tmp+=cnt[((x[i]&gt;&gt;k)&amp;<span class="number">1</span>)^<span class="number">1</span>];  </span><br><span class="line">            ++cnt[(x[i]&gt;&gt;k)&amp;<span class="number">1</span>];  </span><br><span class="line">        &#125;  </span><br><span class="line">        ans1+=<span class="number">1L</span>L*(<span class="number">1</span>&lt;&lt;k)*tmp;</span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans1&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>异或</tag>
-        <tag>按位算贡献</tag>
-        <tag>前缀和</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Canada游记</title>
-    <url>/2018/08/20/Canada/</url>
-    <content><![CDATA[<p>总是要来回忆一下这两周的时光的吧。</p>
-<a id="more"></a>
-<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>当时接到通知需要去办护照的时候，心里是非常激动的。心里是不安和激动，而且越接近，越不安，越激动。不过当时没有想过需要做多少准备，但是，哪里有不麻烦的事情呢？准备工作应该是办护照-办签证-团队的一些事情？现在想来其实也就是这几件事情，不过可能在各种事情的轰炸之中，会觉得需要做的事情很多很多吧。不过，填那些乱七八糟的表格，真的是有些难受，这个时候，就需要体现个人强大的学习能力了23333，一味的问别人是没有用的。海外手机卡？电源转换器？方便面（划掉，好像重点准备的就是这几样，然后是一些日用品，倒也不麻烦。中间又回家了两天，来了启程。</p>
-<h1 id="行程"><a href="#行程" class="headerlink" title="行程"></a>行程</h1><h2 id="出发"><a href="#出发" class="headerlink" title="出发"></a>出发</h2><p>7.8早上，一行人相聚徐特立图书馆门前，就这样浩浩荡荡去了首都国际机场？坐10号线好漫长啊，和YK，HGF斗了会地主，终于到了还是很漫长的机场线？在机场信号很差的打了一把王者，第一次坐飞机的我也是了解了这么早来机场都做了些什么事儿。在机场其实可以发现许多事情。拿到登机牌后，神奇的发现自己从北京到温哥华的位置靠窗，还想着自己能在空中俯视一下太平洋，解锁空中看海成就，但其实只是想想。飞机一路追着太阳行走，眼看着天快要黑了。可以近距离观察一下星星，突然光亮越来越强，刺眼的光芒让我不得不得拉下窗户，外面的云海是真的很漂亮，一大片一大片。随便看了部电影，时间就过的差不多了。就是一直觉得很热，然而别人都觉得冷（逃。向外面一看，看到的是连绵不绝的冰山，当时真的震撼到了，感觉这边的云都很低，就那样飘在空中，仿佛触手可及，和那样的蓝天比较起来，真的美。</p>
-<h2 id="抵达"><a href="#抵达" class="headerlink" title="抵达"></a>抵达</h2><p>飞机降落途中，看到了温哥华的大致情况，几乎没有特别高的楼房，这就是地广人稀的基本素养吧。辗转到了埃德蒙顿，初见热情的Charles和Salta，坐着学校的大巴到了学校，国外的大学没有门，不过真的很大，导致我们后来很好奇他们平时在校园里都靠走么。第一晚跟着国良老师转悠了一个小时，终于找到一个开门的超市23333。这边的宿舍其实挺不错的，不过床太软了，<del>睡不习惯</del>。</p>
-<h2 id="在这里"><a href="#在这里" class="headerlink" title="在这里"></a>在这里</h2><p>飞机上没怎么睡觉，晚上一直到了十一点才发现天黑了，一觉睡得天昏地暗，早上大家在找我舍友的时候才发现我不见了2333，被推门而入的那一刻突然睁开双眼。没记错的话，第一天的欢迎早餐挺丰盛的，<del>所以我就理所当然的吃了不少</del>第一天其实主要是破冰，上午做了一些小游戏，对了，那个拿糖，我毫不犹豫的抓了一把，结果最后有点小坑hhh。下午逛了逛校园，其实不太能听懂解说说的，不过人家是真的很热情，校园也很漂亮，如果当时听懂了后面调研可能会容易一些吧我觉得。每天最大的挑战其实是吃什么，一般都是中午去hub吃一顿，早上晚上泡面牛奶面包，不过巧克力牛奶是真的好喝（</p>
-<h3 id="日子"><a href="#日子" class="headerlink" title="日子"></a>日子</h3><p>要说这两周都干了什么呢，参观学生自己的实验室，参观义肢实验室，参观阿尔伯塔大学植物园，参观阿尔伯塔省政府，参加街道文化节，埃德蒙顿美食节，两个公园，三节文化体验课，各种各样的讲座，野餐，西贸。这些事情，有的给我感触很深。</p>
-<p>带领我们参观学生自己关于航天方面的实验室是一个小姐姐，一看样子就是坚韧的理科生。我感受到的是他们对于自己喜欢的事情的强烈的热情。当我问到他们有老师指导吗，她说一切on their own。其实他们也是本科生，但是可以为了自己感兴趣的东西而努力，想到自己一切都是等着别人拉自己走，真的很惭愧，喜欢，就去做啊，Just Do It。</p>
-<p>当时报了参观义肢的实验室，却没想到如此高端。他们研究的其实和图像识别，机器学习都有很大关系，但只是粗略的体验了一下那个可以遥控的假肢，对于原理什么的，真的是听不懂，听力好差啊（</p>
-<p>在这里，随处都可以感受到的就是热情，买饭的时候，阿姨会问你从哪里来，和你畅谈许久，公园的导游的热情、逗比让人难以忘怀，把自己藏在一个小隔间里，然后让其他人都沿原路返回，再偷偷冒出头来吓大家一跳。有人说这是他们枯燥的工作生活中的一些调剂，但我觉得这是他们对于自己职业的热爱，所爱干一行爱一行，所谓行行出状元，就是这样的热情才有可能做出点样子来吧。</p>
-<p>其实刚开始的时候，感觉自己英语口语太差了，说不出口，不知道和谁交谈，渐渐地，发现，在这样一个环境里，其实是有很多人愿意和你交谈的，不管是身边经过去上课的学生，还是这里的各种各样的老师教授，还是饭店的工作人员，只要你愿意说，他们愿意和你聊，他们愿意故意放慢语速，愿意仔细倾听你说的话。无论什么时候，总是有人和你说一声，Enjoy yourself ，这样的感觉很棒的。一点也不害怕用英语和别人交流了，我想，这应该是我此行最大的收获吧。</p>
-<h3 id="心有所感"><a href="#心有所感" class="headerlink" title="心有所感"></a>心有所感</h3><p>谈一谈我对于这个国家的印象。</p>
-<p>从前我一直以为加拿大地广人稀，应该是一个生活节奏很慢的地方，但是第一天，温哥华到埃德蒙顿飞机的极速降落，我就有些怀疑自己的判断。可是，还是第一天，这边的饭店，超市之类的下午五点就关门，又让我很疑惑（后来知道因为暑假人比较少）。讲究准时，这确实是的，因为人少，车少，基本上不会堵路，就连公交车都是像国内的地铁一样，有着明确的时间规划，真的没有什么可以迟到的理由。所以他们一切事情都是严格按照既定的时间表来做。飞速的公交车让我再次怀疑自己的观点，但是文化交流课的老师告诉我她觉得Canada’s bus is so slow。我感觉，人少真好，坐公交车都有机会坐出高速的感觉。</p>
-<p>这里的天空是真的漂亮，配上低低的云彩，任何人都会为这样一幅画卷痴狂吧。各色各样的建筑，配上天空，配上云彩，都变得如此精彩纷呈。</p>
-<p>感觉他们讲究快的时候，可是，在马路上，所有的十字路口，不管有没有红绿灯，司机一定会给你让路，让你先过，本来觉得可能是法律比较严格，人也比较遵纪守法，可是有一天碰到车已经走出一半，看到我们过来，又退了回去，这就让我很不好意思，这种情况下，所有的司机都会热情的和你打招呼，让你先过去，这也是可以感受到的热情，那么，他们到底是不是追求快呢。</p>
-<p>这样一个我眼中看似“快节奏”的国家，却有着大片大片的草地，周末外出野餐的人也不在少数，也有着精彩纷呈的街道文化节，街边的酒吧也时常有人。我想，他们想要的应该是生活吧，生活就是无关快慢，总有属于自己的那一种生活方式，生活节奏。</p>
-<p>基础设施这一方面，我不想多提，因为现在和他们比这个没有太大实际意义，毕竟难以实现。但是基础设施真心不错，随处可见的直饮水设施，与国内相比很完善的残障保护措施，超大的图书馆等等。等国内资源不紧张了，可以向他们借鉴的。</p>
-<p>来谈谈教育吧，这个差别还是很大的。首先他们进入大学是不需要通过高考的，你最终大学在哪里上和你高中所上的一些大学的先修课有关系，这其实给了一个很好的衔接，如此，高中和大学反差太大的情况应该不会出现，大学堕落成谜的情况应该会减少。</p>
-<p>再者，他们是纯粹的学分制度。给出必修的学分数目，学生根据自己的需要选择课程来学习，学费也是按所选的科目来计算，但是每年选的课程数量是不受限制的，所以就有很快修完课程的学生，也有学生7年再完成学业，中间则可以做一些自己感兴趣的事情。说到这里，不得不提他们非常正式的学生会，他们的学生会几乎是独立于学校的，有自己产业，主要还是为学生服务，学生会的主要成员还可以在学业上申请缓一段时间，给他们时间搞学生工作，这更能提供一种磨练吧，我觉得和上文提到的断节现象少还是有关系，这样也是社会工作经验的积累吧。说到这儿，我想到了那个担任阿尔伯塔大学研究生会副主席的留学生学长，他想到的是，如果作为中国人，自己没有为自己发声的勇气，能力，又如何指望别人为你发声呢?权利意识真的很重要，有时候不仅仅是为了自己的权利，是一个群体的权利。</p>
-<p>上课嘛，因为人少，超过50人的课堂很少，所以老师和学生有更多互动，玩手机的现象可能少一些？不过大家都一样，该翘的课还是会翘的23333。我印象比较深的是他们对于实验类课程的引导性吧，我们的实验课程是老师一股脑给你讲一遍，几乎是傻子式教学，这样子真的又加深了我对于我学这门课有什么用的怀疑。。他们呢，就更注重引导了，老师主要是引出问题，剩下的时间都是学生自己做实验，虽然挑战性较高，但是更能体会到乐趣吧。毕竟是自己手玩出来的东西，直接按老师说的一步一步，有种打游戏看教程的感觉，没什么意思。</p>
-<p>嗯，感受还是挺多的？</p>
-<p>感受还有最深的地方呢，普天之下，所有机会都是只有一次的，机会再眼前，一定要抓住。同样，要珍惜任何一次机会，也要知道，机会是留给有准备的人的。</p>
-<h3 id="难忘的人儿"><a href="#难忘的人儿" class="headerlink" title="难忘的人儿"></a>难忘的人儿</h3><p>更让我难以忘怀是陪我度过这两周的人儿，无论去到哪里，总有连绵不绝的欢声笑语，这就是我所说的：“生活最妙的不过是一群妙人相聚吧”，这注定是一段我永远难以忘怀的记忆，是挤在厨房抢面条的快感吧，是大厅狼人杀的刺激吧，是公园旋转木马的中二吧，是一起在大统华的疯狂吧2333，是都听不懂英文的强颜欢笑吧，是给老师解释green hat的真的皮吧，是一起吐槽饭菜的乐趣吧，是一起yeah的欢愉吧，是一起awesome的畅快吧，是一起cool的希望吧……难忘的事情太多太多，我选择铭记。</p>
-<h2 id="离开"><a href="#离开" class="headerlink" title="离开"></a>离开</h2><p>时间过得真快啊，转眼就最后一天了呢。最终展示得到的奖品是绿帽子也是出乎意料，不过知道阿尔伯塔大学很喜欢绿色，绿色象征着森林，友好，反正我们也解释过这个在中国的含义了，也就没什么了吧23333</p>
-<p>最后一天吃披萨的时候又和Charles聊了很多，很早就自己一个人来这边留学，所有的苦难，所有的迷惑都经历过，但是只要你自己愿意走出来，总是会有人帮你的。</p>
-<p>知道飞机离开了地面，方知自己真的要离开了。</p>
-<p>再见，Canada。再见，Alberta。再见，Edmonton。</p>
-<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><blockquote>
-<p>Happy is the heart that still feels pain</p>
-<p>Darkness drains and light will come again</p>
-<p>Swing open your chest and let it in</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>经历</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【提提醒】</title>
-    <url>/2018/08/18/%E6%8F%90%E6%8F%90%E9%86%92/</url>
-    <content><![CDATA[<h1 id="TLE"><a href="#TLE" class="headerlink" title="TLE"></a>TLE</h1><ol>
-<li>是不是写了死循环</li>
-</ol>
-<h1 id="MLE"><a href="#MLE" class="headerlink" title="MLE"></a>MLE</h1><ol>
-<li>是不是没有清空队列</li>
-</ol>
-<h1 id="WA"><a href="#WA" class="headerlink" title="WA"></a>WA</h1><ol>
-<li>是不是写多组用例了</li>
-</ol>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>坑点</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>操作系统实验二进程控制</title>
-    <url>/2019/11/15/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E4%BA%8C%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/</url>
-    <content><![CDATA[<h2 id="操作系统课程设计实验二-进程控制"><a href="#操作系统课程设计实验二-进程控制" class="headerlink" title="操作系统课程设计实验二 进程控制"></a>操作系统课程设计实验二 进程控制</h2><h3 id="一些基本的东西"><a href="#一些基本的东西" class="headerlink" title="一些基本的东西"></a>一些基本的东西</h3><h5 id="C语言获取系统时间的函数"><a href="#C语言获取系统时间的函数" class="headerlink" title="C语言获取系统时间的函数"></a>C语言获取系统时间的函数</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gettimeofday</span><span class="params">(struct  timeval*tv,struct  timezone *tz )</span></span></span><br><span class="line"><span class="function"><span class="comment">//其中，时间会返回到结构体tv中，tv的结构如下</span></span></span><br><span class="line"><span class="function">    struct  timeval</span>&#123;</span><br><span class="line">       <span class="keyword">long</span>  tv_sec;<span class="comment">/*秒*/</span></span><br><span class="line">       <span class="keyword">long</span>  tv_usec;<span class="comment">/*微妙*/</span></span><br><span class="line">&#125;；</span><br><span class="line"><span class="comment">//同时，timezone为当前时区的信息，一般第二个参数置为NULL，结构体如下。</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timezone</span>&#123;</span></span><br><span class="line">        <span class="keyword">int</span> tz_minuteswest;<span class="comment">//和greenwich时间差的分钟数</span></span><br><span class="line">        <span class="keyword">int</span> tz_dsttime;<span class="comment">//夏令时校正</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="Linux系统编程wait-函数"><a href="#Linux系统编程wait-函数" class="headerlink" title="Linux系统编程wait()函数"></a>Linux系统编程wait()函数</h5><p> wait()函数用于使父进程（也就是调用wait()的进程）阻塞，直到一个子进程结束或者该进程接收到了一个指定的信号为止。如果该父进程没有子进程或者它的子进程已经结束，则wait()函数就会立即返回。 </p>
-<h5 id="Windows进程相关结构体-STARTUPINFO"><a href="#Windows进程相关结构体-STARTUPINFO" class="headerlink" title="Windows进程相关结构体 STARTUPINFO"></a>Windows进程相关结构体 STARTUPINFO</h5><p> 用于指定新进程的主窗口特性的一个结构。 </p>
-<p>没有太明白。。</p>
-]]></content>
-      <categories>
-        <category>课程</category>
-        <category>操作系统</category>
-      </categories>
-      <tags>
-        <tag>进程控制</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>nohup后台运行程序</title>
     <url>/2021/04/29/nohup%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</url>
     <content><![CDATA[<p>再也不用担心断网服务器连接失败从而功夫全废啦！</p>
@@ -749,161 +655,6 @@
       </categories>
       <tags>
         <tag>服务器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>对过去以及未来学习的一些思考</title>
-    <url>/2020/07/07/%E5%AF%B9%E8%BF%87%E5%8E%BB%E4%BB%A5%E5%8F%8A%E6%9C%AA%E6%9D%A5%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83-md/</url>
-    <content><![CDATA[<p>近来突然意识到自己快要步入社会了，学习确实是一件终身的事情啊。</p>
-<a id="more"></a>
-
-<p>大学三年的时光一眨眼就过去了，要说遗憾，感觉还是有的……但是毕竟都过去了，嘛，所以就总结一下，继续向前吧。</p>
-<h2 id="关于学习"><a href="#关于学习" class="headerlink" title="关于学习"></a>关于学习</h2><p>过去的这么多年，似乎学习一直是为了考试，大学以前不必说，小城市没有太多的娱乐活动，也没有老师会教你某一门课背后蕴含的无穷奥妙，有的只是小考、中考、高考。喜欢某一门课？不排除有的朋友真的是从枯燥的应试教育背后发现某门学科的真正含义，比如有些同学对于英语、语文的热爱是真的可以上升到语言、文学层次的，这样的热爱足以支撑枯燥的应试时光。那么其他科目呢，其实刷题把这门课刷高是没有灵魂的，比如我现在慢慢意识到自己对于历史、地理都是很喜欢的，也就对政治一门不是太感兴趣，因为感觉要背的东西太多了，但是就本人而言，还是对政治方面的东西很感兴趣的（确信！）。那为什么当初不选择文科冲一冲某校呢，可能一方面是自己内心不太愿意去做这个决定，另一方面是自己当时对计算机比较感兴趣吧。好吧，上面有些扯远了，我想说的其实就是应试教育似乎也吞噬了我的大学三年，这真的是一件很可怕的事情啊。似乎对很多课失去了兴趣，而是单纯的等考试前看一看，这也造成了一次滑铁卢啊。但是也正是从那时候开始，似乎对学习更加上心了，虽然不如大佬们对待学习的热情，但是在作业层次还是尽心尽力的。但是啊，还是以分数为导向，我觉得不算好好学习。</p>
-<p>这几天看dl的博客，发现了一句个人认为很有价值的话。</p>
-<blockquote>
-<p>大学课程同之前的课程一样，具备课程的基本属性：给你继续自由探索的勇气和能力。也就是说，课程的结束只是起点而已。</p>
-</blockquote>
-<p>所以，大学的课程，并不是这学期学完就结束了，并不是老师教你的东西就是全部，更广阔的世界是需要自己去探索的，这一个过程会耗费大量的时间，会让你娱乐的时间变少，但是确实是值得的啊。可惜我明白的太迟了。浪费了大量的时间。</p>
-<p>所以，从现在开始，学习对我来说意义发生了变化，学习不是你获取高分的工具，学习是自己不断探索的过程，不断成长，学习不能停啊！！</p>
-<h2 id="关于知识管理"><a href="#关于知识管理" class="headerlink" title="关于知识管理"></a>关于知识管理</h2><p>还是学习方面，自己从前的学习其实是没有层次的，学了就忘，mark的东西都是积灰，小孩子这样子可以，但是一个成年人是不是需要拥有一个属于自己的知识体系呢？其实也可以说是自己的生活轨迹。</p>
-<p>斟酌再三，我选用了notion这款软件，page可以任意嵌套，block可以任意排列，这确实是一个理想的人生轨迹软件。</p>
-<p>不出意外的话，日后的学习记录，精彩mark我会保存在notion中。</p>
-<p>说起来就想多说点，考研复习真的是一个体力活，用了一天刷了定积分17个视频，把我恶心到接下来一天半都没怎么复习，持续摸鱼，当然也可能是我给自己的懒找借口吧……保持状态真的特别重要啊！！一定要坐一会起来站站走走！！每天出去走路也是必备的！冲！</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>个人思考</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>个人书单</title>
-    <url>/2021/02/06/%E4%B8%AA%E4%BA%BA%E4%B9%A6%E5%8D%95/</url>
-    <content><![CDATA[<a id="more"></a>
-
-]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-      <tags>
-        <tag>读书</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>some flags</title>
-    <url>/2018/08/29/%E6%96%B0%E5%AD%A6%E6%9C%9F/</url>
-    <content><![CDATA[<p>Promise to myself.</p>
-<a id="more"></a>
-<h1 id="life"><a href="#life" class="headerlink" title="life"></a>life</h1><ul>
-<li>责任</li>
-<li>勇气</li>
-<li>自律</li>
-<li>勤快<h1 id="study"><a href="#study" class="headerlink" title="study"></a>study</h1></li>
-<li>网络相关</li>
-<li>算法</li>
-<li>网页制作</li>
-<li>操作系统</li>
-<li>课程</li>
-</ul>
-<p><img src="https://gitee.com/gugumelon/ownpic/raw/master/img/20200707111315.png" alt></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>中文技术文档写作风格指南阅读报告</title>
-    <url>/2022/05/16/%E4%B8%AD%E6%96%87%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3%E5%86%99%E4%BD%9C%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97%E9%98%85%E8%AF%BB%E6%8A%A5%E5%91%8A/</url>
-    <content><![CDATA[<a id="more"></a>
-<p>记录一些好的文档书写习惯。</p>
-<h1 id="语言风格"><a href="#语言风格" class="headerlink" title="语言风格"></a>语言风格</h1><ul>
-<li>技术文档中不推荐使用只有特定人群才了解的语词，如行业黑话或网络流行语</li>
-<li>正确使用的、地、得</li>
-<li>不使用该、其等指代词，要说清楚</li>
-<li>不使用较好、很好等修饰词，要详细说明衡量指标<h1 id="文档结构样式"><a href="#文档结构样式" class="headerlink" title="文档结构样式"></a>文档结构样式</h1><h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2></li>
-<li>一级扣一级，不跳用标题样式</li>
-<li>若非必要，不使用四级及以上标题，可采用<code>list</code>代替</li>
-<li>标题包括不限于<ul>
-<li>名词词组 “…概述”</li>
-<li>主题词+动词</li>
-<li>动词+主题词</li>
-<li>定语+主题词</li>
-<li>介词+定语+主题词</li>
-</ul>
-</li>
-<li>标题中不以标点符号结尾</li>
-<li>标题与标题之间应有引导性语言</li>
-</ul>
-<h2 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h2><ul>
-<li>一个段落长度在 50-200 字之间，尽量不超过 250 字</li>
-<li>避免只有一个句子，合理断句，避免一逗到底</li>
-<li>开头不缩进，顶格开始即可</li>
-<li>技术描述类主题，考虑先图表后句子</li>
-</ul>
-<h1 id="文档内容描述"><a href="#文档内容描述" class="headerlink" title="文档内容描述"></a>文档内容描述</h1><h2 id="空白符号"><a href="#空白符号" class="headerlink" title="空白符号"></a>空白符号</h2><ul>
-<li>禁止出现全角空格</li>
-<li>中文字符之间禁止出现半角空格</li>
-<li>英文字符和阿拉伯数字应背半角空格包围，但在句首或右侧为半角空格时，则省略</li>
-<li>不同段落、不同排版格式之间建议使用一个空行分开<h2 id="Tab-和空格的使用"><a href="#Tab-和空格的使用" class="headerlink" title="Tab 和空格的使用"></a>Tab 和空格的使用</h2></li>
-<li>禁止混用 Tab 和空格进行缩进<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2></li>
-<li>当元素间顺序不重要时，使用无序列表；当元素间顺序重要时，使用有序列表</li>
-<li>使用有序列表的几个场景<ul>
-<li>必须按照顺序操作的步骤</li>
-<li>排名分先后</li>
-<li>需要在下文明确引用的规则或其他信息</li>
-</ul>
-</li>
-<li>并列列表项中采用相似的句子结构</li>
-<li>每一项长度尽量接近</li>
-<li>不在每一项开头采用相同的词语</li>
-<li>并列列表要保持标点一致<ul>
-<li>若为句子，则以句号结尾</li>
-<li>若为词组，则结尾不加标点</li>
-<li>若既有句子也有词组，则统一采用句号结尾<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2></li>
-</ul>
-</li>
-<li>前后需要加空行</li>
-<li>若在列表缩进中，则在原先缩进基础上再缩进四格</li>
-<li>尽量提供复制按钮，提高可用性</li>
-<li>注释不应太长，一般以句号结尾<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2></li>
-<li>链接格式<ul>
-<li>若链接到同一文档其他标题，则应为<code>[文档标题](#具体标题)</code></li>
-<li>若链接到相邻文档，则应为<code>[文档标题](../文档路径)</code></li>
-<li>若链接到外部站点，则应为<code>[文档标题](文档链接)</code></li>
-</ul>
-</li>
-<li>若链接到相邻文档，且链接的文档篇幅很长，则应定位到具体引用的部分<h2 id="缩略语"><a href="#缩略语" class="headerlink" title="缩略语"></a>缩略语</h2><h3 id="汉语缩略语"><a href="#汉语缩略语" class="headerlink" title="汉语缩略语"></a>汉语缩略语</h3></li>
-<li>在第一次使用时说明情况<h3 id="英语缩略语"><a href="#英语缩略语" class="headerlink" title="英语缩略语"></a>英语缩略语</h3></li>
-<li>首次使用解释完整含义</li>
-<li>禁止使用无规则、不规范的缩略语<h2 id="单位符号"><a href="#单位符号" class="headerlink" title="单位符号"></a>单位符号</h2></li>
-<li>为避免指代不明，建议用汉字名称代替单位符号</li>
-<li>除了摄氏度、度、百分号、英尺英寸等符号外，其他情况下，数值与单位符号之间需要空一个半角空格<h2 id="标点符号"><a href="#标点符号" class="headerlink" title="标点符号"></a>标点符号</h2></li>
-<li>方括号表示窗口名、菜单名，如“弹出[新建任务]窗口”</li>
-<li>带尖括号表示按钮名、键名等</li>
-<li>英文手册名称用中文双引号或斜体表示，不使用书名号</li>
-<li>连接号<ul>
-<li>一字线——表示起止</li>
-<li>浪纹线~表示范围</li>
-<li>复合名词用短横线-</li>
-</ul>
-</li>
-<li>破折号————表示解释</li>
-<li>中文语境下的标点符号必须使用全角形式</li>
-<li>中英文括号的使用<ul>
-<li>括号里全为英文时，使用半角括号，并在括号前后各空一个半角空格</li>
-<li>括号里既有中文又有英文时，使用全角括号，括号前后不空格</li>
-</ul>
-</li>
-</ul>
-<h1 id="名称与命名"><a href="#名称与命名" class="headerlink" title="名称与命名"></a>名称与命名</h1><h2 id="文件命名"><a href="#文件命名" class="headerlink" title="文件命名"></a>文件命名</h2><ul>
-<li>文件名由多个英文单词组成时，使用-隔开</li>
-<li>不建议在文件名中使用下划线</li>
-<li>禁止大小写混用</li>
-</ul>
-]]></content>
-      <categories>
-        <category>阅读</category>
-      </categories>
-      <tags>
-        <tag>阅读</tag>
       </tags>
   </entry>
   <entry>
@@ -1162,6 +913,285 @@
       </tags>
   </entry>
   <entry>
+    <title>个人书单</title>
+    <url>/2021/02/06/%E4%B8%AA%E4%BA%BA%E4%B9%A6%E5%8D%95/</url>
+    <content><![CDATA[<a id="more"></a>
+
+]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
+      <tags>
+        <tag>读书</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>回首2020</title>
+    <url>/2021/01/07/%E5%9B%9E%E9%A6%962020/</url>
+    <content><![CDATA[<p>荒诞却又值得纪念的2020。</p>
+<a id="more"></a>
+
+<p>2020年初，我还在欢乐地带着玉米接待sjy和wsy，那几天真的好快乐喔，尽管sjy这个闷骚的家伙在玉米在的时候就能憋着不说话，晚上回去又属他话多，但还是真的好快乐，记得和他们在大学城北站告别的时候，我在回学校的路上一直在想，为什么无比欢乐的时光总是这么短暂呢？不由想起来，两年前清明节他们俩来找我，结果wsy因为要上军理先溜了，sjy因为要回去数学建模培训也先溜了，那个时候就在想，无忧无虑的时光早已一去不复返了，我们身上都已经背上了一份份责任，对自己，对别人。</p>
+<p>快乐有在变少吗？其实也未必，只是我们获得快乐越来越难了。生活中也许还有百般简单的快乐，但是真正的大快乐在于我们一直担心的事情有了好结果那一瞬间，那一个如释重负的瞬间，或许是在阳光微醺的午后，或许是在星空寂语的深夜，一天中的时时刻刻，都可能会带给我们惊喜。每个接到惊喜的人，怎么能抑制住心中的兴奋呢？所以，其实我们快乐的能力并没有丧失，只是我们获得快乐越来越难了。</p>
+<p>这怎么就扯远了呢。</p>
+<p>软测考试是元旦之前还是之后我都记不清了，只是依稀记得有一个1.4的考试，那应该就是了吧。那这里不得不提前说一下之后的软测大作业，真的离谱，让我们自己爬代码，写自动化测试程序，测试java7和java8的输入、形式都相同，但是结果不同的API。。虽然这门课最后得分还挺好的，但是写大作业的那几天想做点东西却不知道做什么的无力感是真的难受。</p>
+<p>时间来到了每年年前期末的生病阶段，肠胃型感冒，一晚上起来七八次，校医院医生只是直说赶紧转诊急救去，别来找我。生病并不可怕，可怕的是几天之后考试。那几天也几乎没怎么复习，在床上躺尸。不过那几天每天喝粥，吃自己和玉米整的一大堆药，还是挺印象深刻的。考完试搞了几天软测的大作业就回家了，回家当天是生日，回家前一天和玉米在图书馆提前过了一个生日，吃了一个可可爱爱的小蛋糕，火车上了度过了一天，晚上回去又吃了一个大大的大蛋糕，吃了两个蛋糕还是蛮开心的。</p>
+<p>生活总是这么有趣。</p>
+<p>而之后的日子却一天天灰暗了起来。</p>
+<p>某天清晨惊醒看到的科比去世的消息消息，一天天增长的疫情人数，惶惶终日。其实也猜到了开不了学，但是没想到这开不了学的日子一直持续到了9月。在家的日子谈不上索然无味，就是总少了点东西，这里折腾两天，那里折腾两天，不是很如意。而生活也好像喜欢和我开玩笑，上半年光快递就丢了4次，买本旧书还折腾了好多天，电脑还三天两头出问题，课程的作业一天天的堆积着，本来说着复习考研，可是在家的低效率，计网的一堆堆作业，编译原理每周让我焦头烂额的实验，以及家里的一些事情，生活突然就变得不那么有期待了……不过也好在我还是熬过来了，并且完成的还不错。整个暑假其实还是比较扯的，虽然还是完成了些东西，但现在看来我对这个暑假是极其不满意的，但是已经过去了，大概是7月还处于焦虑不安的时期，进了8月就开始每天想着开学了吧，安不下心来。</p>
+<p>8.29抵达北京，阔别良久的良乡，却要在31号就搬离，玉米30号到，晚上见了从1.15以来的第一面，真是难忘的一年啊，这么难都熬过来了，还有什么害怕的呢？未来可期～收拾宿舍发现自己真是一个怀旧的人啊，太多太多的东西都舍不得扔，导致最后我的行李是比别人多一些。当断则断，还是扔了不少东西的，以及好像不小心把自己的录取通知书等等资料给弄丢了……记得当时告诉自己，这是要给你发一个新的录取通知书呢，好兆头。可能确实人在最无助的时候就会turn to 老天爷吧，总把一些东西当成老天爷的馈赠。搬到村里后，地方是真的小啊，慢慢倒是也习惯了，刚开学那会儿每天就想着往良乡跑，确实学不进去，就这我还以为来了学校生活的旋律就慢慢到学习上来了。小学期开始后，生活确实转移到学习上来了，但是我却发现自己没有时间学习考研的东西……每天忙于造CPU，大家都说大四了水一水水一水，可是一个个的还是牟足了劲的做，可能是习惯了把作业完成的很好吧，虽然确实划水了，但是还是用了很大的力气去完成这个作业，以为大四的小学期不用熬夜了，可是还是每天熬夜到一两点；顺便顺便，以为小学期结束就不用熬夜了，可是考研期间其实也是一两点才睡，小学期终于结束了，也就10月了，以为生活的重心终于要转移到考研上来了，不过也确实，中间因为入党材料的事情耽搁了加起来几天的时间吧，不过这件事情好在最后有了好结果。</p>
+<p>十一期间也没怎么学习，十一之后好像才慢慢有了学习的状态吧，那个时候学习还不是很苦，每天7点多点起来，吃个饭就去图书馆学习，晚上学到10.30回来，每天看上去游刃有余，其实看到别人的进度，自己心里还是很慌的，自己确实进度慢慢，也不知道怎么就进入了资料收集的大误区，每天沉迷于收集资料，把自己的百度网盘塞的满满的，各种pdf层出不穷，却没有细看其中哪怕就一份。</p>
+<p>10.31玉米21岁生日生日，本来想着去故宫，吃海底捞完美规划，谁知道地铁上手机被狗东西给偷了，于是去派出所做了一上午笔录笔录，虽然也根本找不回来，可是对于丢手机这个流程，是很熟悉了，该冻结什么，改什么密码，也进一步提醒了自己备份的重要性，还好之前大部分照片都备份了，就是损失了手机，用了两年1个月，结果换了个新手机，是该高兴高兴，还是该哭泣呢？不知道……:( 反正，我自己的资金–了</p>
+<p>11月就这样悄无声息的来临了，还是按部就班的学习，每天给自己打打气，到了到了11月中旬吧，发现大家都开始找导师找毕设了，惊觉与导师的重要性，我觉得找个好导师比较重要，四处打听，其实也没打听到什么，大家好像都不怎么了解，想着要不找那个很push的老师算了，想起来pyq还有一个老师，但是感觉这个老师好厉害，估计保研的都招满了吧，不管了，先试一下，抱着试一试的态度我问了老师招不招考研的学生，没想到老师回复了我招。然后在玉米的教导下，我给老师发了我的基本信息，并表明了我想跟着老师做毕设，以后也想读老师的研究生，老师秒回，欢迎欢迎。然后老师让我去找她聊聊，这一聊，就从不到一点聊到了两点，虽然外卖凉了，但是心里好踏实，我告诉自己我告诉自己，又多了一条上岸的理由。之后老师的种种言行举止都让我觉得自己好幸运，当然我要是考上的话，那我真的好幸运。</p>
+<p>进入进入12月后，开始变得焦虑起来，时间越来越短，而感觉自己的复习毫无进展，简单来说，就是感觉自己啥都不会，唉，现在我还是忘不了那二十多天的煎熬，疲惫的身体已经不支持7点多起来了，而身体问题频出，晚上焦虑的睡不着觉，头疼，不过我还是坚持了下来，坚持学习。12月初其实还好，每天都在做数学卷子赶进度，大概是六级之后，十五天左右，我的眼睛开始废了，每天眼睛肿胀睁不开，而压力也真的好大，自己一个人坐在一楼的沙发那里，看着书，看着看着头就炸掉了，眼泪止不住的往下流，但是我告诉自己千万不能放弃，都坚持到这里了，走下去，一定要走下去，现在想起来，我都忘不了那最后15天昏暗的日子。理了个发，去了趟校医院，医生很温柔，让我注意用眼，坚持下去，眼睛满满的好了，后脑勺又出了一个大疙瘩，根本不能抬头，觉得自己真是倒霉啊那会儿，不过现在都过去了就看起来觉得没什么了。</p>
+<p>最后一周，王晗喊我调整作息，于是每天中午回去午睡，结果没有一天是考试时间起来的。。。不过也保证了身体不会再出现什么问题了，休息好比什么都强强。</p>
+<p>考试前，心情却异常的平静，也不是有多平静，就是这两天一直在积极调整自己的心态，所以从发挥上来看，是没有太大的问题的，数学也算是尽力了吧，粗心的分数不会太多，能拿多少分全看老师大题怎么给分，好了好了，不说这些，总之这一年就这样以考试结束了，果然，结束的时候并不会有什么仪式感，平淡的像什么都没发生什么都没发生。一切都挺好都挺好。</p>
+<p>感谢一直陪伴着我的人儿，自己一个人真的顶不住的，有一群和你每天哈哈哈哈的人不容易，有一个永远陪着你听你诉说的人不容易，这样看来，我还真是幸运的！</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>个人思考</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>中文技术文档写作风格指南阅读报告</title>
+    <url>/2022/05/16/%E4%B8%AD%E6%96%87%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3%E5%86%99%E4%BD%9C%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97%E9%98%85%E8%AF%BB%E6%8A%A5%E5%91%8A/</url>
+    <content><![CDATA[<a id="more"></a>
+<p>记录一些好的文档书写习惯。</p>
+<h1 id="语言风格"><a href="#语言风格" class="headerlink" title="语言风格"></a>语言风格</h1><ul>
+<li>技术文档中不推荐使用只有特定人群才了解的语词，如行业黑话或网络流行语</li>
+<li>正确使用的、地、得</li>
+<li>不使用该、其等指代词，要说清楚</li>
+<li>不使用较好、很好等修饰词，要详细说明衡量指标<h1 id="文档结构样式"><a href="#文档结构样式" class="headerlink" title="文档结构样式"></a>文档结构样式</h1><h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2></li>
+<li>一级扣一级，不跳用标题样式</li>
+<li>若非必要，不使用四级及以上标题，可采用<code>list</code>代替</li>
+<li>标题包括不限于<ul>
+<li>名词词组 “…概述”</li>
+<li>主题词+动词</li>
+<li>动词+主题词</li>
+<li>定语+主题词</li>
+<li>介词+定语+主题词</li>
+</ul>
+</li>
+<li>标题中不以标点符号结尾</li>
+<li>标题与标题之间应有引导性语言</li>
+</ul>
+<h2 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h2><ul>
+<li>一个段落长度在 50-200 字之间，尽量不超过 250 字</li>
+<li>避免只有一个句子，合理断句，避免一逗到底</li>
+<li>开头不缩进，顶格开始即可</li>
+<li>技术描述类主题，考虑先图表后句子</li>
+</ul>
+<h1 id="文档内容描述"><a href="#文档内容描述" class="headerlink" title="文档内容描述"></a>文档内容描述</h1><h2 id="空白符号"><a href="#空白符号" class="headerlink" title="空白符号"></a>空白符号</h2><ul>
+<li>禁止出现全角空格</li>
+<li>中文字符之间禁止出现半角空格</li>
+<li>英文字符和阿拉伯数字应背半角空格包围，但在句首或右侧为半角空格时，则省略</li>
+<li>不同段落、不同排版格式之间建议使用一个空行分开<h2 id="Tab-和空格的使用"><a href="#Tab-和空格的使用" class="headerlink" title="Tab 和空格的使用"></a>Tab 和空格的使用</h2></li>
+<li>禁止混用 Tab 和空格进行缩进<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2></li>
+<li>当元素间顺序不重要时，使用无序列表；当元素间顺序重要时，使用有序列表</li>
+<li>使用有序列表的几个场景<ul>
+<li>必须按照顺序操作的步骤</li>
+<li>排名分先后</li>
+<li>需要在下文明确引用的规则或其他信息</li>
+</ul>
+</li>
+<li>并列列表项中采用相似的句子结构</li>
+<li>每一项长度尽量接近</li>
+<li>不在每一项开头采用相同的词语</li>
+<li>并列列表要保持标点一致<ul>
+<li>若为句子，则以句号结尾</li>
+<li>若为词组，则结尾不加标点</li>
+<li>若既有句子也有词组，则统一采用句号结尾<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2></li>
+</ul>
+</li>
+<li>前后需要加空行</li>
+<li>若在列表缩进中，则在原先缩进基础上再缩进四格</li>
+<li>尽量提供复制按钮，提高可用性</li>
+<li>注释不应太长，一般以句号结尾<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2></li>
+<li>链接格式<ul>
+<li>若链接到同一文档其他标题，则应为<code>[文档标题](#具体标题)</code></li>
+<li>若链接到相邻文档，则应为<code>[文档标题](../文档路径)</code></li>
+<li>若链接到外部站点，则应为<code>[文档标题](文档链接)</code></li>
+</ul>
+</li>
+<li>若链接到相邻文档，且链接的文档篇幅很长，则应定位到具体引用的部分<h2 id="缩略语"><a href="#缩略语" class="headerlink" title="缩略语"></a>缩略语</h2><h3 id="汉语缩略语"><a href="#汉语缩略语" class="headerlink" title="汉语缩略语"></a>汉语缩略语</h3></li>
+<li>在第一次使用时说明情况<h3 id="英语缩略语"><a href="#英语缩略语" class="headerlink" title="英语缩略语"></a>英语缩略语</h3></li>
+<li>首次使用解释完整含义</li>
+<li>禁止使用无规则、不规范的缩略语<h2 id="单位符号"><a href="#单位符号" class="headerlink" title="单位符号"></a>单位符号</h2></li>
+<li>为避免指代不明，建议用汉字名称代替单位符号</li>
+<li>除了摄氏度、度、百分号、英尺英寸等符号外，其他情况下，数值与单位符号之间需要空一个半角空格<h2 id="标点符号"><a href="#标点符号" class="headerlink" title="标点符号"></a>标点符号</h2></li>
+<li>方括号表示窗口名、菜单名，如“弹出[新建任务]窗口”</li>
+<li>带尖括号表示按钮名、键名等</li>
+<li>英文手册名称用中文双引号或斜体表示，不使用书名号</li>
+<li>连接号<ul>
+<li>一字线——表示起止</li>
+<li>浪纹线~表示范围</li>
+<li>复合名词用短横线-</li>
+</ul>
+</li>
+<li>破折号————表示解释</li>
+<li>中文语境下的标点符号必须使用全角形式</li>
+<li>中英文括号的使用<ul>
+<li>括号里全为英文时，使用半角括号，并在括号前后各空一个半角空格</li>
+<li>括号里既有中文又有英文时，使用全角括号，括号前后不空格</li>
+</ul>
+</li>
+</ul>
+<h1 id="名称与命名"><a href="#名称与命名" class="headerlink" title="名称与命名"></a>名称与命名</h1><h2 id="文件命名"><a href="#文件命名" class="headerlink" title="文件命名"></a>文件命名</h2><ul>
+<li>文件名由多个英文单词组成时，使用-隔开</li>
+<li>不建议在文件名中使用下划线</li>
+<li>禁止大小写混用</li>
+</ul>
+]]></content>
+      <categories>
+        <category>阅读</category>
+      </categories>
+      <tags>
+        <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于字符串处理的整理</title>
+    <url>/2019/08/22/%E5%85%B3%E4%BA%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E7%9A%84%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>字符串是我们经常要处理的东西，今天在处理方面比如读入处理等方面做一个小小的总结。</p>
+<h3 id="读字符串之前"><a href="#读字符串之前" class="headerlink" title="读字符串之前"></a>读字符串之前</h3><p>如果读字符串之前有读入数的操作，那么需要把其后的换行符给读入消去，$getchar()$即可。</p>
+<h3 id="整行读入字符串的方式"><a href="#整行读入字符串的方式" class="headerlink" title="整行读入字符串的方式"></a>整行读入字符串的方式</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//C++标准string</span></span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line">getline(<span class="built_in">cin</span>,s);</span><br><span class="line"><span class="comment">//char字符数组</span></span><br><span class="line"><span class="keyword">char</span> s[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%[^\n]%*c"</span>,s);</span><br><span class="line">gets(s);</span><br><span class="line"><span class="built_in">cin</span>.get(s,<span class="number">100</span>);</span><br><span class="line"><span class="built_in">cin</span>.getline(s,<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="整行读入原理解释"><a href="#整行读入原理解释" class="headerlink" title="整行读入原理解释"></a>整行读入原理解释</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%[^\n]%*c"</span>,s);</span><br></pre></td></tr></table></figure>
+
+<p>​    $%[\qquad ]$是很有趣的参数，意义是读入一个字符集合，一旦遇到不在集合中的就停止，同时遇到^后面的字符也会停止，所以^\n就是遇到换行符停止，后面的%*c是为了把换行符读入，防止影响接下来的读入。</p>
+<h3 id="cin-get-和cin-getline-之区别"><a href="#cin-get-和cin-getline-之区别" class="headerlink" title="cin.get()和cin.getline()之区别"></a>cin.get()和cin.getline()之区别</h3><p>两者都是只支持$char*$字符数组。</p>
+<p>我们知道读入时存在缓冲区这一说法，比如$cin$，在键盘输入结束后，将数据存入缓冲区m$cin$函数直接从缓冲区读取数据，所以如果缓冲区有残留数据，$cin$会直接读取。</p>
+<p>问题的关键在于，$cin.get$()在一次输入结束后不会删除缓冲区的结束符，而$cin.getline$()会自动丢弃缓冲区字符。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cin</span>.get(数组名，长度，结束符);</span><br><span class="line"><span class="built_in">cin</span>.getline(数组名，长度，结束符);</span><br><span class="line"><span class="comment">//其中，结束符默认为换行符</span></span><br></pre></td></tr></table></figure>
+
+<p>如果要用$cin.get()$读入多组数据，需要写成 $cin.get(数组名，长度).get()$。</p>
+]]></content>
+      <categories>
+        <category>语言</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+        <tag>整理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【提提醒】</title>
+    <url>/2018/08/18/%E6%8F%90%E6%8F%90%E9%86%92/</url>
+    <content><![CDATA[<h1 id="TLE"><a href="#TLE" class="headerlink" title="TLE"></a>TLE</h1><ol>
+<li>是不是写了死循环</li>
+</ol>
+<h1 id="MLE"><a href="#MLE" class="headerlink" title="MLE"></a>MLE</h1><ol>
+<li>是不是没有清空队列</li>
+</ol>
+<h1 id="WA"><a href="#WA" class="headerlink" title="WA"></a>WA</h1><ol>
+<li>是不是写多组用例了</li>
+</ol>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>坑点</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>子区间异或和</title>
+    <url>/2018/08/18/%E5%AD%90%E5%8C%BA%E9%97%B4%E5%BC%82%E6%88%96%E5%92%8C/</url>
+    <content><![CDATA[<p>异或，二进制，真有趣啊。</p>
+<a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>rating赛的一道二进制题。比赛的时候瞎搞过了，还是记录一下思路。那个时候好菜啊。</p>
+<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给出n个数（n&lt;=1e5），求出这n个数任意子区间的异或值的和。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>之前提过，异或这个东西具有非常优良的性质。对于任意子区间[i,j]，如果我们预处理出异或前缀和pre[]数组，显然i到j的异或值为pre[j]^pre[i-1]。但是得到这个还是不够，1e5的数据O(n^2)是不行的。那么我们考虑按位来计算贡献，1e9的二进制位数不会超过30，对于每一位都计算贡献，显然时间复杂度较低。<br>如何按位计算？我们知道，对于pre[j]^pre[i-1]，只有pre[j]和pre[i-1]的第k位不同时，他们的第k位才会做贡献，那么我们可以固定子区间的右端点r，计算对于每一个r，每一个k，之前的有多少个在第k位和r不一样，这个计算会不会工作量很大呢？不会，假设我们已经知道r时候的情况，那么r+1和r是只区别在r+1这一位的，如果r+1这一位是0，就给做贡献的位数+前面第k位是1的数目，反之，+前面第k位是0的数目。最后2^k*（做贡献的位数）即可，便可得到最终答案。</p>
+<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><p>异或真的是有优良性质，觉得异或的前缀和应该是一个比较常用的工具。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 30000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000000+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mian main</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(a,b) memset(a,b,sizeof a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) cout&lt;&lt;#x&lt;&lt;<span class="meta-string">"="</span>&lt;&lt;x&lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">char</span> ch = getchar();</span><br><span class="line">	<span class="keyword">while</span> (ch&lt;<span class="string">'0'</span> || ch&gt;<span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (ch == <span class="string">'-'</span>) f = <span class="number">-1</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (ch &gt;= <span class="string">'0'</span>&amp;&amp;ch &lt;= <span class="string">'9'</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		x = <span class="number">10</span> * x + ch - <span class="string">'0'</span>;</span><br><span class="line">		ch = getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Out</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (a&gt;<span class="number">9</span>)</span><br><span class="line">		Out(a / <span class="number">10</span>);</span><br><span class="line">	<span class="built_in">putchar</span>(a % <span class="number">10</span> + <span class="string">'0'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n;  </span><br><span class="line">ll a[maxn],x[maxn],ans1;   </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	n=read();  </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;  </span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a[i]);  </span><br><span class="line">        x[i]=x[i<span class="number">-1</span>]^a[i];   </span><br><span class="line">    &#125;     </span><br><span class="line">    ans1=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(ll k=<span class="number">0</span>;k&lt;<span class="number">30</span>;++k)&#123;  </span><br><span class="line">        ll cnt[<span class="number">2</span>]=&#123;&#125;,tmp=<span class="number">0</span>;  </span><br><span class="line">        <span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;=n;i++)&#123;  </span><br><span class="line">            tmp+=cnt[((x[i]&gt;&gt;k)&amp;<span class="number">1</span>)^<span class="number">1</span>];  </span><br><span class="line">            ++cnt[(x[i]&gt;&gt;k)&amp;<span class="number">1</span>];  </span><br><span class="line">        &#125;  </span><br><span class="line">        ans1+=<span class="number">1L</span>L*(<span class="number">1</span>&lt;&lt;k)*tmp;</span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans1&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>异或</tag>
+        <tag>按位算贡献</tag>
+        <tag>前缀和</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>对过去以及未来学习的一些思考</title>
+    <url>/2020/07/07/%E5%AF%B9%E8%BF%87%E5%8E%BB%E4%BB%A5%E5%8F%8A%E6%9C%AA%E6%9D%A5%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83-md/</url>
+    <content><![CDATA[<p>近来突然意识到自己快要步入社会了，学习确实是一件终身的事情啊。</p>
+<a id="more"></a>
+
+<p>大学三年的时光一眨眼就过去了，要说遗憾，感觉还是有的……但是毕竟都过去了，嘛，所以就总结一下，继续向前吧。</p>
+<h2 id="关于学习"><a href="#关于学习" class="headerlink" title="关于学习"></a>关于学习</h2><p>过去的这么多年，似乎学习一直是为了考试，大学以前不必说，小城市没有太多的娱乐活动，也没有老师会教你某一门课背后蕴含的无穷奥妙，有的只是小考、中考、高考。喜欢某一门课？不排除有的朋友真的是从枯燥的应试教育背后发现某门学科的真正含义，比如有些同学对于英语、语文的热爱是真的可以上升到语言、文学层次的，这样的热爱足以支撑枯燥的应试时光。那么其他科目呢，其实刷题把这门课刷高是没有灵魂的，比如我现在慢慢意识到自己对于历史、地理都是很喜欢的，也就对政治一门不是太感兴趣，因为感觉要背的东西太多了，但是就本人而言，还是对政治方面的东西很感兴趣的（确信！）。那为什么当初不选择文科冲一冲某校呢，可能一方面是自己内心不太愿意去做这个决定，另一方面是自己当时对计算机比较感兴趣吧。好吧，上面有些扯远了，我想说的其实就是应试教育似乎也吞噬了我的大学三年，这真的是一件很可怕的事情啊。似乎对很多课失去了兴趣，而是单纯的等考试前看一看，这也造成了一次滑铁卢啊。但是也正是从那时候开始，似乎对学习更加上心了，虽然不如大佬们对待学习的热情，但是在作业层次还是尽心尽力的。但是啊，还是以分数为导向，我觉得不算好好学习。</p>
+<p>这几天看dl的博客，发现了一句个人认为很有价值的话。</p>
+<blockquote>
+<p>大学课程同之前的课程一样，具备课程的基本属性：给你继续自由探索的勇气和能力。也就是说，课程的结束只是起点而已。</p>
+</blockquote>
+<p>所以，大学的课程，并不是这学期学完就结束了，并不是老师教你的东西就是全部，更广阔的世界是需要自己去探索的，这一个过程会耗费大量的时间，会让你娱乐的时间变少，但是确实是值得的啊。可惜我明白的太迟了。浪费了大量的时间。</p>
+<p>所以，从现在开始，学习对我来说意义发生了变化，学习不是你获取高分的工具，学习是自己不断探索的过程，不断成长，学习不能停啊！！</p>
+<h2 id="关于知识管理"><a href="#关于知识管理" class="headerlink" title="关于知识管理"></a>关于知识管理</h2><p>还是学习方面，自己从前的学习其实是没有层次的，学了就忘，mark的东西都是积灰，小孩子这样子可以，但是一个成年人是不是需要拥有一个属于自己的知识体系呢？其实也可以说是自己的生活轨迹。</p>
+<p>斟酌再三，我选用了notion这款软件，page可以任意嵌套，block可以任意排列，这确实是一个理想的人生轨迹软件。</p>
+<p>不出意外的话，日后的学习记录，精彩mark我会保存在notion中。</p>
+<p>说起来就想多说点，考研复习真的是一个体力活，用了一天刷了定积分17个视频，把我恶心到接下来一天半都没怎么复习，持续摸鱼，当然也可能是我给自己的懒找借口吧……保持状态真的特别重要啊！！一定要坐一会起来站站走走！！每天出去走路也是必备的！冲！</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>个人思考</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>操作系统实验二进程控制</title>
+    <url>/2019/11/15/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E4%BA%8C%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6/</url>
+    <content><![CDATA[<h2 id="操作系统课程设计实验二-进程控制"><a href="#操作系统课程设计实验二-进程控制" class="headerlink" title="操作系统课程设计实验二 进程控制"></a>操作系统课程设计实验二 进程控制</h2><h3 id="一些基本的东西"><a href="#一些基本的东西" class="headerlink" title="一些基本的东西"></a>一些基本的东西</h3><h5 id="C语言获取系统时间的函数"><a href="#C语言获取系统时间的函数" class="headerlink" title="C语言获取系统时间的函数"></a>C语言获取系统时间的函数</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gettimeofday</span><span class="params">(struct  timeval*tv,struct  timezone *tz )</span></span></span><br><span class="line"><span class="function"><span class="comment">//其中，时间会返回到结构体tv中，tv的结构如下</span></span></span><br><span class="line"><span class="function">    struct  timeval</span>&#123;</span><br><span class="line">       <span class="keyword">long</span>  tv_sec;<span class="comment">/*秒*/</span></span><br><span class="line">       <span class="keyword">long</span>  tv_usec;<span class="comment">/*微妙*/</span></span><br><span class="line">&#125;；</span><br><span class="line"><span class="comment">//同时，timezone为当前时区的信息，一般第二个参数置为NULL，结构体如下。</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timezone</span>&#123;</span></span><br><span class="line">        <span class="keyword">int</span> tz_minuteswest;<span class="comment">//和greenwich时间差的分钟数</span></span><br><span class="line">        <span class="keyword">int</span> tz_dsttime;<span class="comment">//夏令时校正</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Linux系统编程wait-函数"><a href="#Linux系统编程wait-函数" class="headerlink" title="Linux系统编程wait()函数"></a>Linux系统编程wait()函数</h5><p> wait()函数用于使父进程（也就是调用wait()的进程）阻塞，直到一个子进程结束或者该进程接收到了一个指定的信号为止。如果该父进程没有子进程或者它的子进程已经结束，则wait()函数就会立即返回。 </p>
+<h5 id="Windows进程相关结构体-STARTUPINFO"><a href="#Windows进程相关结构体-STARTUPINFO" class="headerlink" title="Windows进程相关结构体 STARTUPINFO"></a>Windows进程相关结构体 STARTUPINFO</h5><p> 用于指定新进程的主窗口特性的一个结构。 </p>
+<p>没有太明白。。</p>
+]]></content>
+      <categories>
+        <category>课程</category>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>进程控制</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>引用参数与形参区别</title>
+    <url>/2021/02/04/%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0%E4%B8%8E%E5%BD%A2%E5%8F%82%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>发现引用传值真的要快很多。</p>
+<a id="more"></a>
+
+<p>在函数进行参数传递时，如果采用形式参数传递，则需要进行拷贝，将会有额外的时间和空间的开销，而使用引用类型传递，因为自始自终使用的都是一个东西，只是起了几个名字而已，所以就没有额外的开销，时间和空间上都有不小的提升。</p>
+<p>引用传递本质是指针，对于基本数据类型 ，引用传递和非引用基本没有区别（基本类型复制较快）， 而对于<strong>容器</strong>或者<strong>自定义类型</strong> 复制成本非常高（因为这里会调用 拷贝构造函数，具体是深拷贝还是浅拷贝，需要取决于你是否重写拷贝构造函数）</p>
+]]></content>
+      <categories>
+        <category>语言</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>坑点</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>支持向量机</title>
+    <url>/2021/04/15/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/</url>
+    <content><![CDATA[<p>慢慢学习。</p>
+<a id="more"></a>
+<h4 id="几何距离"><a href="#几何距离" class="headerlink" title="几何距离"></a>几何距离</h4><p><img src="https://i.loli.net/2021/04/15/dlyDaGeNZmQFk7r.png" alt="image.png"></p>
+]]></content>
+      <categories>
+        <category>cs229</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数学结论</title>
     <url>/2021/02/04/%E6%95%B0%E5%AD%A6%E7%BB%93%E8%AE%BA/</url>
     <content><![CDATA[<a id="more"></a>
@@ -1185,84 +1215,6 @@
       </categories>
       <tags>
         <tag>数学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>生成学习算法</title>
-    <url>/2021/04/13/%E7%94%9F%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>判别学习算法的模型是通过一条分隔线把两种类别区分开，而生成学习算法是对两种可能的结果分别进行建模，然后分别和输入进行比对，计算出相应的概率.</p>
-<a id="more"></a>
-<h1 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h1><p>我们常用的算法是逻辑回归，判别模型，即找到0和1之间的界限，找到一个决策边界，来区分0和1，而生成学习算法是通过0的特征学习出一个0的模型，根据1的特征学习出一个1的模型，对于一个新的样本，分别放入0 1的模型中，先求得是0的概率，再求是1的概率，进行比较，即可确定类型。这里计算概率使用的是贝叶斯公式。主要完成对$p(x|y)$和$p(y)$的建模</p>
-<h1 id="二、高斯判别分析（Gaussian-Discriminant-Analysis）"><a href="#二、高斯判别分析（Gaussian-Discriminant-Analysis）" class="headerlink" title="二、高斯判别分析（Gaussian Discriminant Analysis）"></a>二、高斯判别分析（Gaussian Discriminant Analysis）</h1><p>假设$p(x|y)$满足多维正态分布<br><img src="https://i.loli.net/2021/04/13/TRWUmFtn3zkEeAr.png" alt="image.png"></p>
-<p>概率分布为<br><img src="https://i.loli.net/2021/04/13/XaSEhYct9eJKRl3.png" alt="image.png"><br>极大似然估计求得所有的参数<br><img src="https://i.loli.net/2021/04/14/CV4r56NKAXZhvMU.png" alt="image.png"><br>其中，$ϕ$ 是训练样本中结果y=1占有的比例，$μ_0$是y=0的样本中特征均值，$μ_1$ 是y=1的样本中特征均值，$Σ$ 是样本特征方差均值。</p>
-<p>注意这里的参数有$μ_0$和$μ_1$，表示在不同的结果模型下，特征均值不同，但我们假设协方差相同。反映在图上就是不同模型中心位置不同，但形状相同。这样就可以用直线来进行分隔判别。</p>
-<p>所以我们得到这样的图像<br><img src="https://i.loli.net/2021/04/13/RndUHTPAOmJFz7V.png" alt="image.png"></p>
-<h1 id="三、朴素贝叶斯（Naive-Bayes）"><a href="#三、朴素贝叶斯（Naive-Bayes）" class="headerlink" title="三、朴素贝叶斯（Naive Bayes）"></a>三、朴素贝叶斯（Naive Bayes）</h1><p>当$x$是离散值时，我们假设垃圾邮件分类的情况。将一封邮件作为输入向量，如果字典中第$i$个词在字典中出现，则$x_i$=1，反之$x_i$=0，这样我们得到所需的特征向量。</p>
-<p>现在对$p(x|y)$建模，假设字典中有50000个词，$x \in{0,1}^{50000}$，如果采用多项式建模， 将会有$2^{50000}$种结果，$2^{50000}$−1维的参数向量，这样明显参数过多，很难进行计算。所以为了对$p(x|y)$建模，需要做一个强假设，假设x的特征是条件独立的，这个假设称为朴素贝叶斯假设(Naive Bayes (NB) assumption),这个算法就称为朴素贝叶斯分类(Naive Bayes classifier).</p>
-<p>根据概率论的链式法则性质和朴素贝叶斯假设，我们可以得到如下等式<br><img src="https://i.loli.net/2021/04/14/UhLlwdFQGpriZ32.png" alt="image.png"></p>
-<p>根据联合似然函数，再依次得到参数的最大似然估计值，我们对一个全新的样本进行预测，特征为$x$，则有<br><img src="https://i.loli.net/2021/04/14/vna2tAU735JVwZI.png" alt="image.png"></p>
-<p>因为分母对于y取0或1是一样的，所以只需要计算比较分子即可确定分类。</p>
-<h1 id="四、拉普拉斯平滑（Laplace-smoothing）"><a href="#四、拉普拉斯平滑（Laplace-smoothing）" class="headerlink" title="四、拉普拉斯平滑（Laplace smoothing）"></a>四、拉普拉斯平滑（Laplace smoothing）</h1><p>朴素贝叶斯模型已经能不错的解决离散值的问题，可是对于数据稀疏问题，朴素贝叶斯模型并不能很好的解决，还是针对邮件分类问题，假设收到了一封含有NIPS的邮件，但是NIPS从未在垃圾邮件或者正常邮件中出现过，假设NIPS在字典中位子伟35000，则计算概率时，<img src="https://i.loli.net/2021/04/14/DmwZnKpdGavJBjy.png" alt="image.png"><br>而后验概率计算得到的为$\frac{0}0$，也就不知道该如何预测了。</p>
-<p>这里我们引入拉普拉斯平滑，将估计替换为</p>
-<p><img src="https://i.loli.net/2021/04/14/mriZuhLe2sbWIJA.png" alt="image.png"></p>
-<p>这里首先是对分子加1，然后对分母加k，要注意$\sum^k_{j=1} \phi_j = 1$依然成立（自己检验一下），这是一个必须有的性质，因为$\phi_j$<br>是对概率的估计，然后所有的概率加到一起必然等于1。另外对于所有的$j$值，都有$\phi_j \neq 0$，这就解决了刚刚的概率估计为零的问题了。在某些特定的条件下（相当强的假设条件下，arguably quite strong），可以发现拉普拉斯平滑还真能给出对参数$\phi_j$ 的最佳估计（optimal estimator）</p>
-<p>在朴素贝叶斯问题上，使用拉普拉斯平滑后得到的公式则为<br><img src="https://i.loli.net/2021/04/14/WpkzK7cf4hrBH1F.png" alt="image.png"></p>
-<p>注：在实际应用中，是否对$\phi_y$使用拉普拉斯平滑影响不大，因为$\phi_y$是对$p(y=1)$的一个合理估计，而垃圾邮件与正常邮件是成一定比例的，所以$\phi_y$与零点存在一定的距离。</p>
-]]></content>
-      <categories>
-        <category>cs229</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>引用参数与形参区别</title>
-    <url>/2021/02/04/%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0%E4%B8%8E%E5%BD%A2%E5%8F%82%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<p>发现引用传值真的要快很多。</p>
-<a id="more"></a>
-
-<p>在函数进行参数传递时，如果采用形式参数传递，则需要进行拷贝，将会有额外的时间和空间的开销，而使用引用类型传递，因为自始自终使用的都是一个东西，只是起了几个名字而已，所以就没有额外的开销，时间和空间上都有不小的提升。</p>
-<p>引用传递本质是指针，对于基本数据类型 ，引用传递和非引用基本没有区别（基本类型复制较快）， 而对于<strong>容器</strong>或者<strong>自定义类型</strong> 复制成本非常高（因为这里会调用 拷贝构造函数，具体是深拷贝还是浅拷贝，需要取决于你是否重写拷贝构造函数）</p>
-]]></content>
-      <categories>
-        <category>语言</category>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>坑点</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>田宇航定理</title>
-    <url>/2021/01/29/%E7%94%B0%E5%AE%87%E8%88%AA%E5%AE%9A%E7%90%86/</url>
-    <content><![CDATA[<h3 id="电脑使用定理"><a href="#电脑使用定理" class="headerlink" title="电脑使用定理"></a>电脑使用定理</h3><ul>
-<li><p>不要花时间折腾一些对于使用没什么大影响的东西，要看重内容</p>
-</li>
-<li><p>不影响使用的bug，如今天遇到的“体系结构 arm64 不受支持”这一C/C++扩展的bug，而且网上也找不到解决方案，不必折腾，让子弹飞一会儿</p>
-</li>
-<li><p>面对问题，要克制自己的冲动，选择bug最少的解决方案</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>个人思考</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>编程经验</title>
-    <url>/2018/08/28/%E7%BB%8F%E7%BB%8F%E9%AA%8C/</url>
-    <content><![CDATA[<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><p>数组作为变量传递时会丢失长度信息</p>
-]]></content>
-      <categories>
-        <category>总结</category>
-      </categories>
-      <tags>
-        <tag>学习</tag>
-        <tag>经验</tag>
       </tags>
   </entry>
   <entry>
@@ -1320,6 +1272,54 @@
       <tags>
         <tag>Pytorch</tag>
         <tag>毕设</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>some flags</title>
+    <url>/2018/08/29/%E6%96%B0%E5%AD%A6%E6%9C%9F/</url>
+    <content><![CDATA[<p>Promise to myself.</p>
+<a id="more"></a>
+<h1 id="life"><a href="#life" class="headerlink" title="life"></a>life</h1><ul>
+<li>责任</li>
+<li>勇气</li>
+<li>自律</li>
+<li>勤快<h1 id="study"><a href="#study" class="headerlink" title="study"></a>study</h1></li>
+<li>网络相关</li>
+<li>算法</li>
+<li>网页制作</li>
+<li>操作系统</li>
+<li>课程</li>
+</ul>
+<p><img src="https://gitee.com/gugumelon/ownpic/raw/master/img/20200707111315.png" alt></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>生成学习算法</title>
+    <url>/2021/04/13/%E7%94%9F%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>判别学习算法的模型是通过一条分隔线把两种类别区分开，而生成学习算法是对两种可能的结果分别进行建模，然后分别和输入进行比对，计算出相应的概率.</p>
+<a id="more"></a>
+<h1 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h1><p>我们常用的算法是逻辑回归，判别模型，即找到0和1之间的界限，找到一个决策边界，来区分0和1，而生成学习算法是通过0的特征学习出一个0的模型，根据1的特征学习出一个1的模型，对于一个新的样本，分别放入0 1的模型中，先求得是0的概率，再求是1的概率，进行比较，即可确定类型。这里计算概率使用的是贝叶斯公式。主要完成对$p(x|y)$和$p(y)$的建模</p>
+<h1 id="二、高斯判别分析（Gaussian-Discriminant-Analysis）"><a href="#二、高斯判别分析（Gaussian-Discriminant-Analysis）" class="headerlink" title="二、高斯判别分析（Gaussian Discriminant Analysis）"></a>二、高斯判别分析（Gaussian Discriminant Analysis）</h1><p>假设$p(x|y)$满足多维正态分布<br><img src="https://i.loli.net/2021/04/13/TRWUmFtn3zkEeAr.png" alt="image.png"></p>
+<p>概率分布为<br><img src="https://i.loli.net/2021/04/13/XaSEhYct9eJKRl3.png" alt="image.png"><br>极大似然估计求得所有的参数<br><img src="https://i.loli.net/2021/04/14/CV4r56NKAXZhvMU.png" alt="image.png"><br>其中，$ϕ$ 是训练样本中结果y=1占有的比例，$μ_0$是y=0的样本中特征均值，$μ_1$ 是y=1的样本中特征均值，$Σ$ 是样本特征方差均值。</p>
+<p>注意这里的参数有$μ_0$和$μ_1$，表示在不同的结果模型下，特征均值不同，但我们假设协方差相同。反映在图上就是不同模型中心位置不同，但形状相同。这样就可以用直线来进行分隔判别。</p>
+<p>所以我们得到这样的图像<br><img src="https://i.loli.net/2021/04/13/RndUHTPAOmJFz7V.png" alt="image.png"></p>
+<h1 id="三、朴素贝叶斯（Naive-Bayes）"><a href="#三、朴素贝叶斯（Naive-Bayes）" class="headerlink" title="三、朴素贝叶斯（Naive Bayes）"></a>三、朴素贝叶斯（Naive Bayes）</h1><p>当$x$是离散值时，我们假设垃圾邮件分类的情况。将一封邮件作为输入向量，如果字典中第$i$个词在字典中出现，则$x_i$=1，反之$x_i$=0，这样我们得到所需的特征向量。</p>
+<p>现在对$p(x|y)$建模，假设字典中有50000个词，$x \in{0,1}^{50000}$，如果采用多项式建模， 将会有$2^{50000}$种结果，$2^{50000}$−1维的参数向量，这样明显参数过多，很难进行计算。所以为了对$p(x|y)$建模，需要做一个强假设，假设x的特征是条件独立的，这个假设称为朴素贝叶斯假设(Naive Bayes (NB) assumption),这个算法就称为朴素贝叶斯分类(Naive Bayes classifier).</p>
+<p>根据概率论的链式法则性质和朴素贝叶斯假设，我们可以得到如下等式<br><img src="https://i.loli.net/2021/04/14/UhLlwdFQGpriZ32.png" alt="image.png"></p>
+<p>根据联合似然函数，再依次得到参数的最大似然估计值，我们对一个全新的样本进行预测，特征为$x$，则有<br><img src="https://i.loli.net/2021/04/14/vna2tAU735JVwZI.png" alt="image.png"></p>
+<p>因为分母对于y取0或1是一样的，所以只需要计算比较分子即可确定分类。</p>
+<h1 id="四、拉普拉斯平滑（Laplace-smoothing）"><a href="#四、拉普拉斯平滑（Laplace-smoothing）" class="headerlink" title="四、拉普拉斯平滑（Laplace smoothing）"></a>四、拉普拉斯平滑（Laplace smoothing）</h1><p>朴素贝叶斯模型已经能不错的解决离散值的问题，可是对于数据稀疏问题，朴素贝叶斯模型并不能很好的解决，还是针对邮件分类问题，假设收到了一封含有NIPS的邮件，但是NIPS从未在垃圾邮件或者正常邮件中出现过，假设NIPS在字典中位子伟35000，则计算概率时，<img src="https://i.loli.net/2021/04/14/DmwZnKpdGavJBjy.png" alt="image.png"><br>而后验概率计算得到的为$\frac{0}0$，也就不知道该如何预测了。</p>
+<p>这里我们引入拉普拉斯平滑，将估计替换为</p>
+<p><img src="https://i.loli.net/2021/04/14/mriZuhLe2sbWIJA.png" alt="image.png"></p>
+<p>这里首先是对分子加1，然后对分母加k，要注意$\sum^k_{j=1} \phi_j = 1$依然成立（自己检验一下），这是一个必须有的性质，因为$\phi_j$<br>是对概率的估计，然后所有的概率加到一起必然等于1。另外对于所有的$j$值，都有$\phi_j \neq 0$，这就解决了刚刚的概率估计为零的问题了。在某些特定的条件下（相当强的假设条件下，arguably quite strong），可以发现拉普拉斯平滑还真能给出对参数$\phi_j$ 的最佳估计（optimal estimator）</p>
+<p>在朴素贝叶斯问题上，使用拉普拉斯平滑后得到的公式则为<br><img src="https://i.loli.net/2021/04/14/WpkzK7cf4hrBH1F.png" alt="image.png"></p>
+<p>注：在实际应用中，是否对$\phi_y$使用拉普拉斯平滑影响不大，因为$\phi_y$是对$p(y=1)$的一个合理估计，而垃圾邮件与正常邮件是成一定比例的，所以$\phi_y$与零点存在一定的距离。</p>
+]]></content>
+      <categories>
+        <category>cs229</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -1394,6 +1394,38 @@
       </tags>
   </entry>
   <entry>
+    <title>田宇航定理</title>
+    <url>/2021/01/29/%E7%94%B0%E5%AE%87%E8%88%AA%E5%AE%9A%E7%90%86/</url>
+    <content><![CDATA[<h3 id="电脑使用定理"><a href="#电脑使用定理" class="headerlink" title="电脑使用定理"></a>电脑使用定理</h3><ul>
+<li><p>不要花时间折腾一些对于使用没什么大影响的东西，要看重内容</p>
+</li>
+<li><p>不影响使用的bug，如今天遇到的“体系结构 arm64 不受支持”这一C/C++扩展的bug，而且网上也找不到解决方案，不必折腾，让子弹飞一会儿</p>
+</li>
+<li><p>面对问题，要克制自己的冲动，选择bug最少的解决方案</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>个人思考</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>编程经验</title>
+    <url>/2018/08/28/%E7%BB%8F%E7%BB%8F%E9%AA%8C/</url>
+    <content><![CDATA[<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><p>数组作为变量传递时会丢失长度信息</p>
+]]></content>
+      <categories>
+        <category>总结</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+        <tag>经验</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>网页视频倍速的小技巧</title>
     <url>/2021/02/17/%E7%BD%91%E9%A1%B5%E8%A7%86%E9%A2%91%E5%80%8D%E9%80%9F%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
     <content><![CDATA[<p>今天玉米问到延河课堂上的视频能不能倍速，想到当时防疫大课堂时的操作，便想直接复现，但是却失败了</p>
@@ -1439,20 +1471,6 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>支持向量机</title>
-    <url>/2021/04/15/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/</url>
-    <content><![CDATA[<p>慢慢学习。</p>
-<a id="more"></a>
-<h4 id="几何距离"><a href="#几何距离" class="headerlink" title="几何距离"></a>几何距离</h4><p><img src="https://i.loli.net/2021/04/15/dlyDaGeNZmQFk7r.png" alt="image.png"></p>
-]]></content>
-      <categories>
-        <category>cs229</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
       </tags>
   </entry>
 </search>
