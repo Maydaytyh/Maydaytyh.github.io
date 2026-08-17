@@ -59,6 +59,10 @@ tr:hover td{background:#f8fafc}
 .btn.ghost{background:#fff;color:var(--accent2);border:1px solid var(--accent2)}
 footer{text-align:center;color:var(--muted);font-size:12px;padding:24px}
 @media(max-width:640px){header{position:static} th,td{white-space:nowrap}}
+.nav-ext{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.nav-ext span{color:#94a3b8;font-size:12px}
+.nav-ext a.nx{background:rgba(255,106,0,.18);color:#ffd9b3;border:1px solid rgba(255,106,0,.45);padding:5px 13px;border-radius:20px;font-size:12.5px;transition:.15s}
+.nav-ext a.nx:hover{background:#ff6a00;color:#fff;text-decoration:none}
 </style>
 </head>
 <body>
@@ -76,6 +80,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:24px}
     <button data-tab="assumptions">假设</button>
     <button data-tab="sources">来源</button>
   </nav>
+  <div class="nav-ext"><span>延伸页面</span><a class="nx" href="xhs-leads.html">捞人帖汇总</a><a class="nx" href="xhs-interview.html">面经/经验帖</a><a class="nx" href="tracker.html">投递追踪表</a></div>
 </header>
 <main>
   <section id="overview" class="section active"></section>
