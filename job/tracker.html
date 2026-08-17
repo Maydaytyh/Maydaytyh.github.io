@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>投递追踪 · 大模型求职</title>
+<style>
+:root{--bg:#0f1115;--card:#1a1d24;--card2:#21252e;--tx:#e8eaed;--mut:#9aa0a6;--acc:#ff4757;--acc2:#ffa502;--ok:#2ed573;--bd:#2d3139}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.hd{padding:24px 20px 14px;border-bottom:1px solid var(--bd);background:linear-gradient(180deg,#16191f,transparent)}
+.hd h1{margin:0 0 6px;font-size:21px}
+.hd .sub{color:var(--mut);font-size:12.5px}
+.stat{margin:12px 0 2px;display:flex;flex-wrap:wrap;gap:8px}
+.stat .b{background:var(--card2);border:1px solid var(--bd);border-radius:10px;padding:6px 12px;font-size:13px}
+.stat .b b{color:var(--ok);font-size:16px}
+.stat .b.offer b{color:var(--acc2)}
+.stat .b.proc b{color:#7d8aff}
+.ctrl{padding:12px 16px;background:var(--card);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:9}
+.ctrl input,.ctrl select,.ctrl textarea{background:var(--card2);color:var(--tx);border:1px solid var(--bd);border-radius:7px;padding:7px 9px;font-size:13px;margin:3px 3px 0 0;font-family:inherit}
+.ctrl input[type=text],.ctrl input[type=search]{width:180px}
+.btn{cursor:pointer;background:var(--card2);border:1px solid var(--bd);color:#cfd3da;border-radius:7px;padding:7px 12px;font-size:13px;margin:3px 3px 0 0}
+.btn:hover{border-color:var(--acc2);color:var(--acc2)}
+.btn.pri{background:var(--acc2);color:#000;border-color:var(--acc2);font-weight:600}
+.btn.dng:hover{border-color:var(--acc);color:var(--acc)}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.lbl{color:var(--mut);font-size:11.5px;margin-right:2px}
+#list{padding:12px 16px 80px;max-width:1100px;margin:0 auto}
+.rec{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px;margin-bottom:10px}
+.rec.hide{display:none}
+.rec.offer{border-left:3px solid var(--ok)}
+.rec.proc{border-left:3px solid #7d8aff}
+.rec.rej{border-left:3px solid var(--acc);opacity:.7}
+.rtop{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:8px}
+.rtop .co{font-weight:700;color:var(--acc2);min-width:90px}
+.rtop .pos{flex:1;min-width:140px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.grid input,.grid select{width:100%;margin:0;background:var(--card2);border:1px solid var(--bd);border-radius:6px;padding:6px 8px;color:var(--tx);font-size:12.5px}
+.grid label{font-size:10.5px;color:var(--mut);display:block;margin-bottom:2px}
+.gfield{display:flex;flex-direction:column}
+.note{width:100%;margin-top:6px;background:var(--card2);border:1px solid var(--bd);border-radius:6px;padding:6px 8px;color:var(--tx);font-size:12.5px;resize:vertical;min-height:32px;font-family:inherit}
+.del{float:right;background:transparent;border:0;color:var(--mut);cursor:pointer;font-size:13px}
+.del:hover{color:var(--acc)}
+.foot{text-align:center;color:var(--mut);font-size:11.5px;padding:24px 16px;border-top:1px solid var(--bd)}
+@media(max-width:640px){.ctrl input[type=text],.ctrl input[type=search]{width:100%}}
+</style>
+</head>
+<body>
+<div class="hd">
+<h1>📋 投递追踪表</h1>
+<div class="sub">记录每家公司/岗位的投递状态与进度 · 数据存本浏览器(localStorage),可导出备份 · <span id="dt"></span></div>
+<div class="stat" id="stat"></div>
+</div>
+<div class="ctrl">
+<div class="row">
+<button class="btn pri" id="addBtn">+ 添加记录</button>
+<button class="btn" id="loadCandBtn">载入 126 候选公司</button>
+<button class="btn" id="expBtn">导出 JSON</button>
+<label class="btn" for="impFile">导入 JSON</label>
+<input id="impFile" type="file" accept="application/json,.json" style="display:none">
+<button class="btn dng" id="clrBtn">清空</button>
+</div>
+<div class="row" style="margin-top:8px">
+<input id="q" type="search" placeholder="🔍 搜索公司/岗位/备注">
+<span class="lbl">状态</span><select id="fst"><option value="">全部</select>
+<span class="lbl">进度</span><select id="fpg"><option value="">全部</select>
+<span class="lbl">类型</span><select id="fty"><option value="">全部</select>
+<span class="lbl">排序</span><select id="so"><option value="ts">添加顺序<option value="co">公司<option value="dt">投递日期<option value="pg">进度</select>
+</div>
+</div>
+<div id="list"></div>
+<div class="foot">投递追踪表 · 数据仅存当前浏览器(localStorage),换设备请用导出/导入 · 加密保护</div>
+<datalist id="cosList"></datalist>
+<script id="leesedata" type="application/json">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</script>
+<style>
+#leeseLock{position:fixed;inset:0;background:#0f1115;color:#e8eaed;display:flex;align-items:center;justify-content:center;z-index:2147483647;font-family:-apple-system,"PingFang SC",sans-serif}
+.leeseBox{background:#1a1d24;border:1px solid #2d3139;border-radius:14px;padding:30px 26px;width:300px;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.leeseBox h2{margin:0 0 6px;color:#ffa502;font-size:18px}
+.leeseBox p{color:#9aa0a6;font-size:12.5px;margin:0 0 18px;line-height:1.5}
+.leeseBox input{width:100%;box-sizing:border-box;padding:11px 12px;border-radius:9px;background:#21252e;border:1px solid #2d3139;color:#e8eaed;font-size:14px;outline:none}
+.leeseBox input:focus{border-color:#ffa502}
+.leeseBox button{margin-top:12px;width:100%;padding:11px;border-radius:9px;border:0;background:#ffa502;color:#000;font-size:14px;font-weight:600;cursor:pointer}
+.leeseBox button:hover{background:#ffb940}
+#leeseErr{color:#ff4757;font-size:12px;margin-top:10px;min-height:16px}
+.leeseHint{color:#5a5f66;font-size:11px;margin-top:16px}
+</style>
+<div id="leeseLock"><div class="leeseBox">
+<h2>🔒 访问受限</h2>
+<p>本页内容已加密,请输入访问密码解锁。</p>
+<input id="leesePwd" type="password" placeholder="访问密码" autocomplete="off" autofocus>
+<button id="leeseBtn">解锁</button>
+<div id="leeseErr"></div>
+<div class="leeseHint">tianyuhang04 求职研究页 · 忘记密码请联系站长</div>
+</div></div>
+<script id="leeseLoader">
+(function(){
+  var el=document.getElementById('leesedata');
+  var b64=el.textContent.trim();
+  function setErr(s){var e=document.getElementById('leeseErr');if(e)e.textContent=s;}
+  async function unlock(pwd){
+    setErr('解密中...');
+    try{
+      var raw=Uint8Array.from(atob(b64),function(c){return c.charCodeAt(0)});
+      var salt=raw.slice(0,16), iv=raw.slice(16,28), data=raw.slice(28);
+      var km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pwd),{name:'PBKDF2'},false,['deriveKey']);
+      var key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:salt,iterations:100000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+      var pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:iv},key,data);
+      var ds=new DecompressionStream('gzip');
+      var text=await new Response(new Blob([pt]).stream().pipeThrough(ds)).text();
+      el.textContent=text;
+      sessionStorage.setItem('leesePwd',pwd);
+      var lk=document.getElementById('leeseLock'); if(lk)lk.remove();
+      document.dispatchEvent(new Event('leeseReady'));
+    }catch(e){setErr('密码错误,请重试');}
+  }
+  window.__leeseUnlock=unlock;
+  document.getElementById('leeseBtn').onclick=function(){unlock(document.getElementById('leesePwd').value)};
+  var pe=document.getElementById('leesePwd');
+  pe.addEventListener('keydown',function(e){if(e.key==='Enter')unlock(pe.value)});
+  var saved=sessionStorage.getItem('leesePwd');
+  if(saved){pe.value=saved;unlock(saved);}
+})();
+</script><script>document.addEventListener("leeseReady",function(){
+
+var D=JSON.parse(document.getElementById('leesedata').textContent);
+var COS=D.companies;
+var dl=document.getElementById('cosList'); COS.forEach(function(c){var o=document.createElement('option');o.value=c;dl.appendChild(o)});
+var KEY='leeseTracker';
+var PROG=['未投递','已投递','笔试','一面','二面','三面','HR面','主管面','终面','offer','已拒','未通过'];
+var STS=['未投递','已投递'];
+var TYP=['校招','实习','社招','博士后'];
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+function save(){localStorage.setItem(KEY,JSON.stringify(recs))}
+var recs=load();
+document.getElementById('dt').textContent=new Date().toLocaleDateString('zh-CN');
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function newRec(o){return Object.assign({id:uid(),company:'',position:'',type:'校招',status:'未投递',progress:'未投递',date:'',url:'',note:'',ts:Date.now()},o||{})}
+function find(id){return recs.find(function(r){return r.id==id})}
+var stSel=document.getElementById('fst'),pgSel=document.getElementById('fpg'),tySel=document.getElementById('fty');
+STS.forEach(function(s){var o=document.createElement('option');o.value=s;o.textContent=s;stSel.appendChild(o)});
+PROG.forEach(function(p){var o=document.createElement('option');o.value=p;o.textContent=p;pgSel.appendChild(o)});
+TYP.forEach(function(t){var o=document.createElement('option');o.value=t;o.textContent=t;tySel.appendChild(o)});
+function stat(){var t=recs.length,y=0,f=0,o=0;recs.forEach(function(r){if(r.status=='已投递')y++;if(['笔试','一面','二面','三面','HR面','主管面','终面'].indexOf(r.progress)>=0)f++;if(r.progress=='offer')o++});
+document.getElementById('stat').innerHTML='<span class="b">总记录 <b>'+t+'</b></span><span class="b">已投递 <b>'+y+'</b></span><span class="b proc">在流程 <b>'+f+'</b></span><span class="b offer">offer <b>'+o+'</b></span>';}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function progClass(p){if(p=='offer')return 'offer';if(p=='已拒'||p=='未通过')return 'rej';if(['笔试','一面','二面','三面','HR面','主管面','终面'].indexOf(p)>=0)return 'proc';return''}
+function sel(cur,arr){return arr.map(function(v){return '<option value="'+esc(v)+'"'+(v==cur?' selected':'')+'>'+esc(v)+'</option>'}).join('')}
+function render(){
+ var so=document.getElementById('so').value;
+ var arr=recs.slice();
+ if(so=='co')arr.sort(function(a,b){return (a.company||'').localeCompare(b.company||'','zh')});
+ else if(so=='dt')arr.sort(function(a,b){return (b.date||'').localeCompare(a.date||'')});
+ else if(so=='pg')arr.sort(function(a,b){return PROG.indexOf(a.progress)-PROG.indexOf(b.progress)});
+ var el=document.getElementById('list');
+ if(!arr.length){el.innerHTML='<div style="color:var(--mut);text-align:center;padding:50px">暂无记录,点「+ 添加记录」或「载入 126 候选公司」开始</div>';stat();return}
+ el.innerHTML=arr.map(function(r){
+  return '<div class="rec '+progClass(r.progress)+'" data-cardid="'+r.id+'">'
+   +'<button class="del" data-act="del" data-id="'+r.id+'">✕ 删除</button>'
+   +'<div class="rtop"><input class="co" data-id="'+r.id+'" data-field="company" value="'+esc(r.company)+'" placeholder="公司" list="cosList">'
+   +'<input class="pos" data-id="'+r.id+'" data-field="position" value="'+esc(r.position)+'" placeholder="岗位/方向"></div>'
+   +'<div class="grid">'
+   +'<div class="gfield"><label>类型</label><select data-id="'+r.id+'" data-field="type">'+sel(r.type,TYP)+'</select></div>'
+   +'<div class="gfield"><label>状态</label><select data-id="'+r.id+'" data-field="status">'+sel(r.status,STS)+'</select></div>'
+   +'<div class="gfield"><label>进度</label><select data-id="'+r.id+'" data-field="progress">'+sel(r.progress,PROG)+'</select></div>'
+   +'<div class="gfield"><label>投递日期</label><input type="date" data-id="'+r.id+'" data-field="date" value="'+esc(r.date)+'"></div>'
+   +'<div class="gfield"><label>投递链接</label><input type="text" data-id="'+r.id+'" data-field="url" value="'+esc(r.url)+'" placeholder="https://"></div>'
+   +'</div>'
+   +'<textarea class="note" data-id="'+r.id+'" data-field="note" placeholder="备注:面试官/反馈/亮点/问题…">'+esc(r.note)+'</textarea>'
+   +'</div>';
+ }).join('');
+ stat();
+ applyFilter();
+}
+var saveT;
+document.getElementById('list').addEventListener('input',function(e){
+ var t=e.target; if(!t.dataset.id)return;
+ var r=find(t.dataset.id); if(!r)return;
+ r[t.dataset.field]=t.value;
+ if(t.dataset.field=='status'&&r.progress=='未投递'&&t.value=='已投递'){r.progress='已投递'}
+ clearTimeout(saveT); saveT=setTimeout(function(){save();stat();},350);
+});
+document.getElementById('list').addEventListener('change',function(e){
+ var t=e.target; if(!t.dataset.id)return;
+ var r=find(t.dataset.id); if(!r)return;
+ r[t.dataset.field]=t.value;
+ clearTimeout(saveT); saveT=setTimeout(function(){save();render();},250);
+});
+document.getElementById('list').addEventListener('click',function(e){
+ var b=e.target.closest('[data-act=del]'); if(!b)return;
+ if(!confirm('删除该记录?'))return;
+ recs=recs.filter(function(r){return r.id!=b.dataset.id}); save(); render();
+});
+document.getElementById('addBtn').onclick=function(){recs.push(newRec());save();render();
+ var el=document.querySelector('.rec[data-cardid="'+recs[recs.length-1].id+'"] input'); if(el)el.focus();}
+document.getElementById('loadCandBtn').onclick=function(){
+ var ex={};recs.forEach(function(r){if(r.company)ex[r.company]=1});
+ var n=0;COS.forEach(function(c){if(!ex[c]){recs.push(newRec({company:c}));n++}});
+ save();render();alert('已载入 '+n+' 家候选公司(已跳过已存在的),共 '+recs.length+' 条记录');}
+document.getElementById('expBtn').onclick=function(){
+ var blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),records:recs},null,2)],{type:'application/json'});
+ var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='tracker-'+new Date().toISOString().slice(0,10)+'.json';a.click();}
+document.getElementById('impFile').addEventListener('change',function(e){
+ var f=e.target.files[0];if(!f)return;var rd=new FileReader();
+ rd.onload=function(){try{var d=JSON.parse(rd.result);var arr=d.records||d;if(Array.isArray(arr)){arr.forEach(function(r){recs.push(newRec(r))});save();render();alert('导入 '+arr.length+' 条,共 '+recs.length+' 条')}}catch(err){alert('导入失败:文件格式错误')}};
+ rd.readAsText(f);e.target.value='';});
+document.getElementById('clrBtn').onclick=function(){if(confirm('确认清空所有记录?此操作不可恢复(建议先导出备份)')){recs=[];save();render()}}
+function applyFilter(){
+ var q=document.getElementById('q').value.trim().toLowerCase();
+ var st=stSel.value,pg=pgSel.value,ty=tySel.value;
+ document.querySelectorAll('#list .rec').forEach(function(el){
+  var r=find(el.dataset.cardid); if(!r)return;
+  var ok=true;
+  if(st&&r.status!=st)ok=false;
+  if(pg&&r.progress!=pg)ok=false;
+  if(ty&&r.type!=ty)ok=false;
+  if(q){var blob=(r.company+' '+r.position+' '+r.note+' '+r.url).toLowerCase();if(blob.indexOf(q)<0)ok=false}
+  el.classList.toggle('hide',!ok);
+ });
+}
+document.getElementById('q').oninput=applyFilter;
+stSel.onchange=applyFilter;pgSel.onchange=applyFilter;tySel.onchange=applyFilter;
+document.getElementById('so').onchange=render;
+render();
+
+});</script>
+</body>
+</html>
