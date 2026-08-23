@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>田宇航｜大模型后训练与 Agent 自进化研究</title>
+  <meta name="description" content="田宇航，北京理工大学计算机学院博士研究生、美团 LongCat 基座团队研究工程师，研究大模型后训练、可验证强化学习、Agent 自进化与结构化推理。">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="canonical" href="https://maydaytyh.github.io/zh/">
+  <link rel="alternate" hreflang="en" href="https://maydaytyh.github.io/">
+  <link rel="alternate" hreflang="zh-CN" href="https://maydaytyh.github.io/zh/">
+  <link rel="alternate" hreflang="x-default" href="https://maydaytyh.github.io/">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="田宇航的个人主页">
+  <meta property="og:title" content="田宇航｜大模型后训练与 Agent 自进化研究">
+  <meta property="og:description" content="研究大模型后训练、可验证强化学习、Agent 自进化与结构化推理。">
+  <meta property="og:url" content="https://maydaytyh.github.io/zh/">
+  <meta property="og:image" content="https://maydaytyh.github.io/assets/og-home.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="田宇航的个人学术主页">
+  <meta property="profile:first_name" content="Yuhang">
+  <meta property="profile:last_name" content="Tian">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="田宇航｜大模型后训练与 Agent 自进化研究">
+  <meta name="twitter:description" content="研究大模型后训练、可验证强化学习、Agent 自进化与结构化推理。">
+  <meta name="twitter:image" content="https://maydaytyh.github.io/assets/og-home.jpg">
+  <meta name="twitter:image:alt" content="田宇航的个人学术主页">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://maydaytyh.github.io/zh/#person",
+    "name": "田宇航",
+    "alternateName": "Yuhang Tian",
+    "url": "https://maydaytyh.github.io/zh/",
+    "image": "https://maydaytyh.github.io/assets/profile.jpg",
+    "email": "mailto:maydaytyh@gmail.com",
+    "jobTitle": ["博士研究生", "大模型研究工程师"],
+    "affiliation": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "北京理工大学",
+        "alternateName": "Beijing Institute of Technology"
+      },
+      {
+        "@type": "Organization",
+        "name": "美团",
+        "alternateName": "Meituan"
+      }
+    ],
+    "sameAs": [
+      "https://scholar.google.com/citations?user=r6HvwsEAAAAJ",
+      "https://github.com/Maydaytyh"
+    ],
+    "knowsAbout": [
+      "大模型后训练",
+      "可验证强化学习",
+      "Agent 自进化",
+      "知识库问答",
+      "结构化推理"
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳至主要内容</a>
+
+  <nav aria-label="主导航">
+    <div class="wrap">
+      <a class="me" href="/zh/">田宇航</a>
+      <a href="#research">研究</a>
+      <a href="#exp">经历</a>
+      <a href="#edu">教育</a>
+      <a href="#pub">论文</a>
+      <a href="#misc">其他</a>
+      <a class="navblog" href="/blog/">Blog ↗</a>
+      <a class="lang-switch" href="/" lang="en" hreflang="en" aria-label="切换至英文版">English</a>
+    </div>
+  </nav>
+
+  <main id="main-content" tabindex="-1">
+    <header>
+      <div class="wrap">
+        <div class="top">
+          <div class="top-copy">
+            <h1>田宇航 <span class="alt-name" lang="en">Yuhang Tian</span></h1>
+            <p class="affiliation">北京理工大学计算机学院博士研究生<br>美团 LongCat 基座团队</p>
+          </div>
+          <img class="photo" src="/assets/profile.jpg" width="108" height="136" alt="田宇航的个人照片" decoding="async">
+        </div>
+
+        <div class="bio">
+          <p class="lead">
+            我在北京理工大学计算机学院攻读博士学位（导师：<strong>宋丹丹教授</strong>），
+            同时在美团 <strong>LongCat 基座团队</strong>从事大模型后训练研究。
+          </p>
+          <p>
+            我关注一个问题：<strong>模型犯过的错，能否自动变成下一轮学习信号？</strong>
+            我的工作串联错误定位、程序化验证与细粒度信用分配，在工业系统中把它们落成可持续的训练闭环，
+            并在研究中检验其有效边界。当前兴趣包括大模型后训练、可验证强化学习、Agent 自进化与结构化推理。
+          </p>
+        </div>
+
+        <div class="profile-links" id="profile-links"></div>
+      </div>
+    </header>
+
+    <section id="research" aria-labelledby="research-title">
+      <div class="wrap">
+        <h2 id="research-title">研究主线 <span class="section-kicker" lang="en">Research</span></h2>
+
+        <article class="theme">
+          <h3><span class="number">01</span>让失败自动进入下一轮训练</h3>
+          <p>
+            线上失败日志往往停留在分析阶段，难以转化为训练数据。我构建
+            <a class="work-link" data-work="badcase">Bad Case 自动修复</a>闭环：
+            以首错定位和模式聚类归纳问题，由修复 Agent 生成 Grader 与训练方案，再自动触发训练和双轨回归。
+            单类失败仅使用<strong>8 条自动挖掘数据</strong>，目标失败占比从
+            <span class="metric">39.5% 降至 2.0%</span>。
+            <a class="work-link" data-work="harness">Zero Auto Harness</a>把同一思路延伸到 Agent 外部系统：
+            冻结基座模型，依据执行反馈演化工具与中间件。
+          </p>
+        </article>
+
+        <article class="theme">
+          <h3><span class="number">02</span>可验证奖励与细粒度信用分配</h3>
+          <p>
+            程序化验证能回答「对不对」，却未必指出「错在哪里」。在
+            <a class="work-link" data-work="toolagent">ToolAgent-RL</a>中，我把多轮工具调用轨迹拆成
+            <span class="metric">6,498</span> 个状态—动作决策，并分别验证协议、工具路由与参数。
+            在 Bad Case 闭环中，Token-level Advantage Mask 将序列级优势聚焦到违规 token，
+            专项指标较无 Mask 方案提高约<strong>7 个百分点</strong>。
+            <a class="work-link" data-work="executor">Executor Signals</a>进一步用匹配强度的安慰剂对照，
+            区分细粒度归因与稠密奖励塑形，刻画这类方法何时有效、何时失效。
+          </p>
+        </article>
+
+        <article class="theme">
+          <h3><span class="number">03</span>结构化推理与可执行验证</h3>
+          <p>
+            与其让模型直接输出答案，我更关心生成<strong>可由执行器检验的结构</strong>，从执行结果中获得监督。
+            <a class="work-link" data-work="compkbqa">CompKBQA</a>以任务分解和知识检索逐步学习逻辑形式；
+            <a class="work-link" data-work="grvkbqa">GRV-KBQA</a>解耦结构生成、语义落地与验证，
+            结构感知验证可过滤 <span class="metric">90%</span> 的无效候选；
+            <a class="work-link" data-work="selfg">SELF-KBQA</a>则结合子图检索与 token 预算约束，
+            为生成阶段提供紧凑、结构对齐的证据。
+          </p>
+        </article>
+
+        <article class="theme">
+          <h3><span class="number">04</span>模型内部机理与诊断</h3>
+          <p>
+            我也从内部表征解释模型为何失效。
+            <a class="work-link" data-work="cancel">Cancellation Trap</a>发现，SAE 原子的相反贡献会在稠密余弦中相互抵消，
+            从而掩盖文化价值引导中的混杂；为此提出无需训练的 <strong>PurPCA</strong>。
+            相关工作还包括基于深层内部表征的幻觉检测，以及用 Probing 分析不同层级的表征与预测信号。
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="exp" aria-labelledby="exp-title">
+      <div class="wrap">
+        <h2 id="exp-title">经历 <span class="section-kicker" lang="en">Experience</span></h2>
+
+        <article class="job">
+          <div class="job-heading">
+            <div class="job-org">美团 <span>｜ LongCat 基座团队</span></div>
+            <div class="date">2026.05 – 至今</div>
+          </div>
+          <div class="job-role">大模型研究工程师</div>
+
+          <div class="work">
+            <div class="work-title">Bad Case 自动修复 <span class="role-badge">端到端负责</span></div>
+            <p>
+              <strong>问题：</strong>高频线上失败依赖人工定位和逐类修补，难以规模化。
+              <strong>方法：</strong>构建「发现—诊断—修复—训练—评测」闭环，覆盖首错定位、模式聚类、
+              修复 Agent、自动 Grader、Token-level Advantage Mask 与回归评测。
+            </p>
+            <p>
+              <strong>结果：</strong>纯 JSON 规范性从 <span class="metric">77.53% 提升至 99.78%</span>，
+              目标失败占比从 <span class="metric">39.5% 降至 2.0%</span>；
+              Mask 方案较无 Mask 方案高约 <span class="metric">7 个百分点</span>，9 项通用能力宏平均无退化。
+            </p>
+          </div>
+
+          <div class="work">
+            <div class="work-title">Zero Auto Harness</div>
+            <p>
+              <strong>问题：</strong>Agent 的工具和中间件通常依赖人工设计，容易针对评测集过拟合。
+              <strong>方法：</strong>固定基座模型，从仅含 <code>run_shell_command</code> 的最小 Harness 出发，
+              用 work / evolve 双 Agent 根据执行轨迹演化 Tool Implementation 与 Middleware，
+              再以全局泛化约束和分轨复评测筛选候选方案。
+            </p>
+            <p>
+              <strong>结果：</strong>固定 GPT-5.4、经过 5 轮演化，SWE-bench Verified 500-task Pass@1 从
+              <span class="metric">51.8% 提升至 61.0%</span>。
+            </p>
+          </div>
+        </article>
+
+        <article class="job">
+          <div class="job-heading">
+            <div class="job-org">上海文谛资产管理 <span>｜ 量化研究</span></div>
+            <div class="date">2021.06 – 2025.06</div>
+          </div>
+          <div class="job-role">大模型研究工程师</div>
+
+          <div class="work">
+            <div class="work-title">量化研究 Agent 与 NLP 系统</div>
+            <p>
+              搭建多 Agent 研究系统，串联策略生成、代码执行与自动回测，
+              将沙盒回测结果转化为 Alpha 因子的自动筛选和迭代信号。
+            </p>
+            <p>
+              主导研报摘要与市场情绪因子建模，围绕长文本截断、类别不平衡、名称干扰与因子共线性迭代模型并上线实盘；
+              同时落地语义切分、稠密 / 稀疏混合检索、Milvus、LLM 重排与归因链路。
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="edu" aria-labelledby="edu-title">
+      <div class="wrap">
+        <h2 id="edu-title">教育背景 <span class="section-kicker" lang="en">Education</span></h2>
+
+        <article class="education-item">
+          <div class="education-row">
+            <div>
+              <div class="school">北京理工大学 · 计算机科学与技术</div>
+              <div class="degree">博士研究生｜导师：宋丹丹教授（青年长江学者）</div>
+            </div>
+            <div class="date">2021.09 – 预计 2027.06</div>
+          </div>
+          <div class="honors"><strong>研究生特等奖学金</strong> · 校优秀学生</div>
+        </article>
+
+        <article class="education-item">
+          <div class="education-row">
+            <div>
+              <div class="school">北京理工大学 · 计算机科学与技术</div>
+              <div class="degree">工学学士</div>
+            </div>
+            <div class="date">2017.09 – 2021.06</div>
+          </div>
+          <div class="honors"><strong>ACM-ICPC 亚洲区域赛银牌</strong> · 全国团队程序设计天梯赛银奖 · 国家励志奖学金</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="pub" aria-labelledby="pub-title">
+      <div class="wrap">
+        <h2 id="pub-title">论文 <span class="section-kicker" lang="en">Publications</span></h2>
+        <p class="section-intro">
+          共 15 篇，其中第一 / 共同第一作者 6 篇。完整列表见
+          <a href="https://scholar.google.com/citations?user=r6HvwsEAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer">Google Scholar</a>。
+          * 表示共同第一作者。
+        </p>
+
+        <div class="year-label">第一 / 共同第一作者</div>
+
+        <article class="publication" data-work="executor">
+          <div class="pub-title">Where Executor Signals Pay Off in Verifiable KBQA: A Placebo-Controlled Study of Reward Granularity and Placement</div>
+          <div class="pub-authors"><span class="me">Yuhang Tian</span>, et al.</div>
+          <div class="pub-venue"><span class="under-review">AAAI 2027 · 在投 / 审稿中</span>｜第一作者</div>
+          <p class="pub-note">用逐约束必要性信号与匹配强度的随机安慰剂，解耦细粒度归因和稠密奖励塑形，并比较训练期与推理期使用执行器的差异。</p>
+        </article>
+
+        <article class="publication" data-work="cancel">
+          <div class="pub-title">The Cancellation Trap: Sparse Diagnostics for Hidden Confounds in Cultural Value Steering</div>
+          <div class="pub-authors"><span class="me">Yuhang Tian</span>, et al.</div>
+          <div class="pub-venue"><span class="under-review">AAAI 2027 · 在投 / 审稿中</span>｜第一作者</div>
+          <p class="pub-note">揭示 SAE 原子相反贡献在稠密余弦中的抵消现象，并提出无需训练的 PurPCA 诊断与缓解隐藏混杂。</p>
+        </article>
+
+        <article class="publication" data-work="selfg">
+          <div class="pub-title">Subgraph-Guided Executable Logical Form Generation for Knowledge Base Question Answering</div>
+          <div class="pub-authors"><span class="me">Yuhang Tian</span>, et al.</div>
+          <div class="pub-venue"><span class="venue">Findings of ACL 2026</span>｜第一作者</div>
+          <p class="pub-note">提出 SELF-KBQA：以结构感知子图检索和 token 预算证据压缩，为可执行逻辑形式生成提供紧凑上下文。</p>
+        </article>
+
+        <article class="publication" data-work="compkbqa">
+          <div class="pub-title">CompKBQA: Component-wise Task Decomposition for Knowledge Base Question Answering</div>
+          <div class="pub-authors"><span class="me">Yuhang Tian</span>, et al.</div>
+          <div class="pub-venue"><span class="venue">EMNLP 2025</span>｜第一作者</div>
+          <p class="pub-note">将逻辑形式生成分解为骨架、主题实体、关系与完整形式四个子任务，并用 R³ 动态检索知识库信息。</p>
+        </article>
+
+        <article class="publication" data-work="grvkbqa">
+          <div class="pub-title">GRV-KBQA: A Three-Stage Framework for Knowledge Base Question Answering with Decoupled Logical Structure, Semantic Grounding and Structure-Aware Validation</div>
+          <div class="pub-authors"><span class="me">Yuhang Tian*</span>, Pan Yang*, et al.</div>
+          <div class="pub-venue"><span class="venue">Findings of EMNLP 2025</span>｜共同第一作者</div>
+          <p class="pub-note">解耦逻辑结构生成、语义落地与结构感知验证，以知识库约束过滤不可执行或结构不一致的候选。</p>
+        </article>
+
+        <article class="publication" data-work="graphkbqa">
+          <div class="pub-title">Augmenting Reasoning Capabilities of LLMs with Graph Structures in Knowledge Base Question Answering</div>
+          <div class="pub-authors"><span class="me">Yuhang Tian</span>, et al.</div>
+          <div class="pub-venue"><span class="venue">Findings of EMNLP 2024</span>｜第一作者</div>
+          <p class="pub-note">以无监督两阶段排序器和图上多跳束搜索检索推理路径，在 GrailQA zero-shot 上提升 8.1 EM。</p>
+        </article>
+
+        <div class="year-label">合作论文</div>
+        <div class="compact-publications">
+          <article class="publication">
+            <div class="pub-title">A Fact-Checking Framework with Denoising Evidence Retrieval and LLM-Based Debate Verification</div>
+            <div class="pub-venue"><span class="venue">WWW 2026</span></div>
+          </article>
+          <article class="publication">
+            <div class="pub-title">Multi-Hop Knowledge Editing via Critic-Guided Multi-Agent Reasoning</div>
+            <div class="pub-venue"><span class="venue">ACL 2026</span></div>
+          </article>
+          <article class="publication">
+            <div class="pub-title">Static Models, Dynamic World: A Unified Perspective on Temporal Perception in Large Language Models</div>
+            <div class="pub-venue"><span class="venue">ACL 2026</span></div>
+          </article>
+          <article class="publication">
+            <div class="pub-title">ActiShade: Activating Overshadowed Knowledge to Guide Multi-Hop Reasoning in Large Language Models</div>
+            <div class="pub-venue"><span class="venue">AAAI 2026</span></div>
+          </article>
+          <article class="publication">
+            <div class="pub-title">Path-enhanced Pre-trained Language Model for Knowledge Graph Completion</div>
+            <div class="pub-venue"><span class="venue">EMNLP 2025</span></div>
+          </article>
+          <article class="publication">
+            <div class="pub-title">Detecting Hallucination in Large Language Models Through Deep Internal Representation Analysis</div>
+            <div class="pub-venue"><span class="venue">IJCAI 2025</span></div>
+          </article>
+          <article class="publication">
+            <div class="pub-title">A Framework of Knowledge Graph-Enhanced Large Language Model Based on Question Decomposition and Atomic Retrieval</div>
+            <div class="pub-venue"><span class="venue">EMNLP 2024</span></div>
+          </article>
+          <article class="publication">
+            <div class="pub-title">Span-Pair Interaction and Tagging for Dialogue-Level Aspect-Based Sentiment Quadruple Analysis</div>
+            <div class="pub-venue"><span class="venue">WWW 2024</span></div>
+          </article>
+          <article class="publication">
+            <div class="pub-title">A Framework of Knowledge Graph-Enhanced Large Language Model Based on Global Planning</div>
+            <div class="pub-venue"><span class="venue">IEEE TKDE</span>｜期刊</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="misc" aria-labelledby="misc-title">
+      <div class="wrap">
+        <h2 id="misc-title">学术服务与其他 <span class="section-kicker" lang="en">Service &amp; More</span></h2>
+
+        <div class="kv">
+          <div class="kv-key">领域主席</div>
+          <div class="kv-value"><strong>ACL Rolling Review Area Chair</strong>，同时为 ARR 团队成员</div>
+        </div>
+        <div class="kv">
+          <div class="kv-key">审稿人</div>
+          <div class="kv-value">ACL · EMNLP · NAACL · NeurIPS · AAAI · CIKM · CCKS · KBS · ESWA</div>
+        </div>
+        <div class="kv">
+          <div class="kv-key">社区</div>
+          <div class="kv-value">MLNLP 学生委员</div>
+        </div>
+        <div class="kv">
+          <div class="kv-key">技术方向</div>
+          <div class="kv-value">GRPO / RLHF 后训练 · 多轮工具调用 Agent · 可验证奖励与信用分配 · 大规模评测与回归 · RAG 与混合检索 · SAE / Probing 表征分析</div>
+        </div>
+        <div class="kv">
+          <div class="kv-key">博客</div>
+          <div class="kv-value"><a href="/blog/">GuguMelon's Blog</a>——2018 年至今的算法、工具、阅读笔记与随笔。</div>
+        </div>
+        <div class="kv">
+          <div class="kv-key">合作</div>
+          <div class="kv-value">欢迎围绕<strong>后训练信用分配、Agent 自进化与可验证奖励</strong>交流合作，也欢迎邮件联系。</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <div>© 2026 田宇航 <span lang="en">Yuhang Tian</span></div>
+      <div>最后更新：2026 年 8 月</div>
+    </div>
+  </footer>
+</body>
+</html>
