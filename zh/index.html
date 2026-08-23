@@ -139,9 +139,7 @@
             <a class="work-link" data-work="toolagent">ToolAgent-RL</a>中，我把多轮工具调用轨迹拆成
             <span class="metric">6,498</span> 个状态—动作决策，并分别验证协议、工具路由与参数。
             在 Bad Case 闭环中，Token-level Advantage Mask 将序列级优势聚焦到违规 token，
-            专项指标较无 Mask 方案提高约<strong>7 个百分点</strong>。
-            <a class="work-link" data-work="executor">Executor Signals</a>进一步用匹配强度的安慰剂对照，
-            区分细粒度归因与稠密奖励塑形，刻画这类方法何时有效、何时失效。
+            专项指标较无 Mask 方案提高约<strong>7 个百分点</strong>，同时尽量保留原本正确的片段。
           </p>
         </article>
 
@@ -161,9 +159,7 @@
           <h3><span class="number">04</span>模型内部机理与诊断</h3>
           <p>
             我也从内部表征解释模型为何失效。
-            <a class="work-link" data-work="cancel">Cancellation Trap</a>发现，SAE 原子的相反贡献会在稠密余弦中相互抵消，
-            从而掩盖文化价值引导中的混杂；为此提出无需训练的 <strong>PurPCA</strong>。
-            相关工作还包括基于深层内部表征的幻觉检测，以及用 Probing 分析不同层级的表征与预测信号。
+            相关工作包括基于深层内部表征的幻觉检测，以及用 Probing 分析不同层级的表征与预测信号。
           </p>
         </article>
       </div>
@@ -263,26 +259,12 @@
       <div class="wrap">
         <h2 id="pub-title">论文 <span class="section-kicker" lang="en">Publications</span></h2>
         <p class="section-intro">
-          共 15 篇，其中第一 / 共同第一作者 6 篇。完整列表见
+          共 13 篇，其中第一 / 共同第一作者 4 篇。完整列表见
           <a href="https://scholar.google.com/citations?user=r6HvwsEAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer">Google Scholar</a>。
           * 表示共同第一作者。
         </p>
 
         <div class="year-label">第一 / 共同第一作者</div>
-
-        <article class="publication" data-work="executor">
-          <div class="pub-title">Where Executor Signals Pay Off in Verifiable KBQA: A Placebo-Controlled Study of Reward Granularity and Placement</div>
-          <div class="pub-authors"><span class="me">Yuhang Tian</span>, et al.</div>
-          <div class="pub-venue"><span class="under-review">AAAI 2027 · 在投 / 审稿中</span>｜第一作者</div>
-          <p class="pub-note">用逐约束必要性信号与匹配强度的随机安慰剂，解耦细粒度归因和稠密奖励塑形，并比较训练期与推理期使用执行器的差异。</p>
-        </article>
-
-        <article class="publication" data-work="cancel">
-          <div class="pub-title">The Cancellation Trap: Sparse Diagnostics for Hidden Confounds in Cultural Value Steering</div>
-          <div class="pub-authors"><span class="me">Yuhang Tian</span>, et al.</div>
-          <div class="pub-venue"><span class="under-review">AAAI 2027 · 在投 / 审稿中</span>｜第一作者</div>
-          <p class="pub-note">揭示 SAE 原子相反贡献在稠密余弦中的抵消现象，并提出无需训练的 PurPCA 诊断与缓解隐藏混杂。</p>
-        </article>
 
         <article class="publication" data-work="selfg">
           <div class="pub-title">Subgraph-Guided Executable Logical Form Generation for Knowledge Base Question Answering</div>

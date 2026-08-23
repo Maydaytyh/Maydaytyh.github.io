@@ -128,9 +128,8 @@
             credit. In <span class="work-link no-link" data-work="toolagent">ToolAgent-RL</span>, I decomposed
             multi-turn tool-use trajectories into <span class="metric">6,498</span> state-action decisions and built
             executable rewards for protocol validity, tool routing, and argument accuracy. My post-training work uses
-            token-level advantage masks to focus sequence-level feedback on attributable errors; our
-            <span class="work-link no-link" data-work="executor">Executor Signals</span> study then uses
-            magnitude-matched placebo controls to separate true credit assignment from generic dense shaping.
+            token-level advantage masks to focus sequence-level feedback on attributable errors and preserve correct
+            spans during optimization.
           </p>
         </article>
 
@@ -152,10 +151,8 @@
           <h3><span class="number">04</span>Model-internals diagnostics</h3>
           <p>
             I also use internal representations to test whether a behavioral result reflects the mechanism we think
-            it does. <span class="work-link no-link" data-work="cancel">The Cancellation Trap</span> shows how
-            opposite sparse-feature contributions can cancel under dense cosine diagnostics, and introduces the
-            training-free PurPCA method. Related work studies hallucination signals in deep representations and uses
-            probing to connect layer-wise features with downstream predictions.
+            it does. My work studies hallucination signals in deep representations and uses probing to connect
+            layer-wise features with downstream predictions.
           </p>
         </article>
       </div>
@@ -262,7 +259,7 @@
       <div class="wrap">
         <h2 id="publications-heading">Publications <span class="section-kicker">Selected and complete list</span></h2>
         <p class="section-intro">
-          15 papers, including 6 first- or co-first-authored papers. See also
+          13 papers, including 4 first- or co-first-authored papers. See also
           <a href="https://scholar.google.com/citations?user=r6HvwsEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>.
         </p>
 
@@ -273,20 +270,6 @@
           <p class="pub-authors"><span class="me">Yuhang Tian</span>, Dandan Song, Zhijing Wu, et al.</p>
           <p class="pub-venue"><span class="venue">Findings of ACL 2026</span> · First author</p>
           <p class="pub-note">SELF-KBQA retrieves structurally aligned subgraphs, condenses them under a token budget, and generates executable logical forms.</p>
-        </article>
-
-        <article class="publication" data-work="executor">
-          <h4 class="pub-title">Where Executor Signals Pay Off in Verifiable KBQA: A Placebo-Controlled Study of Reward Granularity and Placement</h4>
-          <p class="pub-authors"><span class="me">Yuhang Tian</span>, et al.</p>
-          <p class="pub-venue"><span class="under-review">AAAI 2027 · Under review</span> · First author</p>
-          <p class="pub-note">Magnitude-matched shuffled placebos disentangle fine-grained attribution from dense shaping and map where constraint-level executor rewards help.</p>
-        </article>
-
-        <article class="publication" data-work="cancel">
-          <h4 class="pub-title">The Cancellation Trap: Sparse Diagnostics for Hidden Confounds in Cultural Value Steering</h4>
-          <p class="pub-authors"><span class="me">Yuhang Tian</span>, et al.</p>
-          <p class="pub-venue"><span class="under-review">AAAI 2027 · Under review</span> · First author</p>
-          <p class="pub-note">Diagnoses cancellation hidden by dense cosine metrics and introduces training-free PurPCA for sparse, direction-aware evaluation.</p>
         </article>
 
         <article class="publication" data-work="compkbqa">

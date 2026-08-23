@@ -35,8 +35,6 @@
     graphkbqa: {
       paper: "https://aclanthology.org/2024.findings-emnlp.699/",
     },
-    executor: {},
-    cancel: {},
     toolagent: {},
     badcase: {},
     harness: {},

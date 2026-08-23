@@ -460,11 +460,6 @@ code {
   font-weight: 650;
 }
 
-.under-review {
-  color: #a3372d;
-  font-weight: 650;
-}
-
 .pub-note {
   margin-top: 6px;
   color: var(--ink-2);
